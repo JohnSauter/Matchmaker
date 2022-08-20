@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 
 const { Schema } = mongoose;
 
-const productSchema = new Schema({
+const PotentialSchema = new Schema({
   
   Match: {
     User1: {
@@ -17,11 +17,13 @@ const productSchema = new Schema({
       required: true,
       },
     rating: {
-      type: integer
+      type: Number,
+      required: true
     }
+    
   }
 });
 
-const Category = mongoose.model('PotentialMatch', potentialSchema);
+const PotentialMatch = mongoose.model('PotentialMatch', PotentialSchema);
 
-module.exports = Category;
+module.exports = PotentialMatch;
