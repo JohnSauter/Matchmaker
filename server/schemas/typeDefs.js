@@ -37,6 +37,10 @@ const typeDefs = gql`
     wishhair:String
   }
 
+  type Matchrate {
+    rating: Int
+  }
+
   type Checkout {
     session: ID
   }
@@ -56,7 +60,7 @@ const typeDefs = gql`
      }
 
   type Mutation {
-    rateAMatch (rating:integer):
+    rateAMatch (rating:integer): MatchRate
 
     addUser(firstName: String!, lastName: String!, email: String!, password: String!): Auth
        
