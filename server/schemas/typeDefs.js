@@ -13,7 +13,30 @@ const typeDefs = gql`
     email: String
     role: String
     match: Boolean
-        }
+    }
+
+  type Profile {
+  userid: User
+  gender: String
+  age: Int
+  height:  String
+  weight: Int
+  eyes:  String
+  hair:  String          
+  }
+
+  type Wishlist {
+    userid: User
+    wishgen:String
+    minage: Int
+    maxage: Int
+    minheight: String
+    maxheight: String
+    minweight: String
+    maxweight: String
+    wisheye: String
+    wishhair:String
+  }
 
   type Checkout {
     session: ID
@@ -37,11 +60,16 @@ const typeDefs = gql`
     rateAMatch(rating:integer)
 
     addUser(firstName: String!, lastName: String!, email: String!, password: String!): Auth
-        updateProfile(firstName: String, lastName: String, email: String, password: String): 
-        updateWishList
-        User login(email: String!, password: String!): Auth
-        chargeMyCard
-        matchChosen
+       
+    updateProfile(userid: User, gender: String, age: Int, height:  String, weight: Int, eyes: String, hair:  String): 
+       
+    updateWishList (userid: User, wishgen:String, minage: Int,maxage: Int,minheight: String,maxheight: String,minweight: String, maxweight: String, wisheye: String, wishhair:String )
+        
+    updatelogin(email: String!, password: String!): Auth
+        
+    chargeMyCard
+        
+    matchChosen
 
   }
 `;
