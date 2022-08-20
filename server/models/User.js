@@ -30,7 +30,7 @@ const userSchema = new Schema({
     required: true
   },
   age: {
-    type: Int,
+    type: Number,
     required: true,
   },
   height: {
@@ -38,7 +38,7 @@ const userSchema = new Schema({
     required: true
   },
   weight: {
-    type: Int,
+    type: Number,
     required: true
   },
   eyes: {
@@ -54,11 +54,11 @@ const userSchema = new Schema({
       required: true
     },
     minage: {
-      type: Int,
+      type: Number,
       required: false
     },
     maxage: {
-      type: Int,
+      type: Number,
       required: false
     },
     minheight: {
