@@ -3,8 +3,7 @@ const { gql } = require('apollo-server-express');
 const typeDefs = gql`
   type PotentialMatch {
     _id: ID
-    name: String
-  }
+      }
 
     type User {
     _id: ID
