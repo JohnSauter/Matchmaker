@@ -57,7 +57,7 @@ const typeDefs = gql`
      }
 
   type Mutation {
-    rateAMatch(rating:integer)
+    rateAMatch (rating:integer):
 
     addUser(firstName: String!, lastName: String!, email: String!, password: String!): Auth
        
