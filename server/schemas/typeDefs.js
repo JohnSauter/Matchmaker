@@ -60,15 +60,13 @@ const typeDefs = gql`
 
     addUser(firstName: String!, lastName: String!, email: String!, password: String!): Auth
        
-    updateProfile(userid: User, gender: String, age: Int, height:  String, weight: Int, eyes: String, hair:  String): 
+    updateProfile(userid: User, gender: String, age: Int, height:  String, weight: Int, eyes: String, hair:  String): Profile
        
-    updateWishList (userid: User, wishgen:String, minage: Int,maxage: Int,minheight: String,maxheight: String,minweight: String, maxweight: String, wisheye: String, wishhair:String )
+    updateWishList (userid: User, wishgen:String, minage: Int,maxage: Int,minheight: String,maxheight: String,minweight: String, maxweight: String, wisheye: String, wishhair:String ) : Wishlist
         
     updatelogin(email: String!, password: String!): Auth
         
-    chargeMyCard
-        
-    matchChosen
+    
 
   }
 `;
