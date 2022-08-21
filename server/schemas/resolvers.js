@@ -15,7 +15,7 @@ const resolvers = {
       throw new AuthenticationError("Must be logged in");
     },
     /* Get all of the potential matches for the logged-in user.  */
-    allMyMatches: async (parent, args, context) => {
+    allMyPotentialMatches: async (parent, args, context) => {
       const logged_in_user = context.user;
       if (!logged_in_user) {
         throw new AuthenticationError("Must be logged in.");
@@ -212,6 +212,9 @@ const resolvers = {
       const maxweight = args.maxweight;
       const wisheye_brown = args.wisheye_brown;
       const wisheye_blue = args.wisheye_blue;
+      const wisheye_hazel = args.wisheye_hazel;
+      const wisheye_gray = args.wisheye_gray;
+      const wishhair_black = args.wishhair_black;
       const wishhair_dark = args.wishhair_dark;
       const wishhair_blond = args.wishhair_blond;
       const wishhair_red = args.wishhair_red;
@@ -230,6 +233,9 @@ const resolvers = {
             maxweight: maxweight,
             wisheye_brown: wisheye_brown,
             wisheye_blue: wisheye_blue,
+            wisheye_hazel: wisheye_hazel,
+            wisheye_gray: wisheye_gray,
+            wishhair_black: wishhair_black,
             wishhair_dark: wishhair_dark,
             wishhair_blond: wishhair_blond,
             wishhair_red: wishhair_red,
