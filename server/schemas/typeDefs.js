@@ -1,10 +1,6 @@
 const { gql } = require("apollo-server-express");
 
 const typeDefs = gql`
-  type PotentialMatch {
-    _id: ID
-  }
-
   type User {
     _id: ID
     firstName: String
@@ -12,20 +8,14 @@ const typeDefs = gql`
     email: String
     role: String
     match: Boolean
-  }
-
-  type Profile {
-    userid: User
+    # Profile
     gender: String
     age: Int
     height: String
     weight: Int
     eyes: String
     hair: String
-  }
-
-  type Wishlist {
-    userid: User
+    # wish list
     wishgen: String
     minage: Int
     maxage: Int
@@ -37,28 +27,24 @@ const typeDefs = gql`
     wishhair: String
   }
 
-  type Matchrate {
-    rating: Int
-  }
-
-  type Checkout {
-    session: ID
-  }
-
   type Auth {
     token: ID
     user: User
   }
-
+  type PotentialMatch {
+    _id: ID
+    User1: User
+    User2: User
+    rating: Int
+  }
   type Query {
-    matches: [PotentialMatch]
     user: User
-    allMyMatches: User
-    unRatedMatches: User
+    allMyMatches: [PotentialMatch]
+    unRatedMatches: [PotentialMatch]
   }
 
   type Mutation {
-    rateAMatch(rating: Int): Matchrate
+    rateAMatch(PotentialMatchId: ID, rating: Int): PotentialMatch
 
     addUser(
       firstName: String!
@@ -74,7 +60,9 @@ const typeDefs = gql`
       weight: Int
       eyes: String
       hair: String
-    ): Profile
+      aboutMe: String
+      contactInfo: String
+    ): User
 
     updateWishList(
       wishgen: String
@@ -86,7 +74,7 @@ const typeDefs = gql`
       maxweight: String
       wisheye: String
       wishhair: String
-    ): Wishlist
+    ): User
 
     login(email: String!, password: String!): Auth
   }
