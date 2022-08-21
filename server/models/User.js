@@ -33,7 +33,7 @@ const userSchema = new Schema({
     required: true,
   },
   height: {
-    type: String,
+    type: Number,
     required: true,
   },
   weight: {
@@ -57,8 +57,12 @@ const userSchema = new Schema({
     required: true,
   },
   /* Wish List */
-  wishgen: {
-    type: String,
+  wishgen_male: {
+    type: Boolean,
+    required: true,
+  },
+  wishgen_female: {
+    type: Boolean,
     required: true,
   },
   minage: {
@@ -85,12 +89,24 @@ const userSchema = new Schema({
     type: String,
     required: true,
   },
-  wisheye: {
-    type: String,
+  wisheye_brown: {
+    type: Boolean,
+    required: true,
+  }, 
+  wisheye_blue: {
+    type: Boolean,
     required: true,
   },
-  wishhair: {
-    type: String,
+  wishhair_dark: {
+    type: Boolean,
+    required: true,
+  },
+  wishhair_blond: {
+    type: Boolean,
+    required: true,
+  },
+  wishhair_red: {
+    type: Boolean,
     required: true,
   },
 });

@@ -46,17 +46,12 @@ const typeDefs = gql`
   type Mutation {
     rateAMatch(PotentialMatchId: ID, rating: Int): PotentialMatch
 
-    addUser(
-      firstName: String!
-      lastName: String!
-      email: String!
-      password: String!
-    ): Auth
+    addUser(userName: String!, email: String!, password: String!): Auth
 
     updateProfile(
       gender: String
       age: Int
-      height: String
+      height: Int
       weight: Int
       eyes: String
       hair: String
@@ -68,15 +63,18 @@ const typeDefs = gql`
       wishgen: String
       minage: Int
       maxage: Int
-      minheight: String
-      maxheight: String
-      Intminweight: String
-      maxweight: String
-      wisheye: String
-      wishhair: String
+      minheight: Int
+      maxheight: Int
+      minweight: Int
+      maxweight: Int
+      wisheye_blue: Boolean
+      wisheye_brown: Boolean
+      wishhair_dark: Boolean
+      wishhair_blond: Boolean
+      wishhair_red: Boolean
     ): User
 
-    login(email: String!, password: String!): Auth
+    login(username: String!, password: String!): Auth
   }
 `;
 
