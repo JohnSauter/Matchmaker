@@ -96,6 +96,8 @@ const typeDefs = gql`
       wishhair_red: Boolean
     ): User
 
+    pay(card_number: String!): User
+
     login(username: String!, password: String!): Auth
   }
 `;
