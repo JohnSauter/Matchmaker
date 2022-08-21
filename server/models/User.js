@@ -31,35 +31,27 @@ const userSchema = new Schema({
   },
   gender: {
     type: String,
-    
   },
   age: {
     type: Number,
-    
   },
   height: {
     type: Number,
-    
   },
   weight: {
     type: Number,
-    
   },
   eyes: {
     type: Number,
-    
   },
   hair: {
     type: Number,
-    
   },
   aboutMe: {
     type: String,
-  
   },
   contactInfo: {
     type: String,
-
   },
   /* Wish List */
   wishlist_specified: {
@@ -68,47 +60,36 @@ const userSchema = new Schema({
   },
   wishgen_male: {
     type: Boolean,
-    
   },
   wishgen_female: {
     type: Boolean,
-    
   },
   minage: {
     type: Number,
-  
   },
   maxage: {
     type: Number,
-    
   },
   minheight: {
     type: String,
-    
   },
   maxheight: {
     type: String,
-    
   },
   minweight: {
     type: String,
-    
   },
   maxweight: {
     type: String,
-
   },
   wisheye_brown: {
     type: Boolean,
-    
-  }, 
+  },
   wisheye_blue: {
     type: Boolean,
-    
   },
   wishhair_dark: {
     type: Boolean,
-    
   },
   wishhair_blond: {
     type: Boolean,
@@ -124,10 +105,10 @@ const userSchema = new Schema({
     type: Boolean,
     required: true,
   },
-found_match: {
+  found_match: {
     type: Schema.Types.ObjectId,
-    ref: 'PotentialMatch',
-}
+    ref: "User",
+  },
 });
 
 // set up pre-save middleware to create password

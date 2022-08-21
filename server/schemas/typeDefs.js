@@ -41,7 +41,7 @@ const typeDefs = gql`
     wishhair_red: Boolean
     paid: Boolean!
     match_found: Boolean!
-    found_match: [PotentialMatch]
+    found_match: User
   }
 
   type Auth {
@@ -63,15 +63,15 @@ const typeDefs = gql`
   type Mutation {
     rateAMatch(PotentialMatchId: ID, rating: Int): PotentialMatch
 
-    addUser(userName: String!, email: String!, password: String!): Auth
+    addUser(username: String!, email: String!, password: String!): Auth
 
     updateProfile(
       gender: String
       age: Int
       height: Int
       weight: Int
-      eyes: String
-      hair: String
+      eyes: eye_color
+      hair: hair_color
       aboutMe: String
       contactInfo: String
     ): User
