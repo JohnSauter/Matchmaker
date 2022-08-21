@@ -42,10 +42,11 @@ const userSchema = new Schema({
     type: Number,
   },
   eyes: {
-    type: Number,
+    type: String,
   },
   hair: {
     type: Number,
+
   },
   aboutMe: {
     type: String,
@@ -102,9 +103,17 @@ const userSchema = new Schema({
     type: Boolean,
   },
   wishhair_black: {
+=======
+  wisheye_hazel: {
     type: Boolean,
   },
-  wishhair_blond: {
+  wisheye_gray: {
+    type: Boolean,
+  },
+  wishhair_black: {
+    type: Boolean,
+  },
+    wishhair_blond: {
     type: Boolean,
   },
   wishhair_red: {

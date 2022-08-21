@@ -1,6 +1,7 @@
 const { gql } = require("apollo-server-express");
 
 const typeDefs = gql`
+
   enum hair_color {
     dark
     black
@@ -13,9 +14,10 @@ const typeDefs = gql`
     green
     gray
     hazel
-  }
 
-  type User {
+  # The matchmaker and the seeker when looking at other users' information
+  # do not get the contact information.
+  type LimitedUser {
     _id: ID
     username: String!
     email: String!
@@ -24,10 +26,11 @@ const typeDefs = gql`
     profile_specified: Boolean
     gender: String
     age: Int
-    height: String
+    height: Int
     weight: Int
-    eyes: eye_color
-    hair: hair_color
+    eyes: String
+    hair: String
+    aboutMe: String
     # wish list
     wishlist_specified: Boolean!
     wishgen_male: Boolean
@@ -38,35 +41,82 @@ const typeDefs = gql`
     maxheight: Int
     minweight: Int
     maxweight: Int
-    wisheye_blue: Boolean
     wisheye_brown: Boolean
+    wisheye_blue: Boolean
+    wisheye_hazel: Boolean
+    whisheye_gray: Boolean
+    wishhair_black: Boolean
     wishhair_dark: Boolean
     wishhair_blond: Boolean
     wishhair_red: Boolean
     paid: Boolean!
     match_found: Boolean!
-    found_match: User
+    found_match: LimitedUser
+
+  }
+
+  # When the seeker is looking at himself he gets the contact information.
+  type FullUser {
+    _id: ID
+    username: String!
+    email: String!
+    matchmaker: Boolean!
+    # Profile
+    profile_specified: Boolean
+    gender: String
+    age: Int
+    height: Int
+    weight: Int
+    eyes: String
+    hair: String
+    aboutMe: String
+    contactInfo: String
+    # wish list
+    wishlist_specified: Boolean!
+    wishgen_male: Boolean
+    wishgen_female: Boolean
+    minage: Int
+    maxage: Int
+    minheight: Int
+    maxheight: Int
+    minweight: Int
+    maxweight: Int
+    wisheye_brown: Boolean
+    wisheye_blue: Boolean
+    wisheye_hazel: Boolean
+    whisheye_gray: Boolean
+    wishhair_black: Boolean
+    wishhair_dark: Boolean
+    wishhair_blond: Boolean
+    wishhair_red: Boolean
+    paid: Boolean!
+    match_found: Boolean!
+    found_match: FullUser
   }
 
   type Auth {
     token: ID
-    user: User
+    user: LimitedUser
   }
   type PotentialMatch {
     _id: ID
-    User1: User
-    User2: User
+    User1: LimitedUser
+    User2: LimitedUser
     rating: Int
   }
+
   type Query {
-    user: User
-    allMyMatches: [PotentialMatch]
+    user: FullUser
+    allMyPotentialMatches: [PotentialMatch]
     unRatedMatches: [PotentialMatch]
+    myMatch: String
   }
 
   type Mutation {
     rateAMatch(PotentialMatchId: ID, rating: Int): PotentialMatch
     chooseMatch
+
+    chooseAMatch(PotentialMatchId: ID): String
 
     addUser(
       username: String!
@@ -80,11 +130,11 @@ const typeDefs = gql`
       age: Int
       height: Int
       weight: Int
-      eyes: eye_color
-      hair: hair_color
+      eyes: String
+      hair: String
       aboutMe: String
       contactInfo: String
-    ): User
+    ): FullUser
 
     updateWishList(
       wishgen: String
@@ -94,14 +144,17 @@ const typeDefs = gql`
       maxheight: Int
       minweight: Int
       maxweight: Int
-      wisheye_blue: Boolean
       wisheye_brown: Boolean
+      wisheye_blue: Boolean
+      wisheye_hazel: Boolean
+      whisheye_gray: Boolean
+      wishhair_black: Boolean
       wishhair_dark: Boolean
       wishhair_blond: Boolean
       wishhair_red: Boolean
-    ): User
+    ): FullUser
 
-    pay(card_number: String!): User
+    pay(card_number: String!): FullUser
 
     login(username: String!, password: String!): Auth
   }
