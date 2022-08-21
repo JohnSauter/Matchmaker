@@ -1,30 +1,47 @@
 const { gql } = require("apollo-server-express");
 
 const typeDefs = gql`
+  enum hair_color {
+    dark
+    blond
+    red
+  }
+  enum eye_color {
+    blue
+    brown
+  }
+
   type User {
     _id: ID
-    firstName: String
-    lastName: String
-    email: String
-    role: String
-    matchmaker: Boolean
+    username: String!
+    email: String!
+    matchmaker: Boolean!
     # Profile
+    profile_specified: Boolean
     gender: String
     age: Int
     height: String
     weight: Int
-    eyes: String
-    hair: String
+    eyes: eye_color
+    hair: hair_color
     # wish list
-    wishgen: String
+    wishlist_specified: Boolean!
+    wishgen_male: Boolean
+    wishgen_female: Boolean
     minage: Int
     maxage: Int
-    minheight: String
-    maxheight: String
-    minweight: String
-    maxweight: String
-    wisheye: String
-    wishhair: String
+    minheight: Int
+    maxheight: Int
+    minweight: Int
+    maxweight: Int
+    wisheye_blue: Boolean
+    wisheye_brown: Boolean
+    wishhair_dark: Boolean
+    wishhair_blond: Boolean
+    wishhair_red: Boolean
+    paid: Boolean!
+    match_found: Boolean!
+    found_match: [PotentialMatch]
   }
 
   type Auth {
