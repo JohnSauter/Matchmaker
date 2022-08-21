@@ -19,6 +19,10 @@ const PotentialSchema = new Schema({
     rating: {
       type: Number,
       required: true
+    },
+    rated: {
+      type: Boolean,
+      required: true,
     }
     
   }
