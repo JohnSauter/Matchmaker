@@ -7,7 +7,7 @@ const typeDefs = gql`
     lastName: String
     email: String
     role: String
-    match: Boolean
+    matchmaker: Boolean
     # Profile
     gender: String
     age: Int
