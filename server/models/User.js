@@ -72,16 +72,16 @@ const userSchema = new Schema({
     type: Number,
   },
   minheight: {
-    type: String,
+    type: Number,
   },
   maxheight: {
-    type: String,
+    type: Number,
   },
   minweight: {
-    type: String,
+    type: Numberg,
   },
   maxweight: {
-    type: String,
+    type: Number,
   },
   wisheye_brown: {
     type: Boolean,
