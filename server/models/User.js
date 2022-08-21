@@ -8,6 +8,7 @@ const userSchema = new Schema({
     type: String,
     required: true,
     trim: true,
+    unique: true,
   },
   email: {
     type: String,
@@ -24,91 +25,109 @@ const userSchema = new Schema({
     required: true,
   },
   /* Profile */
+  profile_specified: {
+    type: Boolean,
+    required: true,
+  },
   gender: {
     type: String,
-    required: true,
+    
   },
   age: {
     type: Number,
-    required: true,
+    
   },
   height: {
     type: Number,
-    required: true,
+    
   },
   weight: {
     type: Number,
-    required: true,
+    
   },
   eyes: {
-    type: String,
-    required: true,
+    type: Number,
+    
   },
   hair: {
-    type: String,
-    required: true,
+    type: Number,
+    
   },
   aboutMe: {
     type: String,
-    required: true,
+  
   },
   contactInfo: {
     type: String,
-    required: true,
+
   },
   /* Wish List */
-  wishgen_male: {
+  wishlist_specified: {
     type: Boolean,
     required: true,
+  },
+  wishgen_male: {
+    type: Boolean,
+    
   },
   wishgen_female: {
     type: Boolean,
-    required: true,
+    
   },
   minage: {
     type: Number,
-    required: false,
+  
   },
   maxage: {
     type: Number,
-    required: false,
+    
   },
   minheight: {
     type: String,
-    required: true,
+    
   },
   maxheight: {
     type: String,
-    required: true,
+    
   },
   minweight: {
     type: String,
-    required: true,
+    
   },
   maxweight: {
     type: String,
-    required: true,
+
   },
   wisheye_brown: {
     type: Boolean,
-    required: true,
+    
   }, 
   wisheye_blue: {
     type: Boolean,
-    required: true,
+    
   },
   wishhair_dark: {
     type: Boolean,
-    required: true,
+    
   },
   wishhair_blond: {
     type: Boolean,
-    required: true,
   },
   wishhair_red: {
     type: Boolean,
+  },
+  paid: {
+    type: Boolean,
     required: true,
   },
+  match_found: {
+    type: Boolean,
+    required: true,
+  },
+found_match: {
+    type: Schema.Types.ObjectId,
+    ref: 'PotentialMatch',
+}
 });
 
 // set up pre-save middleware to create password
