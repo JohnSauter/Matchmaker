@@ -1,33 +1,33 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const { Schema } = mongoose;
-const bcrypt = require('bcrypt');
-const PotentialMatch = require('./PotentialMatch');
+const bcrypt = require("bcrypt");
 
 const userSchema = new Schema({
   firstName: {
     type: String,
     required: true,
-    trim: true
+    trim: true,
   },
   lastName: {
     type: String,
     required: true,
-    trim: true
+    trim: true,
   },
   email: {
     type: String,
     required: true,
-    unique: true
+    unique: true,
   },
   password: {
     type: String,
     required: true,
-    minlength: 5
+    minlength: 5,
   },
+  /* Profile */
   gender: {
     type: String,
-    required: true
+    required: true,
   },
   age: {
     type: Number,
@@ -35,63 +35,70 @@ const userSchema = new Schema({
   },
   height: {
     type: String,
-    required: true
+    required: true,
   },
   weight: {
     type: Number,
-    required: true
+    required: true,
   },
   eyes: {
     type: String,
-    required: true
+    required: true,
   },
   hair: {
-    type: String, 
-    required: true
+    type: String,
+    required: true,
   },
-    wishgen:{
-      type: String,
-      required: true
-    },
-    minage: {
-      type: Number,
-      required: false
-    },
-    maxage: {
-      type: Number,
-      required: false
-    },
-    minheight: {
-      type: String,
-      required: true
-    },
-    maxheight: {
-      type: String,
-      required: true
-    },
-    minweight: {
-      type: String,
-      required: true
-    },
-    maxweight: {
-      type: String,
-      required: true
-    },
-    wisheye: {
-      type: String,
-      required: true
-    },
-    wishhair: {
-      type: String,
-      required: true
-    },
-      potentialmatches: [PotentialMatch.schema]
-
+  aboutMe: {
+    type: String,
+    required: true,
+  },
+  contactInfo: {
+    type: String,
+    required: true,
+  },
+  /* Wish List */
+  wishgen: {
+    type: String,
+    required: true,
+  },
+  minage: {
+    type: Number,
+    required: false,
+  },
+  maxage: {
+    type: Number,
+    required: false,
+  },
+  minheight: {
+    type: String,
+    required: true,
+  },
+  maxheight: {
+    type: String,
+    required: true,
+  },
+  minweight: {
+    type: String,
+    required: true,
+  },
+  maxweight: {
+    type: String,
+    required: true,
+  },
+  wisheye: {
+    type: String,
+    required: true,
+  },
+  wishhair: {
+    type: String,
+    required: true,
+  },
 });
 
 // set up pre-save middleware to create password
-userSchema.pre('save', async function (next) {
-  if (this.isNew || this.isModified('password')) {
+userSchema.pre("save", async function (next) {
+  if (this.isNew || this.isModified("password")) {
     const saltRounds = 10;
     this.password = await bcrypt.hash(this.password, saltRounds);
   }
@@ -104,6 +111,6 @@ userSchema.methods.isCorrectPassword = async function (password) {
   return await bcrypt.compare(password, this.password);
 };
 
-const User = mongoose.model('User', userSchema);
+const User = mongoose.model("User", userSchema);
 
 module.exports = User;
