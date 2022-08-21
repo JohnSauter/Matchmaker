@@ -3,12 +3,16 @@ const { gql } = require("apollo-server-express");
 const typeDefs = gql`
   enum hair_color {
     dark
+    black
     blond
     red
   }
   enum eye_color {
     blue
     brown
+    green
+    gray
+    hazel
   }
 
   type User {

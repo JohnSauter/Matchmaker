@@ -45,7 +45,6 @@ const userSchema = new Schema({
     type: Number,
   },
   hair: {
-
     type: Number,
   },
   aboutMe: {
@@ -65,6 +64,10 @@ const userSchema = new Schema({
   wishgen_female: {
     type: Boolean,
   },
+  wishgen_nonbinary: {
+    type: Boolean,
+  },
+
   minage: {
     type: Number,
   },
@@ -78,7 +81,7 @@ const userSchema = new Schema({
     type: Number,
   },
   minweight: {
-    type: Numberg,
+    type: Number,
   },
   maxweight: {
     type: Number,
@@ -89,7 +92,16 @@ const userSchema = new Schema({
   wisheye_blue: {
     type: Boolean,
   },
-  wishhair_dark: {
+  wisheye_gray: {
+    type: Boolean,
+  },
+  wisheye_green: {
+    type: Boolean,
+  },
+  wishhair_brown: {
+    type: Boolean,
+  },
+  wishhair_black: {
     type: Boolean,
   },
   wishhair_blond: {
@@ -110,7 +122,7 @@ const userSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: "User",
   },
- 
+
 });
 
 // set up pre-save middleware to create password
