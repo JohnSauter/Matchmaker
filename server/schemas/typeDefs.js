@@ -1,6 +1,20 @@
 const { gql } = require("apollo-server-express");
 
 const typeDefs = gql`
+
+  enum hair_color {
+    dark
+    black
+    blond
+    red
+  }
+  enum eye_color {
+    blue
+    brown
+    green
+    gray
+    hazel
+
   # The matchmaker and the seeker when looking at other users' information
   # do not get the contact information.
   type LimitedUser {
@@ -38,6 +52,7 @@ const typeDefs = gql`
     paid: Boolean!
     match_found: Boolean!
     found_match: LimitedUser
+
   }
 
   # When the seeker is looking at himself he gets the contact information.
