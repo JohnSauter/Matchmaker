@@ -49,43 +49,51 @@ const userSchema = new Schema({
     type: String, 
     required: true
   },
-    wishgen:{
+  likes:{
+    type: String,
+    required: true
+  },
+  dislikes:{
+    type: String,
+    required: true
+  },
+    wishGen:{
       type: String,
       required: true
     },
-    minage: {
+    minAge: {
       type: Number,
       required: false
     },
-    maxage: {
+    maxAge: {
       type: Number,
       required: false
     },
-    minheight: {
+    minHeight: {
       type: String,
       required: true
     },
-    maxheight: {
+    maxHeight: {
       type: String,
       required: true
     },
-    minweight: {
+    minWeight: {
       type: String,
       required: true
     },
-    maxweight: {
+    maxWeight: {
       type: String,
       required: true
     },
-    wisheye: {
+    wishEye: {
       type: String,
       required: true
     },
-    wishhair: {
+    wishHair: {
       type: String,
       required: true
     },
-      potentialmatches: [PotentialMatch.schema]
+      potentialMatches: [PotentialMatch.schema]
 
 });
 

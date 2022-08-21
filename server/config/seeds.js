@@ -1,5 +1,6 @@
 const db = require('./connection');
-const { User, Product, Category } = require('../models');
+const { User, PotentialMatch } = require('../models');
+const { aggregate } = require('../models/PotentialMatch');
 
 db.once('open', async () => {
   await Category.deleteMany();
@@ -135,7 +136,24 @@ db.once('open', async () => {
     lastName: 'Washington',
     email: 'pamela@testmail.com',
     password: 'password12345',
-    orders: [
+    gender:'Female',
+    age:32,
+    height:64,
+    weight:120,
+    eyes:'blue',
+    hair:'brown',
+    likes:'Anime,spicy food, Netflix and chill',
+    dislikes: 'nature, being cold, shag carpet',
+    wishGen: 'male',
+    minAge: 18,
+    maxAge:35,
+    minHeight:'no preference',
+    maxHeight:'no preference',
+    minWeight:'no preference',
+    maxWeight:'no preference',
+    wishEye:'no preference',
+    wishHair:'no preference',
+    potentialMatches: [
       {
         products: [products[0]._id, products[0]._id, products[1]._id]
       }
@@ -146,7 +164,30 @@ db.once('open', async () => {
     firstName: 'Elijah',
     lastName: 'Holt',
     email: 'eholt@testmail.com',
-    password: 'password12345'
+    password: 'password12345',
+    gender:'Male',
+    age:29,
+    height:70,
+    weight:180,
+    eyes:'brown',
+    hair:'brown',
+    likes:'soccer,Thai food, movies',
+    dislikes: 'Project Runway,HGTV, winter',
+    wishGen: 'Female',
+    minAge: 18,
+    maxAge:35,
+    minHeight:'no preference',
+    maxHeight:'no preference',
+    minWeight:'no preference',
+    maxWeight:'no preference',
+    wishEye:'no preference',
+    wishHair:'no preference',
+    potentialMatches: [
+      {
+        products: [products[0]._id, products[0]._id, products[1]._id]
+      }
+    ]
+  });
   });
 
   console.log('users seeded');
