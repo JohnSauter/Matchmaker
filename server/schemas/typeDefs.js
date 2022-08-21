@@ -62,6 +62,7 @@ const typeDefs = gql`
 
   type Mutation {
     rateAMatch(PotentialMatchId: ID, rating: Int): PotentialMatch
+    chooseMatch
 
     addUser(
       username: String!
