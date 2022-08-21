@@ -11,21 +11,42 @@ const resolvers = {
         const user = await User.findById(context.user._id);
         return user;
       }
-      throw new AuthenticationError("Not logged in");
+      throw new AuthenticationError("Must be logged in");
     },
     /* Get all of the potential matches for the logged-in user.  */
     allMyMatches: async (parent, args, context) => {
-      if (!context.user) {
+      const logged_in_user = context.user;
+      if (!logged_in_user) {
         throw new AuthenticationError("Must be logged in.");
       }
-      throw new AuthenticationError("Not implemented.");
+      const user_id = logged_in_user._id;
+
+      const potential_matches = await PotentialMatch.find({
+        rated: true,
+        rating: { $gt: 0 },
+      });
+
+      /* Filter out matches not involving this user.
+       * Perhaps this can be done in the query instead.
+       */
+      filtered_matches = potential_matches.filter((element) => {
+        if (element.user1 == user_id) {
+          return true;
+        }
+        if (element.user2 == user_id) {
+          return true;
+        }
+        return false;
+      });
+      return filtered_matches;
     },
     /* Get all unrated matches for the matchmaker.  */
     unRatedMatches: async (parent, args, context) => {
       if (!context.user) {
         throw new AuthenticationError("Must be logged in.");
       }
-      throw new AuthenticationError("Not implemented.");
+      const potential_matches = await PotentialMatch.find({ rated: false });
+      return potential_matches;
     },
   },
   Mutation: {
@@ -83,7 +104,18 @@ const resolvers = {
       if (!user.matchmaker) {
         throw new AuthenticationError("Only a matchmaker can do this.");
       }
-      throw new AuthenticationError("Not implemented.");
+      const match_id = args.potentialMatchID;
+      const rating = args.rating;
+      const updated_match = await User.findOneAndUpdate(
+        { _id: match_id },
+        {
+          $set: {
+            rating: rating,
+            rated: true,
+          },
+        }
+      );
+      return updated_match;
     },
 
     /* Update a user's profile.
