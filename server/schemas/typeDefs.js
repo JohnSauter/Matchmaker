@@ -1,32 +1,32 @@
-const { gql } = require('apollo-server-express');
+const { gql } = require("apollo-server-express");
 
 const typeDefs = gql`
   type PotentialMatch {
     _id: ID
-      }
+  }
 
-    type User {
+  type User {
     _id: ID
     firstName: String
     lastName: String
     email: String
     role: String
     match: Boolean
-    }
+  }
 
   type Profile {
-  userid: User
-  gender: String
-  age: Int
-  height:  String
-  weight: Int
-  eyes:  String
-  hair:  String          
+    userid: User
+    gender: String
+    age: Int
+    height: String
+    weight: Int
+    eyes: String
+    hair: String
   }
 
   type Wishlist {
     userid: User
-    wishgen:String
+    wishgen: String
     minage: Int
     maxage: Int
     minheight: String
@@ -34,7 +34,7 @@ const typeDefs = gql`
     minweight: String
     maxweight: String
     wisheye: String
-    wishhair:String
+    wishhair: String
   }
 
   type Matchrate {
@@ -52,26 +52,43 @@ const typeDefs = gql`
 
   type Query {
     matches: [PotentialMatch]
-        user: User
-        allMyMatches:User
-        unRatedMatches:User
-
-
-     }
+    user: User
+    allMyMatches: User
+    unRatedMatches: User
+  }
 
   type Mutation {
-    rateAMatch (rating:Int): Matchrate
+    rateAMatch(rating: Int): Matchrate
 
-    addUser(firstName: String!, lastName: String!, email: String!, password: String!): Auth
-       
-    updateProfile(userid: User, gender: String, age: Int, height:  String, weight: Int, eyes: String, hair:  String): Profile
-       
-    updateWishList (userid: User, wishgen:String, minage: Int, maxage: Int, minheight: String, maxheight: String, Intminweight: String, maxweight: String, wisheye: String, wishhair:String ) : Wishlist
-        
-    updatelogin(email: String!, password: String!): Auth
-        
-    
+    addUser(
+      firstName: String!
+      lastName: String!
+      email: String!
+      password: String!
+    ): Auth
 
+    updateProfile(
+      gender: String
+      age: Int
+      height: String
+      weight: Int
+      eyes: String
+      hair: String
+    ): Profile
+
+    updateWishList(
+      wishgen: String
+      minage: Int
+      maxage: Int
+      minheight: String
+      maxheight: String
+      Intminweight: String
+      maxweight: String
+      wisheye: String
+      wishhair: String
+    ): Wishlist
+
+    login(email: String!, password: String!): Auth
   }
 `;
 
