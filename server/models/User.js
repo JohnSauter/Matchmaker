@@ -42,11 +42,10 @@ const userSchema = new Schema({
     type: Number,
   },
   eyes: {
-    type: Number,
+    type: String,
   },
   hair: {
-
-    type: Number,
+    type: String,
   },
   aboutMe: {
     type: String,
@@ -89,6 +88,15 @@ const userSchema = new Schema({
   wisheye_blue: {
     type: Boolean,
   },
+  wisheye_hazel: {
+    type: Boolean,
+  },
+  wisheye_gray: {
+    type: Boolean,
+  },
+  wishhair_black: {
+    type: Boolean,
+  },
   wishhair_dark: {
     type: Boolean,
   },
@@ -110,7 +118,6 @@ const userSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: "User",
   },
- 
 });
 
 // set up pre-save middleware to create password
