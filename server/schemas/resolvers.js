@@ -31,14 +31,30 @@ const resolvers = {
   Mutation: {
     /* Sign up a new user. */
     addUser: async (parent, args) => {
-      const user = await User.create(args);
+      const username = args.username;
+      const email = args.email;
+      const password = args.password;
+      const matchmaker = args.matchmaker;
+      const new_user = {
+        username,
+        email,
+        password,
+        matchmaker,
+        wishlist_specified: false,
+        profile_specified: false,
+        paid: false,
+        match_found: false,
+      };
+      const user = await User.create(new_user);
       const token = signToken(user);
 
       return { token, user };
     },
     /* Log in an old user.  */
-    login: async (parent, { email, password }) => {
-      const user = await User.findOne({ email });
+    login: async (parent, args, content) => {
+      const username = args.username;
+      const password = args.password;
+      const user = await User.findOne({ username });
 
       if (!user) {
         throw new AuthenticationError("Incorrect credentials");

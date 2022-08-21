@@ -63,7 +63,12 @@ const typeDefs = gql`
   type Mutation {
     rateAMatch(PotentialMatchId: ID, rating: Int): PotentialMatch
 
-    addUser(username: String!, email: String!, password: String!): Auth
+    addUser(
+      username: String!
+      email: String!
+      password: String!
+      matchmaker: Boolean!
+    ): Auth
 
     updateProfile(
       gender: String
