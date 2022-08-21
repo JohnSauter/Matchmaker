@@ -20,7 +20,7 @@ const typeDefs = gql`
     profile_specified: Boolean
     gender: String
     age: Int
-    height: String
+    height: Int
     weight: Int
     eyes: eye_color
     hair: hair_color
@@ -54,14 +54,18 @@ const typeDefs = gql`
     User2: User
     rating: Int
   }
+  
   type Query {
     user: User
     allMyMatches: [PotentialMatch]
     unRatedMatches: [PotentialMatch]
+    myMatch: String
   }
 
   type Mutation {
     rateAMatch(PotentialMatchId: ID, rating: Int): PotentialMatch
+
+    chooseAMatch(PotentialMatchId: ID): String
 
     addUser(
       username: String!
