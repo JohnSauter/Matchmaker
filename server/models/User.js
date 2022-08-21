@@ -45,6 +45,7 @@ const userSchema = new Schema({
     type: Number,
   },
   hair: {
+
     type: Number,
   },
   aboutMe: {
@@ -109,6 +110,7 @@ const userSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: "User",
   },
+ main
 });
 
 // set up pre-save middleware to create password
