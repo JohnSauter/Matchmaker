@@ -1,7 +1,8 @@
 const { AuthenticationError } = require("apollo-server-express");
 const { User, PotentialMatch } = require("../models");
-const { signToken } = require("../utils/auth");
+const { signToken } = require("../utils/auth.js");
 const stripe = require("stripe")("sk_test_4eC39HqLyjWDarjtT1zdp7dc");
+const { match_recompute } = require("../utils/make_matches.js");
 
 const resolvers = {
   Query: {
@@ -132,6 +133,7 @@ const resolvers = {
       if (logged_in_user.matchmaker) {
         throw new AuthenticationError("Only a seeker can do this.");
       }
+      const user_id = logged_in_user._id;
       const gender = args.gender;
       const age = args.age;
       const height = args.height;
@@ -141,7 +143,7 @@ const resolvers = {
       const aboutMe = args.aboutMe;
       const contactInfo = args.contactInfo;
       const updated_user = await User.findOneAndUpdate(
-        { _id: logged_in_user._id },
+        { _id: user_id },
         {
           $set: {
             profile_specified: true,
@@ -157,6 +159,7 @@ const resolvers = {
         },
         { new: true }
       );
+      match_recompute (user_id);
       /* Delete this user's matches and recompute potential matches.  */
       return updated_user;
     },
@@ -176,6 +179,7 @@ const resolvers = {
       if (logged_in_user.matchmaker) {
         throw new AuthenticationError("Only a seeker can do this.");
       }
+      const user_id = logged_in_user._id;
       const wishgen_male = args.wishgen_male;
       const wishgen_female = args.wishgen_female;
       const minage = args.minage;
@@ -190,7 +194,7 @@ const resolvers = {
       const wishhair_blond = args.wishhair_blond;
       const wishhair_red = args.wishhair_red;
       const updated_user = await User.findOneAndUpdate(
-        { _id: logged_in_user._id },
+        { _id: user_id },
         {
           $set: {
             wishlist_specified: true,
@@ -211,7 +215,7 @@ const resolvers = {
         },
         { new: true }
       );
-      /* Delete this user's matches and recompute potential matches.  */
+      match_recompute (user_id);
       return updated_user;
     },
     /* Pay invokes the billing system.  */
@@ -223,9 +227,10 @@ const resolvers = {
       if (logged_in_user.matchmaker) {
         throw new AuthenticationError("Only a seeker can do this.");
       }
+      const user_id = logged_in_user._id;
       /* Invoke the credit card payment software.  */
       const updated_user = await User.findOneAndUpdate(
-        { _id: logged_in_user._id },
+        { _id: user_id },
         {
           $set: {
             paid: true,
@@ -233,6 +238,9 @@ const resolvers = {
         },
         { new: true }
       );
+      /* Now that this seeker is paid, he may have some potential matches
+       */
+      match_recompute(user_id);
       return updated_user;
     },
   },
