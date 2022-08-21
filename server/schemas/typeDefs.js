@@ -1,77 +1,104 @@
-const { gql } = require('apollo-server-express');
+const { gql } = require("apollo-server-express");
 
 const typeDefs = gql`
-  type PotentialMatch {
-    _id: ID
-      }
-
-    type User {
-    _id: ID
-    firstName: String
-    lastName: String
-    email: String
-    role: String
-    match: Boolean
-    }
-
-  type Profile {
-  userid: User
-  gender: String
-  age: Int
-  height:  String
-  weight: Int
-  eyes:  String
-  hair:  String          
+  enum hair_color {
+    dark
+    blond
+    red
+  }
+  enum eye_color {
+    blue
+    brown
   }
 
-  type Wishlist {
-    userid: User
-    wishgen:String
+  type User {
+    _id: ID
+    username: String!
+    email: String!
+    matchmaker: Boolean!
+    # Profile
+    profile_specified: Boolean
+    gender: String
+    age: Int
+    height: String
+    weight: Int
+    eyes: eye_color
+    hair: hair_color
+    # wish list
+    wishlist_specified: Boolean!
+    wishgen_male: Boolean
+    wishgen_female: Boolean
     minage: Int
     maxage: Int
-    minheight: String
-    maxheight: String
-    minweight: String
-    maxweight: String
-    wisheye: String
-    wishhair:String
-  }
-
-  type Matchrate {
-    rating: Int
-  }
-
-  type Checkout {
-    session: ID
+    minheight: Int
+    maxheight: Int
+    minweight: Int
+    maxweight: Int
+    wisheye_blue: Boolean
+    wisheye_brown: Boolean
+    wishhair_dark: Boolean
+    wishhair_blond: Boolean
+    wishhair_red: Boolean
+    paid: Boolean!
+    match_found: Boolean!
+    found_match: User
   }
 
   type Auth {
     token: ID
     user: User
   }
-
+  type PotentialMatch {
+    _id: ID
+    User1: User
+    User2: User
+    rating: Int
+  }
   type Query {
-    matches: [PotentialMatch]
-        user: User
-        allMyMatches:User
-        unRatedMatches:User
-
-
-     }
+    user: User
+    allMyMatches: [PotentialMatch]
+    unRatedMatches: [PotentialMatch]
+  }
 
   type Mutation {
-    rateAMatch (rating:Int): Matchrate
+    rateAMatch(PotentialMatchId: ID, rating: Int): PotentialMatch
 
-    addUser(firstName: String!, lastName: String!, email: String!, password: String!): Auth
-       
-    updateProfile(userid: User, gender: String, age: Int, height:  String, weight: Int, eyes: String, hair:  String): Profile
-       
-    updateWishList (userid: User, wishgen:String, minage: Int, maxage: Int, minheight: String, maxheight: String, Intminweight: String, maxweight: String, wisheye: String, wishhair:String ) : Wishlist
-        
-    updatelogin(email: String!, password: String!): Auth
-        
-    
+    addUser(
+      username: String!
+      email: String!
+      password: String!
+      matchmaker: Boolean!
+    ): Auth
 
+    updateProfile(
+      gender: String
+      age: Int
+      height: Int
+      weight: Int
+      eyes: eye_color
+      hair: hair_color
+      aboutMe: String
+      contactInfo: String
+    ): User
+
+    updateWishList(
+      wishgen: String
+      minage: Int
+      maxage: Int
+      minheight: Int
+      maxheight: Int
+      minweight: Int
+      maxweight: Int
+      wisheye_blue: Boolean
+      wisheye_brown: Boolean
+      wishhair_dark: Boolean
+      wishhair_blond: Boolean
+      wishhair_red: Boolean
+    ): User
+
+    pay(card_number: String!): User
+
+    login(username: String!, password: String!): Auth
   }
 `;
 

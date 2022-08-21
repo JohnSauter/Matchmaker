@@ -1,105 +1,121 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const { Schema } = mongoose;
-const bcrypt = require('bcrypt');
-const PotentialMatch = require('./PotentialMatch');
+const bcrypt = require("bcrypt");
 
 const userSchema = new Schema({
-  firstName: {
+  username: {
     type: String,
     required: true,
-    trim: true
-  },
-  lastName: {
-    type: String,
-    required: true,
-    trim: true
+    trim: true,
+    unique: true,
   },
   email: {
     type: String,
     required: true,
-    unique: true
+    unique: true,
   },
   password: {
     type: String,
     required: true,
-    minlength: 5
+    minlength: 5,
+  },
+  matchmaker: {
+    type: Boolean,
+    required: true,
+  },
+  /* Profile */
+  profile_specified: {
+    type: Boolean,
+    required: true,
   },
   gender: {
     type: String,
-    required: true
   },
   age: {
     type: Number,
-    required: true,
   },
   height: {
-    type: String,
-    required: true
+    type: Number,
   },
   weight: {
     type: Number,
-    required: true
   },
   eyes: {
-    type: String,
-    required: true
+    type: Number,
   },
   hair: {
-    type: String, 
-    required: true
-  },
-  likes:{
-    type: String,
-    required: true
-  },
-  dislikes:{
-    type: String,
-    required: true
-  },
-    wishGen:{
-      type: String,
-      required: true
-    },
-    minAge: {
-      type: Number,
-      required: false
-    },
-    maxAge: {
-      type: Number,
-      required: false
-    },
-    minHeight: {
-      type: String,
-      required: true
-    },
-    maxHeight: {
-      type: String,
-      required: true
-    },
-    minWeight: {
-      type: String,
-      required: true
-    },
-    maxWeight: {
-      type: String,
-      required: true
-    },
-    wishEye: {
-      type: String,
-      required: true
-    },
-    wishHair: {
-      type: String,
-      required: true
-    },
-      potentialMatches: [PotentialMatch.schema]
 
+    type: Number,
+  },
+  aboutMe: {
+    type: String,
+  },
+  contactInfo: {
+    type: String,
+  },
+  /* Wish List */
+  wishlist_specified: {
+    type: Boolean,
+    required: true,
+  },
+  wishgen_male: {
+    type: Boolean,
+  },
+  wishgen_female: {
+    type: Boolean,
+  },
+  minage: {
+    type: Number,
+  },
+  maxage: {
+    type: Number,
+  },
+  minheight: {
+    type: String,
+  },
+  maxheight: {
+    type: String,
+  },
+  minweight: {
+    type: String,
+  },
+  maxweight: {
+    type: String,
+  },
+  wisheye_brown: {
+    type: Boolean,
+  },
+  wisheye_blue: {
+    type: Boolean,
+  },
+  wishhair_dark: {
+    type: Boolean,
+  },
+  wishhair_blond: {
+    type: Boolean,
+  },
+  wishhair_red: {
+    type: Boolean,
+  },
+  paid: {
+    type: Boolean,
+    required: true,
+  },
+  match_found: {
+    type: Boolean,
+    required: true,
+  },
+  found_match: {
+    type: Schema.Types.ObjectId,
+    ref: "User",
+  },
+ main
 });
 
 // set up pre-save middleware to create password
-userSchema.pre('save', async function (next) {
-  if (this.isNew || this.isModified('password')) {
+userSchema.pre("save", async function (next) {
+  if (this.isNew || this.isModified("password")) {
     const saltRounds = 10;
     this.password = await bcrypt.hash(this.password, saltRounds);
   }
@@ -112,6 +128,6 @@ userSchema.methods.isCorrectPassword = async function (password) {
   return await bcrypt.compare(password, this.password);
 };
 
-const User = mongoose.model('User', userSchema);
+const User = mongoose.model("User", userSchema);
 
 module.exports = User;
