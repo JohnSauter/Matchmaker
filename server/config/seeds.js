@@ -161,9 +161,8 @@ db.once('open', async () => {
   });
 
   await User.create({
-    firstName: 'Elijah',
-    lastName: 'Holt',
-    email: 'eholt@testmail.com',
+    userName: 'Elijah Holt',
+        email: 'eholt@testmail.com',
     password: 'password12345',
     gender:'Male',
     age:29,
@@ -176,12 +175,12 @@ db.once('open', async () => {
     wishGen: 'Female',
     minAge: 18,
     maxAge:35,
-    minHeight:'no preference',
-    maxHeight:'no preference',
-    minWeight:'no preference',
-    maxWeight:'no preference',
-    wishEye:'no preference',
-    wishHair:'no preference',
+    minHeight:0,
+    maxHeight:100,
+    minWeight: 0,
+    maxWeight:1000,
+    wishEye: true,
+    wishHair:true,
     potentialMatches: [
       {
         products: [products[0]._id, products[0]._id, products[1]._id]
