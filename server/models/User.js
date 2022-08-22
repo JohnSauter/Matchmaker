@@ -45,7 +45,7 @@ const userSchema = new Schema({
     type: String,
   },
   hair: {
-    type: Number,
+    type: String,
   },
   aboutMe: {
     type: String,

@@ -35,13 +35,14 @@ db.once('open', async () => {
     wisheye_blue: true,
     whisheye_gray: false,
     wisheye_green: true,
-        wishhair_black: true,
+    wisheye_hazel: true,
+    wishhair_black: true,
     wishhair_brown: false,
     wishhair_blond: true,
     wishhair_red: false,
     paid: true,
     match_found: false,
-    found_match:false
+    found_match: false
   });
 
   await User.create({
@@ -72,13 +73,14 @@ db.once('open', async () => {
     wisheye_blue: true,
     whisheye_gray: false,
     wisheye_green: false,
+    wisheye_hazel: true,
     wishhair_black: true,
     wishhair_brown: false,
     wishhair_blond: false,
     wishhair_red: true,
     paid: true,
     match_found: false,
-    found_match:false
+    found_match: false
   });
   await User.create({
     username: 'Sam Gamgee',
@@ -108,6 +110,7 @@ db.once('open', async () => {
     wisheye_blue: true,
     whisheye_gray: false,
     wisheye_green: true,
+    wisheye_hazel: true,
     wishhair_black: true,
     wishhair_brown: false,
     wishhair_blond: true,
@@ -154,10 +157,10 @@ db.once('open', async () => {
     wishhair_red: true,
     paid: true,
     match_found: false,
-    found_match:false
+    found_match: false
   });
   await User.create({
-  username: 'Cleopatra Philopator',
+    username: 'Cleopatra Philopator',
     email: 'cphilopato@ptolemy.gov',
     password: 'emerald',
     matchmaker: false,
@@ -184,16 +187,17 @@ db.once('open', async () => {
     wisheye_blue: true,
     whisheye_gray: false,
     wisheye_green: true,
-        wishhair_black: true,
+    wisheye_hazel: true,
+    wishhair_black: true,
     wishhair_brown: true,
     wishhair_blond: true,
     wishhair_red: false,
     paid: true,
     match_found: false,
-    found_match:false
+    found_match: false
   });
 
-console.log('users seeded');
+  console.log('users seeded');
 
-process.exit();
+  process.exit();
 });
