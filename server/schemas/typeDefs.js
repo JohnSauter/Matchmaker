@@ -2,19 +2,6 @@ const { gql } = require("apollo-server-express");
 
 const typeDefs = gql`
 
-  enum hair_color {
-    dark
-    black
-    blond
-    red
-  }
-  enum eye_color {
-    blue
-    brown
-    green
-    gray
-    hazel
-
   # The matchmaker and the seeker when looking at other users' information
   # do not get the contact information.
   type LimitedUser {
@@ -43,16 +30,16 @@ const typeDefs = gql`
     maxweight: Int
     wisheye_brown: Boolean
     wisheye_blue: Boolean
-    wisheye_hazel: Boolean
     whisheye_gray: Boolean
+    wisheye_gtreen: Boolean
+    wisheye_hazel: Boolean
     wishhair_black: Boolean
-    wishhair_dark: Boolean
+    wishhair_brown: Boolean
     wishhair_blond: Boolean
     wishhair_red: Boolean
     paid: Boolean!
     match_found: Boolean!
     found_match: LimitedUser
-
   }
 
   # When the seeker is looking at himself he gets the contact information.
@@ -83,10 +70,11 @@ const typeDefs = gql`
     maxweight: Int
     wisheye_brown: Boolean
     wisheye_blue: Boolean
-    wisheye_hazel: Boolean
     whisheye_gray: Boolean
+    wisheye_green: Boolean
+    wisheye_hazel: Boolean
     wishhair_black: Boolean
-    wishhair_dark: Boolean
+    wishhair_brown: Boolean
     wishhair_blond: Boolean
     wishhair_red: Boolean
     paid: Boolean!
@@ -114,9 +102,10 @@ const typeDefs = gql`
 
   type Mutation {
     rateAMatch(PotentialMatchId: ID, rating: Int): PotentialMatch
-    chooseMatch
 
     chooseAMatch(PotentialMatchId: ID): String
+
+    rejectMatch: FullUser
 
     addUser(
       username: String!
@@ -146,10 +135,11 @@ const typeDefs = gql`
       maxweight: Int
       wisheye_brown: Boolean
       wisheye_blue: Boolean
-      wisheye_hazel: Boolean
       whisheye_gray: Boolean
+      wisheye_green: Boolean
+      wisheye_hazel: Boolean
       wishhair_black: Boolean
-      wishhair_dark: Boolean
+      wishhair_brown: Boolean
       wishhair_blond: Boolean
       wishhair_red: Boolean
     ): FullUser
