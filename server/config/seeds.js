@@ -1,6 +1,8 @@
 const db = require('./connection');
 const { User, PotentialMatch } = require('../models');
 const { aggregate } = require('../models/PotentialMatch');
+const { isNullableType } = require('graphql');
+const { match_recompute } = require('../utils/make_matches.js')
 
 db.once('open', async () => {
 
@@ -12,7 +14,9 @@ db.once('open', async () => {
     email: 'rosie@theshire.net',
     password: 'GreenDragon',
     matchmaker: false,
-    profile_specified: true,
+    paid: true,
+    profile_specified: false,
+    match_found: false,
     gender: 'Female',
     age: 35,
     height: 38,
@@ -42,7 +46,7 @@ db.once('open', async () => {
     wishhair_red: false,
     paid: true,
     match_found: false,
-    found_match: false
+    found_match: null
   });
 
   await User.create({
@@ -80,7 +84,7 @@ db.once('open', async () => {
     wishhair_red: true,
     paid: true,
     match_found: false,
-    found_match: false
+    found_match: null
   });
   await User.create({
     username: 'Sam Gamgee',
@@ -116,12 +120,10 @@ db.once('open', async () => {
     wishhair_blond: true,
     wishhair_red: false,
     paid: true,
-    potentialMatches: [
-      {
-        products: [products[0]._id, products[0]._id, products[1]._id]
-      }
-    ]
+    match_found: false,
+    found_match: null
   });
+
   await User.create({
     username: 'Hari Seldon',
     email: 'hseldon@streeling.edu',
@@ -157,8 +159,9 @@ db.once('open', async () => {
     wishhair_red: true,
     paid: true,
     match_found: false,
-    found_match: false
+    found_match: null
   });
+
   await User.create({
     username: 'Cleopatra Philopator',
     email: 'cphilopato@ptolemy.gov',
@@ -194,10 +197,13 @@ db.once('open', async () => {
     wishhair_red: false,
     paid: true,
     match_found: false,
-    found_match: false
+    found_match: null
+
   });
 
   console.log('users seeded');
+  match_recompute([]);
+  console.log('Potential matches computed.')
 
   process.exit();
 });
