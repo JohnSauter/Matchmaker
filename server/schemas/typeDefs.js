@@ -2,7 +2,7 @@ const { gql } = require("apollo-server-express");
 
 const typeDefs = gql`
   enum hair_color {
-    dark
+    brown
     black
     blond
     red
@@ -12,8 +12,7 @@ const typeDefs = gql`
     brown
     green
     gray
-    hazel
-  }
+      }
 
   type User {
     _id: ID
@@ -24,14 +23,16 @@ const typeDefs = gql`
     profile_specified: Boolean
     gender: String
     age: Int
-    height: String
+    height: Int
     weight: Int
     eyes: eye_color
     hair: hair_color
+    aboutMe: String
     # wish list
     wishlist_specified: Boolean!
     wishgen_male: Boolean
     wishgen_female: Boolean
+    wishgen_nonbinary: Boolean
     minage: Int
     maxage: Int
     minheight: Int
