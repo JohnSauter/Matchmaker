@@ -70,7 +70,68 @@ db.once('open', async () => {
       }
     ]
   });
-
+  await User.create({
+    username: 'Sam Gamgee',
+    email: 'sgamgee@lotr.com',
+    password: 'Mellon',
+    matchmaker: false,
+    profile_specified: true,
+    gender: 'Male',
+    age: 39,
+    height: 42,
+    weight: 100,
+    eyes: 'green',
+    hair: 'blonde',
+    aboutMe: 'I am a homebody who loves gardening and home-cooked meals. I do not like traveling. Looking for someone who likes pipes and second breakfast',
+    contactinfo: "sgamgee@lotr.com",
+    wishlist_specified: true,
+    wishGen: 'Female',
+    minAge: 33,
+    maxAge: 100,
+    minHeight: 0,
+    maxHeight: 48,
+    minWeight: 0,
+    maxWeight: 1000,
+    wishEye: true,
+    wishHair: true,
+    paid: true,
+    potentialMatches: [
+      {
+        products: [products[0]._id, products[0]._id, products[1]._id]
+      }
+    ]
+  });
+  await User.create({
+    username: 'Hari Seldon',
+    email: 'hseldon@streeling.edu',
+    password: 'the Raven',
+    matchmaker: false,
+    profile_specified: true,
+    gender: 'Male',
+    age: 42,
+    height: 70,
+    weight: 180,
+    eyes: 'brown',
+    hair: 'brown',
+    aboutMe: 'I am a careful planner and not much for spontenaity. I am looking for someone who like peace and quiet but can take bad news with aplomb ',
+    contactinfo: "hseldon@streeling.edu",
+    wishlist_specified: true,
+    wishGen: 'Female',
+    minAge: 18,
+    maxAge: 100,
+    minHeight: 0,
+    maxHeight: 100,
+    minWeight: 0,
+    maxWeight: 1000,
+    wishEye: true,
+    wishHair: true,
+    paid: true,
+    potentialMatches: [
+      {
+        products: [products[0]._id, products[0]._id, products[1]._id]
+      }
+    ]
+  });
 
 console.log('users seeded');
 
