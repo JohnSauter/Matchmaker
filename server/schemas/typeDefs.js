@@ -47,7 +47,6 @@ const typeDefs = gql`
     wisheye_blue: Boolean
     whisheye_gray: Boolean
     wisheye_gtreen: Boolean
-    wisheye_hazel: Boolean
     wishhair_black: Boolean
     wishhair_brown: Boolean
     wishhair_blond: Boolean
