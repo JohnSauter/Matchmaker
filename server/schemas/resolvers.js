@@ -12,10 +12,11 @@ const resolvers = {
         const user = await User.findById(context.user._id);
         return user;
       }
-      throw new AuthenticationError("Must be logged in");
+      throw new AuthenticationError("Must be logged in.");
     },
+
     /* Get all of the potential matches for the logged-in user.  */
-    allMyMatches: async (parent, args, context) => {
+    allMyPotentialMatches: async (parent, args, context) => {
       const logged_in_user = context.user;
       if (!logged_in_user) {
         throw new AuthenticationError("Must be logged in.");
@@ -41,6 +42,7 @@ const resolvers = {
       });
       return filtered_matches;
     },
+
     /* Get all unrated matches for the matchmaker.  */
     unRatedMatches: async (parent, args, context) => {
       if (!context.user) {
@@ -48,6 +50,33 @@ const resolvers = {
       }
       const potential_matches = await PotentialMatch.find({ rated: false });
       return potential_matches;
+    },
+
+    /* If we already have a match, return the contact information
+     * for the user we are matched against.
+     * Otherwise return the empty string.  */
+    myMatch: async (parent, args, context) => {
+      if (!context.user) {
+        throw new AuthenticationError("Must be logged in.");
+      }
+      const user_id = context.user._id;
+      const user = User.findById(user_id);
+      if (!user) {
+        return "";
+      }
+      if (user.matchmaker) {
+        throw new AuthenticationError("Only a seeker has a match.");
+      }
+      if (user.match_found) {
+        const other_user_id = user.found_match;
+        const other_user = User.findById(other_user_id);
+        if (!other_user) {
+          return "";
+        }
+        return other_user.ContactInfo;
+      } else {
+        return "";
+      }
     },
   },
   Mutation: {
@@ -72,6 +101,7 @@ const resolvers = {
 
       return { token, user };
     },
+
     /* Log in an old user.  */
     login: async (parent, args, content) => {
       const username = args.username;
@@ -159,10 +189,11 @@ const resolvers = {
         },
         { new: true }
       );
-      match_recompute (user_id);
+      match_recompute([user_id]);
       /* Delete this user's matches and recompute potential matches.  */
       return updated_user;
     },
+
     /* Update a user's wish list.
      * A seeker specifies information about the kind of person
      * he is looking for.  Input is those details, output is
@@ -170,7 +201,6 @@ const resolvers = {
      * this user are deleted and recomputed based on the
      * new information.
      */
-
     updateWishList: async (parent, args, context) => {
       const logged_in_user = context.user;
       if (!logged_in_user) {
@@ -190,7 +220,11 @@ const resolvers = {
       const maxweight = args.maxweight;
       const wisheye_brown = args.wisheye_brown;
       const wisheye_blue = args.wisheye_blue;
-      const wishhair_dark = args.wishhair_dark;
+      const wisheye_gray = args.wisheye_gray;
+      const wisheye_green = args.wisheye_green;
+      const wisheye_hazel = args.wisheye_hazel;
+      const wishhair_black = args.wishhair_black;
+      const wishhair_brown = args.wishhair_brown;
       const wishhair_blond = args.wishhair_blond;
       const wishhair_red = args.wishhair_red;
       const updated_user = await User.findOneAndUpdate(
@@ -208,16 +242,21 @@ const resolvers = {
             maxweight: maxweight,
             wisheye_brown: wisheye_brown,
             wisheye_blue: wisheye_blue,
-            wishhair_dark: wishhair_dark,
+            wisheye_gray: wisheye_gray,
+            wisheye_green: wisheye_green,
+            wisheye_hazel: wisheye_hazel,
+            wishhair_black: wishhair_black,
+            wishhair_brown: wishhair_brown,
             wishhair_blond: wishhair_blond,
             wishhair_red: wishhair_red,
           },
         },
         { new: true }
       );
-      match_recompute (user_id);
+      match_recompute([user_id]);
       return updated_user;
     },
+
     /* Pay invokes the billing system.  */
     pay: async (parent, args, context) => {
       const logged_in_user = context.user;
@@ -238,10 +277,101 @@ const resolvers = {
         },
         { new: true }
       );
-      /* Now that this seeker is paid, he may have some potential matches
+      /* Now that this seeker is paid, he may have some potential matches.
        */
-      match_recompute(user_id);
+      match_recompute([user_id]);
       return updated_user;
+    },
+
+    /* The seeker has found a companion.  */
+    chooseAMatch: async (parent, args, context) => {
+      const logged_in_user = context.user;
+      if (!logged_in_user) {
+        throw new AuthenticationError("Must be logged in.");
+      }
+      if (logged_in_user.matchmaker) {
+        throw new AuthenticationError("Only a seeker can do this.");
+      }
+      const user_id = logged_in_user._id;
+      const match_id = args.PotentialMatchId;
+      const the_match = await PotentialMatch.findById(match_id);
+      let the_other_user = the_match.User1;
+      if (the_other_user._id == user_id) {
+        the_other_user = the_match.User2;
+      }
+      const other_user_id = the_other_user._id;
+
+      /* Tell each user that the other is their match.  */
+      const updated_user = await User.findOneAndUpdate(
+        { _id: user_id },
+        {
+          $set: {
+            found_match: other_user_id,
+            match_found: true,
+          },
+        },
+        { new: true }
+      );
+
+      const updated_other_user = await User.findOneAndUpdate(
+        { _id: other_user_id },
+        {
+          $set: {
+            found_match: user_id,
+            match_found: true,
+          },
+        },
+        { new: true }
+      );
+      match_recompute([user_id, other_user_id]);
+      return updated_other_user.contactInfo;
+    },
+
+    /* The seeker has rejected his match.  */
+    rejectMatch: async (parent, args, context) => {
+      if (!context.user) {
+        throw new AuthenticationError("Must be logged in.");
+      }
+      const logged_in_user = context.user;
+      const user_id = logged_in_user._id;
+      const user = await User.FindById(logged_in_user._id);
+      if (!user) {
+        throw new AuthenticationError("Must be logged in.");
+      }
+      if (user.matchmaker) {
+        throw new AuthenticationError("Only a seeker can do this.");
+      }
+      if (!user.match_found) {
+        throw new AuthenticationError("Only reject if matched.");
+      }
+      const other_user = user.found_match;
+      const other_user_id = other_user._id;
+
+      /* Tell each user that he is no longer matched.  */
+      const updated_user = await User.findOneAndUpdate(
+        { _id: user_id },
+        {
+          $set: {
+            found_match: null,
+            match_found: false,
+            paid: false,
+          },
+        },
+        { new: true }
+      );
+
+      const updated_other_user = await User.findOneAndUpdate(
+        { _id: other_user_id },
+        {
+          $set: {
+            found_match: user_id,
+            match_found: true,
+          },
+        },
+        { new: true }
+      );
+      match_recompute([user_id, other_user_id]);
+      return user;
     },
   },
 };
