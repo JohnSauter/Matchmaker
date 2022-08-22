@@ -1,6 +1,19 @@
 const { gql } = require("apollo-server-express");
 
 const typeDefs = gql`
+  enum hair_color {
+    brown
+    black
+    blond
+    red
+  }
+  enum eye_color {
+    blue
+    brown
+    green
+    gray
+      }
+
 
   # The matchmaker and the seeker when looking at other users' information
   # do not get the contact information.
@@ -15,13 +28,15 @@ const typeDefs = gql`
     age: Int
     height: Int
     weight: Int
-    eyes: String
-    hair: String
+
+    eyes: eye_color
+    hair: hair_color
     aboutMe: String
     # wish list
     wishlist_specified: Boolean!
     wishgen_male: Boolean
     wishgen_female: Boolean
+    wishgen_nonbinary: Boolean
     minage: Int
     maxage: Int
     minheight: Int

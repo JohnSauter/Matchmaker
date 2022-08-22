@@ -110,7 +110,7 @@ const userSchema = new Schema({
   wishhair_blond: {
     type: Boolean,
   },
-  wishhair_red: {
+    wishhair_red: {
     type: Boolean,
   },
   paid: {
