@@ -189,7 +189,7 @@ const resolvers = {
         },
         { new: true }
       );
-      match_recompute([user_id]);
+      await match_recompute([user_id]);
       /* Delete this user's matches and recompute potential matches.  */
       return updated_user;
     },
@@ -253,7 +253,7 @@ const resolvers = {
         },
         { new: true }
       );
-      match_recompute([user_id]);
+      await match_recompute([user_id]);
       return updated_user;
     },
 
@@ -279,7 +279,7 @@ const resolvers = {
       );
       /* Now that this seeker is paid, he may have some potential matches.
        */
-      match_recompute([user_id]);
+      await match_recompute([user_id]);
       return updated_user;
     },
 
@@ -323,7 +323,7 @@ const resolvers = {
         },
         { new: true }
       );
-      match_recompute([user_id, other_user_id]);
+      await match_recompute([user_id, other_user_id]);
       return updated_other_user.contactInfo;
     },
 
@@ -370,7 +370,7 @@ const resolvers = {
         },
         { new: true }
       );
-      match_recompute([user_id, other_user_id]);
+      await match_recompute([user_id, other_user_id]);
       return user;
     },
   },
