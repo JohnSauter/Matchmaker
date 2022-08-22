@@ -45,7 +45,7 @@ db.once('open', async () => {
   });
 
   await User.create({
-    username: 'Juius Caesar',
+    username: 'Julius Caesar',
     email: 'jcaesar@empire.com',
     password: 'IdesofMarch',
     matchmaker: false,
@@ -113,11 +113,8 @@ db.once('open', async () => {
     wishhair_blond: true,
     wishhair_red: false,
     paid: true,
-    potentialMatches: [
-      {
-        products: [products[0]._id, products[0]._id, products[1]._id]
-      }
-    ]
+    match_found: false,
+    found_match:false
   });
   await User.create({
     username: 'Hari Seldon',
@@ -163,8 +160,8 @@ db.once('open', async () => {
     matchmaker: false,
     profile_specified: true,
     gender: 'Female',
-    age: 35,
-    height: 38,
+    age: 27,
+    height: 65,
     weight: 90,
     eyes: 'blue',
     hair: 'red',
@@ -174,7 +171,7 @@ db.once('open', async () => {
     wishgen_male: true,
     wishgen_female: false,
     wishgen_nonbinary: false,
-    minAge: 33,
+    minAge: 30,
     maxAge: 100,
     minHeight: 0,
     maxHeight: 100,
@@ -192,7 +189,42 @@ db.once('open', async () => {
     match_found: false,
     found_match:false
   });
-
+  await User.create({
+    username: 'Mark Antony',
+    email: 'mantony@secondtriumvirate.gov',
+    password: 'IamdyingEgyptdying.',
+    matchmaker: false,
+    profile_specified: true,
+    gender: 'Male',
+    age: 39,
+    height: 68,
+    weight: 170,
+    eyes: 'brown',
+    hair: 'brown',
+    aboutMe: '',
+    contactinfo: "mantony@secondtriumvirate.gov",
+    wishlist_specified: true,
+    wishgen_male: true,
+    wishgen_female: true,
+    wishgen_nonbinary: true,
+    minAge: 18,
+    maxAge: 35,
+    minHeight: 0,
+    maxHeight: 100,
+    minWeight: 0,
+    maxWeight: 1000,
+    wisheye_brown: true,
+    wisheye_blue: true,
+    whisheye_gray: false,
+    wisheye_green: false,
+    wishhair_black: true,
+    wishhair_brown: false,
+    wishhair_blond: false,
+    wishhair_red: true,
+    paid: true,
+    match_found: false,
+    found_match:false
+  });
 console.log('users seeded');
 
 process.exit();
