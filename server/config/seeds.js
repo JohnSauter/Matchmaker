@@ -17,7 +17,7 @@ db.once('open', async () => {
     paid: true,
     profile_specified: false,
     match_found: false,
-    gender: 'Female',
+    gender: 'female',
     age: 35,
     height: 38,
     weight: 90,
@@ -41,7 +41,7 @@ db.once('open', async () => {
     wisheye_green: true,
     wisheye_hazel: true,
     wishhair_black: true,
-    wishhair_brown: false,
+    wishhair_brown: true,
     wishhair_blond: true,
     wishhair_red: false,
     paid: true,
@@ -55,7 +55,7 @@ db.once('open', async () => {
     password: 'IdesofMarch',
     matchmaker: false,
     profile_specified: true,
-    gender: 'Male',
+    gender: 'male',
     age: 50,
     height: 68,
     weight: 170,
@@ -76,10 +76,10 @@ db.once('open', async () => {
     wisheye_brown: true,
     wisheye_blue: true,
     whisheye_gray: false,
-    wisheye_green: false,
+    wisheye_green: true,
     wisheye_hazel: true,
     wishhair_black: true,
-    wishhair_brown: false,
+    wishhair_brown: true,
     wishhair_blond: false,
     wishhair_red: true,
     paid: true,
@@ -92,7 +92,7 @@ db.once('open', async () => {
     password: 'Mellon',
     matchmaker: false,
     profile_specified: true,
-    gender: 'Male',
+    gender: 'male',
     age: 39,
     height: 42,
     weight: 100,
@@ -116,7 +116,7 @@ db.once('open', async () => {
     wisheye_green: true,
     wisheye_hazel: true,
     wishhair_black: true,
-    wishhair_brown: false,
+    wishhair_brown: true,
     wishhair_blond: true,
     wishhair_red: false,
     paid: true,
@@ -130,7 +130,7 @@ db.once('open', async () => {
     password: 'the Raven',
     matchmaker: false,
     profile_specified: true,
-    gender: 'Male',
+    gender: 'male',
     age: 42,
     height: 70,
     weight: 180,
@@ -168,7 +168,7 @@ db.once('open', async () => {
     password: 'emerald',
     matchmaker: false,
     profile_specified: true,
-    gender: 'Female',
+    gender: 'female',
     age: 35,
     height: 38,
     weight: 90,
@@ -202,8 +202,9 @@ db.once('open', async () => {
   });
 
   console.log('users seeded');
-  match_recompute([]);
-  console.log('Potential matches computed.')
 
-  process.exit();
+  await match_recompute([]);
+  console.log('Potential matches computed.');
+
+  process.exit(1);
 });

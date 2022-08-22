@@ -5,20 +5,20 @@ const { User, PotentialMatch } = require("../models");
 /* Function of two seekers to see if the first fits the
  * wishes of the second.  */
 function compatible(user_a, user_b) {
-  if ((user_a.gender == "male") && (!user_b.wishgenmale)) { return false };
-  if ((user_a.gender == "female") && (!user_b.wishgenfemale)) { return false };
-  if ((user_a.gender == "nonbinary") && (!user_b.wishgennonbinary)) { return false };
+  if ((user_a.gender == "male") && (!user_b.wishgen_male)) { return false };
+  if ((user_a.gender == "female") && (!user_b.wishgen_female)) { return false };
+  if ((user_a.gender == "nonbinary") && (!user_b.wishgen_nonbinary)) { return false };
   if (user_a.age < user_b.minage) { return false };
   if (user_a.age > user_b.maxage) { return false };
   if (user_a.height < user_b.minheight) { return false };
   if (user_a.height > user_b.maxheight) { return false };
   if (user_a.weight < user_b.minweight) { return false };
   if (user_a.weight > user_b.maxweight) { return false };
-  if ((user_a.eyes == "brown") && (!user_b.wisheyes_brown)) { return false };
-  if ((user_a.eyes == "blue") && (!user_b.wisheyes_blue)) { return false };
-  if ((user_a.eyes == "gray") && (!user_b.wisheyes_gray)) { return false };
-  if ((user_a.eyes == "green") && (!user_b.wisheyes_green)) { return false };
-  if ((user_a.eyes == "hazel") && (!user_b.wisheyes_hazel)) { return false };
+  if ((user_a.eyes == "brown") && (!user_b.wisheye_brown)) { return false };
+  if ((user_a.eyes == "blue") && (!user_b.wisheye_blue)) { return false };
+  if ((user_a.eyes == "gray") && (!user_b.wisheye_gray)) { return false };
+  if ((user_a.eyes == "green") && (!user_b.wisheye_green)) { return false };
+  if ((user_a.eyes == "hazel") && (!user_b.wisheye_hazel)) { return false };
   if ((user_a.hair == "black") && (!user_b.wishhair_black)) { return false };
   if ((user_a.hair == "brown") && (!user_b.wishhair_brown)) { return false };
   if ((user_a.hair == "blond") && (!user_b.wishhair_blond)) { return false };
