@@ -138,7 +138,7 @@ module.exports = {
     const promises = [];
     user_ids.forEach((user_id) => {
       const the_promise = PotentialMatch.deleteMany({
-        $or: [{ User1: { user_id } }, { User2: { user_id } }],
+        $or: [{ User1: user_id  }, { User2: user_id }],
       });
       promises.push(the_promise);
     });
