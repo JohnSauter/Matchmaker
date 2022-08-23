@@ -94,6 +94,9 @@ const typeDefs = gql`
     User2: LimitedUser
     rating: Int
   }
+  type contact_information {
+    contact_info: String
+  }
 
   type Query {
     user: FullUser
@@ -105,7 +108,7 @@ const typeDefs = gql`
   type Mutation {
     rateAMatch(PotentialMatchId: ID, rating: Int): PotentialMatch
 
-    chooseAMatch(PotentialMatchId: ID): String
+    chooseAMatch(PotentialMatchId: ID, rating: Int): contact_information
 
     rejectMatch: FullUser
 

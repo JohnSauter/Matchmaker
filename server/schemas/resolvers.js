@@ -3,6 +3,7 @@ const { User, PotentialMatch } = require("../models");
 const { signToken } = require("../utils/auth.js");
 const stripe = require("stripe")("sk_test_4eC39HqLyjWDarjtT1zdp7dc");
 const { match_recompute } = require("../utils/make_matches.js");
+const mongoose = require('mongoose');
 
 const resolvers = {
   Query: {
@@ -36,16 +37,18 @@ const resolvers = {
       const potential_matches = await PotentialMatch.find({
         rated: true,
         rating: { $gt: 0 },
-      });
+      })
+        .populate("User1")
+        .populate("User2");
 
       /* Filter out matches not involving this user.
        * Perhaps this can be done in the query instead.
        */
       filtered_matches = potential_matches.filter((element) => {
-        if (element.User1 == user_id) {
+        if (element.User1._id == user_id) {
           return true;
         }
-        if (element.User2 == user_id) {
+        if (element.User2._id == user_id) {
           return true;
         }
         return false;
@@ -370,32 +373,50 @@ const resolvers = {
       if (!logged_in_user) {
         throw new AuthenticationError("Must be logged in.");
       }
-      const user_id = logged_in_user._id;
-      if (!user_id) {
+      const user_id_string = logged_in_user._id;
+
+      if (!user_id_string) {
         throw new AuthenticationError("Must be logged in.");
       }
-      const user = await User.findById(user_id);
+      const user = await User.findById(user_id_string);
       if (!user) {
         throw new AuthenticationError("Unknown user.");
       }
       if (user.matchmaker) {
         throw new AuthenticationError("Only a seeker can choose a match.");
       }
-
+      const user_id = user._id;
+      
       /* Get the id of the user we are being matched to.  */
       const match_id = args.PotentialMatchId;
       if (!match_id) {
         throw new AuthenticationError("No match specified.");
       }
-      const the_match = await PotentialMatch.findById(match_id);
+      const the_match = await PotentialMatch.findById(match_id)
+        .populate("User1")
+        .populate("User2");
       if (!the_match) {
         throw new AuthenticationError("Invalid match specified.");
       }
-      let other_user_id = the_match.User1;
-      if (other_user_id == user_id) {
-        other_user_id = the_match.User2;
+
+      /* A potential match has two users.  One of them is us;
+       * find the other one.  */
+      const user_1 = the_match.User1;
+      const user_1_id = user_1._id;
+      const user_1_id_string = user_1_id.toString();
+      const user_2 = the_match.User2;
+      const user_2_id = user_2._id;
+      const user_2_id_string = user_2_id.toString();
+      let other_user = user_1;
+      let other_user_id = user_1_id;
+      let other_user_id_string = user_1_id_string;
+      if (other_user_id_string == user_id_string) {
+        other_user = user_2;
+        other_user_id = user_2_id;
+        other_user_id_string = user_2_id_string;
       }
-      if (!other_user_id) {
+
+      if (!other_user_id_string) {
         throw new AuthenticationError("Invalid other user specified.");
       }
 
