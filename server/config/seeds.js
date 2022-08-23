@@ -1,40 +1,38 @@
-const db = require('./connection');
-const { User, PotentialMatch } = require('../models');
-const { aggregate } = require('../models/PotentialMatch');
-const { isNullableType } = require('graphql');
-const { match_recompute } = require('../utils/make_matches.js')
+const db = require("./connection");
+const { User, PotentialMatch } = require("../models");
+const { aggregate } = require("../models/PotentialMatch");
+const { isNullableType, UniqueFieldDefinitionNamesRule } = require("graphql");
+const { match_recompute } = require("../utils/make_matches.js");
 
-db.once('open', async () => {
-
-
+db.once("open", async () => {
   await User.deleteMany();
+  await PotentialMatch.deleteMany();
 
   await User.create({
-    username: 'Rosie Cotton',
-    email: 'rosie@theshire.net',
-    password: 'GreenDragon',
+    username: "Rosie Cotton",
+    email: "rosie@theshire.net",
+    password: "GreenDragon",
     matchmaker: false,
-    paid: true,
-    profile_specified: false,
-    match_found: false,
-    gender: 'female',
+    profile_specified: true,
+    gender: "female",
     age: 35,
     height: 38,
     weight: 90,
-    eyes: 'green',
-    hair: 'blonde',
-    aboutMe: 'I am sociable, patient, and love to dance. I am looking for someone who wants to make a home.',
+    eyes: "green",
+    hair: "blonde",
+    aboutMe:
+      "I am sociable, patient, and love to dance. I am looking for someone who wants to make a home.",
     contactinfo: "rosie@theshire.net",
     wishlist_specified: true,
     wishgen_male: true,
     wishgen_female: false,
     wishgen_nonbinary: false,
-    minAge: 33,
-    maxAge: 100,
-    minHeight: 0,
-    maxHeight: 48,
-    minWeight: 0,
-    maxWeight: 1000,
+    minage: 33,
+    maxage: 100,
+    minheight: 0,
+    maxheight: 48,
+    minweight: 0,
+    maxweight: 1000,
     wisheye_brown: true,
     wisheye_blue: true,
     whisheye_gray: false,
@@ -46,33 +44,34 @@ db.once('open', async () => {
     wishhair_red: false,
     paid: true,
     match_found: false,
-    found_match: null
+    found_match: null,
   });
 
   await User.create({
-    username: 'Juius Caesar',
-    email: 'jcaesar@empire.com',
-    password: 'IdesofMarch',
+    username: "Juius Caesar",
+    email: "jcaesar@empire.com",
+    password: "IdesofMarch",
     matchmaker: false,
     profile_specified: true,
-    gender: 'male',
+    gender: "male",
     age: 50,
     height: 68,
     weight: 170,
-    eyes: 'brown',
-    hair: 'brown',
-    aboutMe: 'My likes include Italian food, subjugating peoples, and receiving adoring crowds. Love to travel. Looking for someone who wants to be treated like a queen',
+    eyes: "brown",
+    hair: "brown",
+    aboutMe:
+      "My likes include Italian food, subjugating peoples, and receiving adoring crowds. Love to travel. Looking for someone who wants to be treated like a queen",
     contactinfo: "jcaesar@empire.com",
     wishlist_specified: true,
     wishgen_male: true,
     wishgen_female: true,
     wishgen_nonbinary: true,
-    minAge: 18,
-    maxAge: 35,
-    minHeight: 0,
-    maxHeight: 100,
-    minWeight: 0,
-    maxWeight: 1000,
+    minage: 18,
+    maxage: 35,
+    minheight: 0,
+    maxheight: 100,
+    minweight: 0,
+    maxweight: 1000,
     wisheye_brown: true,
     wisheye_blue: true,
     whisheye_gray: false,
@@ -84,32 +83,33 @@ db.once('open', async () => {
     wishhair_red: true,
     paid: true,
     match_found: false,
-    found_match: null
+    found_match: null,
   });
   await User.create({
-    username: 'Sam Gamgee',
-    email: 'sgamgee@lotr.com',
-    password: 'Mellon',
+    username: "Sam Gamgee",
+    email: "sgamgee@lotr.com",
+    password: "Mellon",
     matchmaker: false,
     profile_specified: true,
-    gender: 'male',
+    gender: "male",
     age: 39,
     height: 42,
     weight: 100,
-    eyes: 'green',
-    hair: 'blonde',
-    aboutMe: 'I am a homebody who loves gardening and home-cooked meals. I do not like traveling. Looking for someone who likes pipes and second breakfast',
+    eyes: "green",
+    hair: "blonde",
+    aboutMe:
+      "I am a homebody who loves gardening and home-cooked meals. I do not like traveling. Looking for someone who likes pipes and second breakfast",
     contactinfo: "sgamgee@lotr.com",
     wishlist_specified: true,
     wishgen_male: false,
     wishgen_female: true,
     wishgen_nonbinary: false,
-    minAge: 33,
-    maxAge: 100,
-    minHeight: 0,
-    maxHeight: 48,
-    minWeight: 0,
-    maxWeight: 1000,
+    minage: 33,
+    maxage: 100,
+    minheight: 0,
+    maxheight: 48,
+    minweight: 0,
+    maxweight: 1000,
     wisheye_brown: false,
     wisheye_blue: true,
     whisheye_gray: false,
@@ -121,33 +121,34 @@ db.once('open', async () => {
     wishhair_red: false,
     paid: true,
     match_found: false,
-    found_match: null
+    found_match: null,
   });
 
   await User.create({
-    username: 'Hari Seldon',
-    email: 'hseldon@streeling.edu',
-    password: 'the Raven',
+    username: "Hari Seldon",
+    email: "hseldon@streeling.edu",
+    password: "the Raven",
     matchmaker: false,
     profile_specified: true,
-    gender: 'male',
+    gender: "male",
     age: 42,
     height: 70,
     weight: 180,
-    eyes: 'brown',
-    hair: 'brown',
-    aboutMe: 'I am a careful planner and not much for spontenaity. I am looking for someone who like peace and quiet but can take bad news with aplomb. Open to sentient AI. ',
+    eyes: "brown",
+    hair: "brown",
+    aboutMe:
+      "I am a careful planner and not much for spontenaity. I am looking for someone who like peace and quiet but can take bad news with aplomb. Open to sentient AI. ",
     contactinfo: "hseldon@streeling.edu",
     wishlist_specified: true,
     wishgen_male: false,
     wishgen_female: true,
     wishgen_nonbinary: true,
-    minAge: 18,
-    maxAge: 100,
-    minHeight: 0,
-    maxHeight: 100,
-    minWeight: 0,
-    maxWeight: 1000,
+    minage: 18,
+    maxage: 100,
+    minheight: 0,
+    maxheight: 100,
+    minweight: 0,
+    maxweight: 1000,
     wisheye_brown: true,
     wisheye_blue: true,
     whisheye_gray: true,
@@ -159,33 +160,34 @@ db.once('open', async () => {
     wishhair_red: true,
     paid: true,
     match_found: false,
-    found_match: null
+    found_match: null,
   });
 
   await User.create({
-    username: 'Cleopatra Philopator',
-    email: 'cphilopato@ptolemy.gov',
-    password: 'emerald',
+    username: "Cleopatra Philopator",
+    email: "cphilopato@ptolemy.gov",
+    password: "emerald",
     matchmaker: false,
     profile_specified: true,
-    gender: 'female',
+    gender: "female",
     age: 35,
     height: 38,
     weight: 90,
-    eyes: 'blue',
-    hair: 'red',
-    aboutMe: 'I am sociable, patient, and love to dance. I am looking for someone who wants to make a home.',
+    eyes: "blue",
+    hair: "red",
+    aboutMe:
+      "I am sociable, patient, and love to dance. I am looking for someone who wants to make a home.",
     contactinfo: "'cphilopato@ptolemy.gov'",
     wishlist_specified: true,
     wishgen_male: true,
     wishgen_female: false,
     wishgen_nonbinary: false,
-    minAge: 33,
-    maxAge: 100,
-    minHeight: 0,
-    maxHeight: 100,
-    minWeight: 0,
-    maxWeight: 1000,
+    minage: 33,
+    maxage: 100,
+    minheight: 0,
+    maxheight: 100,
+    minweight: 0,
+    maxweight: 1000,
     wisheye_brown: true,
     wisheye_blue: true,
     whisheye_gray: false,
@@ -197,14 +199,24 @@ db.once('open', async () => {
     wishhair_red: false,
     paid: true,
     match_found: false,
-    found_match: null
-
+    found_match: null,
   });
 
-  console.log('users seeded');
+  await User.create({
+    username: "Yenta",
+    email: "Yenta@fiddlerontheroof.com",
+    password: "12345678",
+    matchmaker: true,
+    profile_specified: false,
+    wishlist_specified: false,
+    paid: false,
+    match_found: false,
+  });
 
-  await match_recompute([]);
-  console.log('Potential matches computed.');
+  console.log("users seeded");
+
+  const matches_created = await match_recompute([]);
+  console.log(String(matches_created) + " potential matches computed.");
 
   process.exit(1);
 });
