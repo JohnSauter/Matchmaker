@@ -4,27 +4,23 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const PotentialSchema = new Schema({
-  
-  Match: {
-    User1: {
+  User1: {
     type: Schema.Types.ObjectId,
     ref: 'User',
     required: true,
-    },
-    User2: {
-      type: Schema.Types.ObjectId,
-      ref: 'User',
-      required: true,
-      },
-    rating: {
-      type: Number,
-      required: true
-    },
-    rated: {
-      type: Boolean,
-      required: true,
-    }
-    
+  },
+  User2: {
+    type: Schema.Types.ObjectId,
+    ref: 'User',
+    required: true,
+  },
+  rating: {
+    type: Number,
+    required: true
+  },
+  rated: {
+    type: Boolean,
+    required: true,
   }
 });
 

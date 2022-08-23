@@ -1,20 +1,7 @@
 const { gql } = require("apollo-server-express");
 
 const typeDefs = gql`
-  enum hair_color {
-    brown
-    black
-    blond
-    red
-  }
-  enum eye_color {
-    blue
-    brown
-    green
-    gray
-      }
-
-
+ 
   # The matchmaker and the seeker when looking at other users' information
   # do not get the contact information.
   type LimitedUser {
@@ -29,8 +16,8 @@ const typeDefs = gql`
     height: Int
     weight: Int
 
-    eyes: eye_color
-    hair: hair_color
+    eyes: String
+    hair: String
     aboutMe: String
     # wish list
     wishlist_specified: Boolean!
@@ -46,7 +33,8 @@ const typeDefs = gql`
     wisheye_brown: Boolean
     wisheye_blue: Boolean
     whisheye_gray: Boolean
-    wisheye_gtreen: Boolean
+    wisheye_green: Boolean
+    wisheye_hazel: Boolean
     wishhair_black: Boolean
     wishhair_brown: Boolean
     wishhair_blond: Boolean
@@ -98,13 +86,16 @@ const typeDefs = gql`
 
   type Auth {
     token: ID
-    user: LimitedUser
+    user: FullUser
   }
   type PotentialMatch {
     _id: ID
     User1: LimitedUser
     User2: LimitedUser
     rating: Int
+  }
+  type contact_information {
+    contact_info: String
   }
 
   type Query {
@@ -117,7 +108,7 @@ const typeDefs = gql`
   type Mutation {
     rateAMatch(PotentialMatchId: ID, rating: Int): PotentialMatch
 
-    chooseAMatch(PotentialMatchId: ID): String
+    chooseAMatch(PotentialMatchId: ID, rating: Int): contact_information
 
     rejectMatch: FullUser
 
