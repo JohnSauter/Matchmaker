@@ -1,25 +1,37 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { useMutation } from '@apollo/client';
-import Auth from '../utils/auth';
-import { ADD_USER } from '../utils/mutations';
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import { useMutation } from "@apollo/client";
+import Auth from "../utils/auth";
+import { ADD_USER } from "../utils/mutations";
 
 function Signup(props) {
-  const [formState, setFormState] = useState({ email: '', password: '' });
+  const [formState, setFormState] = useState({
+    username: "",
+    email: "",
+    password: "",
+    matchmaker: false,
+  });
   const [addUser] = useMutation(ADD_USER);
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-    const mutationResponse = await addUser({
-      variables: {
-        email: formState.email,
-        password: formState.password,
-        firstName: formState.firstName,
-        lastName: formState.lastName,
-      },
-    });
-    const token = mutationResponse.data.addUser.token;
-    Auth.login(token);
+    try {
+      const mutationResponse = await addUser({
+        variables: {
+          username: formState.username,
+          email: formState.email,
+          password: formState.password,
+          matchmaker: formState.matchmaker,
+        },
+      });
+      const token = mutationResponse.data.addUser.token;
+      Auth.login(token);
+    } catch (err) {
+      console.log("signup error:");
+      if (err.message) {
+        console.log(err.message);
+      }
+    }
   };
 
   const handleChange = (event) => {
@@ -30,6 +42,25 @@ function Signup(props) {
     });
   };
 
+  const handleBooleanChange = (event) => {
+    const { name, value } = event.target;
+    let real_value = false;
+    switch (value) {
+      case "true":
+        real_value = true;
+        break;
+      case "false":
+        real_value = false;
+        break;
+      default:
+        real_value = false;
+    }
+    setFormState({
+      ...formState,
+      [name]: real_value,
+    });
+  };
+
   return (
     <div className="container my-1">
       <Link to="/login">← Go to Login</Link>
@@ -37,25 +68,16 @@ function Signup(props) {
       <h2>Signup</h2>
       <form onSubmit={handleFormSubmit}>
         <div className="flex-row space-between my-2">
-          <label htmlFor="firstName">First Name:</label>
+          <label htmlFor="username">Username:</label>
           <input
-            placeholder="First"
-            name="firstName"
-            type="firstName"
-            id="firstName"
+            placeholder="name"
+            name="username"
+            type="username"
+            id="username"
             onChange={handleChange}
           />
         </div>
-        <div className="flex-row space-between my-2">
-          <label htmlFor="lastName">Last Name:</label>
-          <input
-            placeholder="Last"
-            name="lastName"
-            type="lastName"
-            id="lastName"
-            onChange={handleChange}
-          />
-        </div>
+
         <div className="flex-row space-between my-2">
           <label htmlFor="email">Email:</label>
           <input
@@ -66,6 +88,7 @@ function Signup(props) {
             onChange={handleChange}
           />
         </div>
+
         <div className="flex-row space-between my-2">
           <label htmlFor="pwd">Password:</label>
           <input
@@ -76,6 +99,21 @@ function Signup(props) {
             onChange={handleChange}
           />
         </div>
+
+        <div className="flex-row space-between my-2">
+          <label htmlFor="matchmaker">
+            Matchmaker?
+            <select
+              name="matchmaker"
+              id="matchmaker"
+              onChange={handleBooleanChange}
+            >
+              <option value={false}>no</option>
+              <option value={true}>yes</option>
+            </select>
+          </label>
+        </div>
+
         <div className="flex-row flex-end">
           <button type="submit">Submit</button>
         </div>
