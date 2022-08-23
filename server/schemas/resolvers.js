@@ -3,14 +3,16 @@ const { User, PotentialMatch } = require("../models");
 const { signToken } = require("../utils/auth.js");
 const stripe = require("stripe")("sk_test_4eC39HqLyjWDarjtT1zdp7dc");
 const { match_recompute } = require("../utils/make_matches.js");
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const resolvers = {
   Query: {
     /* Get information about the current user.  */
     user: async (parent, args, context) => {
       if (context.user) {
-        const user = await User.findById(context.user._id);
+        const user = await User.findById(context.user._id).populate(
+          "found_match"
+        );
         return user;
       }
       throw new AuthenticationError("Must be logged in.");
@@ -386,7 +388,7 @@ const resolvers = {
         throw new AuthenticationError("Only a seeker can choose a match.");
       }
       const user_id = user._id;
-      
+
       /* Get the id of the user we are being matched to.  */
       const match_id = args.PotentialMatchId;
       if (!match_id) {
@@ -430,7 +432,7 @@ const resolvers = {
           },
         },
         { new: true }
-      );
+      ).populate("found_match");
 
       const updated_other_user = await User.findOneAndUpdate(
         { _id: other_user_id },
@@ -441,7 +443,7 @@ const resolvers = {
           },
         },
         { new: true }
-      );
+      ).populate("found_match");
 
       /* Send e-mail to each user saying that they are matched.  */
       /* Not yet written.  */
@@ -492,7 +494,7 @@ const resolvers = {
           },
         },
         { new: true }
-      );
+      ).populate("found_match");
 
       const updated_other_user = await User.findOneAndUpdate(
         { _id: other_user_id },
@@ -503,7 +505,7 @@ const resolvers = {
           },
         },
         { new: true }
-      );
+      ).populate("found_match");
 
       /* Send email to each user saying he is no longer matched.  */
       /* Not yet written.  */
@@ -512,7 +514,7 @@ const resolvers = {
        * matched until they pay again.  */
       await match_recompute([user_id, other_user_id]);
 
-      return user;
+      return updated_user;
     },
   },
 };
