@@ -22,6 +22,16 @@ const resolvers = {
         throw new AuthenticationError("Must be logged in.");
       }
       const user_id = logged_in_user._id;
+      if (!user_id) {
+        throw new AuthenticationError("Must be logged in.");
+      }
+      const user = await User.findById(user_id);
+      if (!user) {
+        throw new AuthenticationError("Unknown user.");
+      }
+      if (user.matchmaker) {
+        throw new AuthenticationError("Only seekers have potential matches.");
+      }
 
       const potential_matches = await PotentialMatch.find({
         rated: true,
@@ -32,10 +42,10 @@ const resolvers = {
        * Perhaps this can be done in the query instead.
        */
       filtered_matches = potential_matches.filter((element) => {
-        if (element.user1 == user_id) {
+        if (element.User1 == user_id) {
           return true;
         }
-        if (element.user2 == user_id) {
+        if (element.User2 == user_id) {
           return true;
         }
         return false;
@@ -45,9 +55,25 @@ const resolvers = {
 
     /* Get all unrated matches for the matchmaker.  */
     unRatedMatches: async (parent, args, context) => {
-      if (!context.user) {
+      const logged_in_user = context.user;
+      if (!logged_in_user) {
         throw new AuthenticationError("Must be logged in.");
       }
+      const user_id = logged_in_user._id;
+      if (!user_id) {
+        throw new AuthenticationError("Must be logged in.");
+      }
+      const user = await User.findById(user_id);
+      if (!user) {
+        throw new AuthenticationError("Unknown user.");
+      }
+      if (!user.matchmaker) {
+        throw new AuthenticationError(
+          "Only matchmakers can see unrated matches."
+        );
+      }
+
+      /* Return an array of potential matches that have not yet been rated.  */
       const potential_matches = await PotentialMatch.find({ rated: false });
       return potential_matches;
     },
@@ -56,17 +82,22 @@ const resolvers = {
      * for the user we are matched against.
      * Otherwise return the empty string.  */
     myMatch: async (parent, args, context) => {
-      if (!context.user) {
+      const logged_in_user = context.user;
+      if (!logged_in_user) {
         throw new AuthenticationError("Must be logged in.");
       }
-      const user_id = context.user._id;
-      const user = User.findById(user_id);
+      const user_id = logged_in_user._id;
+      if (!user_id) {
+        throw new AuthenticationError("Must be logged in.");
+      }
+      const user = await User.findById(user_id);
       if (!user) {
-        return "";
+        throw new AuthenticationError("Unknown user.");
       }
       if (user.matchmaker) {
-        throw new AuthenticationError("Only a seeker has a match.");
+        throw new AuthenticationError("Only a seeker can have a match.");
       }
+
       if (user.match_found) {
         const other_user_id = user.found_match;
         const other_user = User.findById(other_user_id);
@@ -128,14 +159,23 @@ const resolvers = {
      * match and the rating.  Output is the updated potential match.
      */
     rateAMatch: async (parent, args, context) => {
-      const user = context.user;
-      if (!user) {
+      const logged_in_user = context.user;
+      if (!logged_in_user) {
         throw new AuthenticationError("Must be logged in.");
       }
-      if (!user.matchmaker) {
-        throw new AuthenticationError("Only a matchmaker can do this.");
+      const user_id = logged_in_user._id;
+      if (!user_id) {
+        throw new AuthenticationError("Must be logged in.");
       }
-      const match_id = args.potentialMatchID;
+      const user = await User.findById(user_id);
+      if (!user) {
+        throw new AuthenticationError("Unknown user.");
+      }
+      if (!user.matchmaker) {
+        throw new AuthenticationError("Only a matchmaker can rate a match.");
+      }
+
+      const match_id = args.potentialMatchId;
       const rating = args.rating;
       const updated_match = await User.findOneAndUpdate(
         { _id: match_id },
@@ -160,10 +200,18 @@ const resolvers = {
       if (!logged_in_user) {
         throw new AuthenticationError("Must be logged in.");
       }
-      if (logged_in_user.matchmaker) {
-        throw new AuthenticationError("Only a seeker can do this.");
-      }
       const user_id = logged_in_user._id;
+      if (!user_id) {
+        throw new AuthenticationError("Must be logged in.");
+      }
+      const user = await User.findById(user_id);
+      if (!user) {
+        throw new AuthenticationError("Unknown user.");
+      }
+      if (user.matchmaker) {
+        throw new AuthenticationError("Only a seeker has a profile.");
+      }
+
       const gender = args.gender;
       const age = args.age;
       const height = args.height;
@@ -189,8 +237,10 @@ const resolvers = {
         },
         { new: true }
       );
-      await match_recompute([user_id]);
+
       /* Delete this user's matches and recompute potential matches.  */
+      await match_recompute([user_id]);
+
       return updated_user;
     },
 
@@ -206,10 +256,18 @@ const resolvers = {
       if (!logged_in_user) {
         throw new AuthenticationError("Must be logged in.");
       }
-      if (logged_in_user.matchmaker) {
-        throw new AuthenticationError("Only a seeker can do this.");
-      }
       const user_id = logged_in_user._id;
+      if (!user_id) {
+        throw new AuthenticationError("Must be logged in.");
+      }
+      const user = await User.findById(user_id);
+      if (!user) {
+        throw new AuthenticationError("Unknown user.");
+      }
+      if (user.matchmaker) {
+        throw new AuthenticationError("Only a seeker has a wish list.");
+      }
+
       const wishgen_male = args.wishgen_male;
       const wishgen_female = args.wishgen_female;
       const minage = args.minage;
@@ -253,7 +311,10 @@ const resolvers = {
         },
         { new: true }
       );
+
+      /* Delete this user's matches and recompute potential matches.  */
       await match_recompute([user_id]);
+
       return updated_user;
     },
 
@@ -263,11 +324,23 @@ const resolvers = {
       if (!logged_in_user) {
         throw new AuthenticationError("Must be logged in.");
       }
-      if (logged_in_user.matchmaker) {
-        throw new AuthenticationError("Only a seeker can do this.");
-      }
       const user_id = logged_in_user._id;
+      if (!user_id) {
+        throw new AuthenticationError("Must be logged in.");
+      }
+      const user = await User.findById(user_id);
+      if (!user) {
+        throw new AuthenticationError("Unknown user.");
+      }
+      if (user.matchmaker) {
+        throw new AuthenticationError("Only a seeker needs to pay.");
+      }
+
       /* Invoke the credit card payment software.  */
+      /* Not yet written.  */
+
+      /* If the charge was successful, flag the seeker as having paid.  
+       */
       const updated_user = await User.findOneAndUpdate(
         { _id: user_id },
         {
@@ -277,9 +350,11 @@ const resolvers = {
         },
         { new: true }
       );
+
       /* Now that this seeker is paid, he may have some potential matches.
        */
       await match_recompute([user_id]);
+
       return updated_user;
     },
 
@@ -289,17 +364,34 @@ const resolvers = {
       if (!logged_in_user) {
         throw new AuthenticationError("Must be logged in.");
       }
-      if (logged_in_user.matchmaker) {
-        throw new AuthenticationError("Only a seeker can do this.");
-      }
       const user_id = logged_in_user._id;
-      const match_id = args.PotentialMatchId;
-      const the_match = await PotentialMatch.findById(match_id);
-      let the_other_user = the_match.User1;
-      if (the_other_user._id == user_id) {
-        the_other_user = the_match.User2;
+      if (!user_id) {
+        throw new AuthenticationError("Must be logged in.");
       }
-      const other_user_id = the_other_user._id;
+      const user = await User.findById(user_id);
+      if (!user) {
+        throw new AuthenticationError("Unknown user.");
+      }
+      if (user.matchmaker) {
+        throw new AuthenticationError("Only a seeker can choose a match.");
+      }
+
+      /* Get the id of the user we are being matched to.  */
+      const match_id = args.PotentialMatchId;
+      if (!match_id) {
+        throw new AuthenticationError("No match specified.");
+      }
+      const the_match = await PotentialMatch.findById(match_id);
+      if (!the_match) {
+        throw new AuthenticationError("Invalid match specified.");
+      }
+      let other_user_id = the_match.User1;
+      if (other_user_id == user_id) {
+        other_user_id = the_match.User2;
+      }
+      if (!other_user_id) {
+        throw new AuthenticationError("Invalid other user specified.");
+      }
 
       /* Tell each user that the other is their match.  */
       const updated_user = await User.findOneAndUpdate(
@@ -323,29 +415,42 @@ const resolvers = {
         },
         { new: true }
       );
+
+      /* Send e-mail to each user saying that they are matched.  */
+      /* Not yet written.  */
+
+      /* These two seekers are no longer eligible for matching.  */
       await match_recompute([user_id, other_user_id]);
+
+      /* Return the contact information for the matched seeker.  */
       return updated_other_user.contactInfo;
     },
 
     /* The seeker has rejected his match.  */
     rejectMatch: async (parent, args, context) => {
-      if (!context.user) {
+      const logged_in_user = context.user;
+      if (!logged_in_user) {
         throw new AuthenticationError("Must be logged in.");
       }
-      const logged_in_user = context.user;
       const user_id = logged_in_user._id;
-      const user = await User.FindById(logged_in_user._id);
-      if (!user) {
+      if (!user_id) {
         throw new AuthenticationError("Must be logged in.");
+      }
+      const user = await User.findById(user_id);
+      if (!user) {
+        throw new AuthenticationError("Unknown user.");
       }
       if (user.matchmaker) {
-        throw new AuthenticationError("Only a seeker can do this.");
+        throw new AuthenticationError("Only a seeker can reject a match.");
       }
       if (!user.match_found) {
-        throw new AuthenticationError("Only reject if matched.");
+        throw new AuthenticationError("Only matched seekers can reject their match.")
       }
-      const other_user = user.found_match;
-      const other_user_id = other_user._id;
+
+      const other_user_id = user.found_match;
+      if (!other_user_id) {
+        throw new AuthenticationError("Invalid matched seeker.");
+      }
 
       /* Tell each user that he is no longer matched.  */
       const updated_user = await User.findOneAndUpdate(
@@ -370,7 +475,14 @@ const resolvers = {
         },
         { new: true }
       );
+
+      /* Send email to each user saying he is no longer matched.  */
+      /* Not yet written.  */
+
+      /* It is probably unnecessary, but make sure these seekers are not
+       * matched until they pay again.  */
       await match_recompute([user_id, other_user_id]);
+
       return user;
     },
   },
