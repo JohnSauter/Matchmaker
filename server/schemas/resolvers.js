@@ -179,9 +179,9 @@ const resolvers = {
         throw new AuthenticationError("Only a matchmaker can rate a match.");
       }
 
-      const match_id = args.potentialMatchId;
+      const match_id = args.PotentialMatchId;
       const rating = args.rating;
-      const updated_match = await User.findOneAndUpdate(
+      const updated_match = await PotentialMatch.findOneAndUpdate(
         { _id: match_id },
         {
           $set: {
@@ -189,7 +189,9 @@ const resolvers = {
             rated: true,
           },
         }
-      );
+      )
+        .populate("User1")
+        .populate("User2");
       return updated_match;
     },
 
