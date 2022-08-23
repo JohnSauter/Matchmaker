@@ -48,9 +48,9 @@ db.once("open", async () => {
   });
 
   await User.create({
-    username: "Juius Caesar",
-    email: "jcaesar@empire.com",
-    password: "IdesofMarch",
+    username: 'Julius Caesar',
+    email: 'jcaesar@empire.com',
+    password: 'IdesofMarch',
     matchmaker: false,
     profile_specified: true,
     gender: "male",
@@ -170,8 +170,8 @@ db.once("open", async () => {
     matchmaker: false,
     profile_specified: true,
     gender: "female",
-    age: 35,
-    height: 38,
+    age: 27,
+    height: 65,
     weight: 90,
     eyes: "blue",
     hair: "red",
@@ -182,12 +182,12 @@ db.once("open", async () => {
     wishgen_male: true,
     wishgen_female: false,
     wishgen_nonbinary: false,
-    minage: 33,
-    maxage: 100,
-    minheight: 0,
-    maxheight: 100,
-    minweight: 0,
-    maxweight: 1000,
+    minAge: 30,
+    maxAge: 100,
+    minHeight: 0,
+    maxHeight: 100,
+    minWeight: 0,
+    maxWeight: 1000,
     wisheye_brown: true,
     wisheye_blue: true,
     whisheye_gray: false,
@@ -201,6 +201,45 @@ db.once("open", async () => {
     match_found: false,
     found_match: null,
   });
+
+  await User.create({
+    username: 'Mark Antony',
+    email: 'mantony@secondtriumvirate.gov',
+    password: 'IamdyingEgyptdying.',
+    matchmaker: false,
+    profile_specified: true,
+    gender: 'male',
+    age: 39,
+    height: 68,
+    weight: 170,
+    eyes: 'brown',
+    hair: 'brown',
+    aboutMe '',
+    contactInfo: "mantony@secondtriumvirate.gov",
+    wishlist_specified: true,
+    wishgen_male: true,
+    wishgen_female: true,
+    wishgen_nonbinary: true,
+    minAge: 18,
+    maxAge: 35,
+    minHeight: 0,
+    maxHeight: 100,
+    minWeight: 0,
+    maxWeight: 1000,
+    wisheye_brown: true,
+    wisheye_blue: true,
+    whisheye_gray: false,
+    wisheye_green: false,
+    wishhair_black: true,
+    wishhair_brown: false,
+    wishhair_blond: false,
+    wishhair_red: true,
+    paid: true,
+    match_found: false,
+    found_match:false
+  });
+console.log('users seeded');
+
 
   await User.create({
     username: "Yenta",
@@ -217,6 +256,7 @@ db.once("open", async () => {
 
   const matches_created = await match_recompute([]);
   console.log(String(matches_created) + " potential matches computed.");
+
 
   process.exit(1);
 });
