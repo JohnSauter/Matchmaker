@@ -99,7 +99,7 @@ const typeDefs = gql`
 
   type Auth {
     token: ID
-    user: LimitedUser
+    user: FullUser
   }
   type PotentialMatch {
     _id: ID

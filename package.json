@@ -12,7 +12,7 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "AGPL3.0-or-later",
   "devDependencies": {
     "concurrently": "^5.1.0"
   }
