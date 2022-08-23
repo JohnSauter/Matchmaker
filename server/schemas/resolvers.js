@@ -74,7 +74,11 @@ const resolvers = {
       }
 
       /* Return an array of potential matches that have not yet been rated.  */
-      const potential_matches = await PotentialMatch.find({ rated: false });
+      const potential_matches = await PotentialMatch.find({
+        rated: false,
+      })
+        .populate("User1")
+        .populate("User2");
       return potential_matches;
     },
 
@@ -339,7 +343,7 @@ const resolvers = {
       /* Invoke the credit card payment software.  */
       /* Not yet written.  */
 
-      /* If the charge was successful, flag the seeker as having paid.  
+      /* If the charge was successful, flag the seeker as having paid.
        */
       const updated_user = await User.findOneAndUpdate(
         { _id: user_id },
@@ -444,7 +448,9 @@ const resolvers = {
         throw new AuthenticationError("Only a seeker can reject a match.");
       }
       if (!user.match_found) {
-        throw new AuthenticationError("Only matched seekers can reject their match.")
+        throw new AuthenticationError(
+          "Only matched seekers can reject their match."
+        );
       }
 
       const other_user_id = user.found_match;
