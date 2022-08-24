@@ -2,8 +2,9 @@ const { gql } = require("apollo-server-express");
 
 const typeDefs = gql`
  
-  # The matchmaker and the seeker when looking at other users' information
-  # do not get the contact information.
+  # The matchmaker and the seeker when looking at 
+  # other users' information do not get the contact 
+  # information.
   type LimitedUser {
     _id: ID
     username: String!
@@ -44,7 +45,8 @@ const typeDefs = gql`
     found_match: LimitedUser
   }
 
-  # When the seeker is looking at himself he gets the contact information.
+  # When the seeker is looking at himself he gets his own 
+  # and his match's contact information.
   type FullUser {
     _id: ID
     username: String!
@@ -94,9 +96,6 @@ const typeDefs = gql`
     User2: LimitedUser
     rating: Int
   }
-  type contact_information {
-    contact_info: String
-  }
 
   type Query {
     user: FullUser
@@ -108,7 +107,7 @@ const typeDefs = gql`
   type Mutation {
     rateAMatch(PotentialMatchId: ID, rating: Int): PotentialMatch
 
-    chooseAMatch(PotentialMatchId: ID, rating: Int): contact_information
+    chooseAMatch(PotentialMatchId: ID): FullUser
 
     rejectMatch: FullUser
 
