@@ -350,7 +350,9 @@ const resolvers = {
       }
 
       /* Invoke the credit card payment software.  */
-      /* Not yet written.  */
+      /* Not yet written.
+      collect_payment(user, args);
+       */
 
       /* If the charge was successful, flag the seeker as having paid.
        */
@@ -448,7 +450,9 @@ const resolvers = {
       ).populate("found_match");
 
       /* Send e-mail to each user saying that they are matched.  */
-      /* Not yet written.  */
+      /* Not yet written.  
+      send_two_emails(updated_user, updated_other_user, "match");
+       */
 
       /* These two seekers are no longer eligible for matching.  */
       await match_recompute([user_id, other_user_id]);
@@ -511,7 +515,9 @@ const resolvers = {
       ).populate("found_match");
 
       /* Send email to each user saying he is no longer matched.  */
-      /* Not yet written.  */
+      /* Not yet written. 
+      send_two_emails(updated_user, updated_other_user, "reject");
+       */
 
       /* It is probably unnecessary, but make sure these seekers are not
        * matched until they pay again.  */
