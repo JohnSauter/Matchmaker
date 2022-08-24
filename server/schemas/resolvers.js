@@ -198,7 +198,7 @@ const resolvers = {
       )
         .populate("User1")
         .populate("User2");
-        
+
       return updated_match;
     },
 
@@ -453,8 +453,9 @@ const resolvers = {
       /* These two seekers are no longer eligible for matching.  */
       await match_recompute([user_id, other_user_id]);
 
-      /* Return the contact information for the matched seeker.  */
-      return updated_other_user.contactInfo;
+      /* Return the contact information for the matched seeker
+       * in user.found_match.contactInfo.  */
+      return updated_user;
     },
 
     /* The seeker has rejected his match.  */
