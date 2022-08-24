@@ -3,6 +3,7 @@
 const { User, PotentialMatch } = require("../models");
 
 const logging = false;
+const abbreviated_logging = false;
 
 /* Function of two seekers to see if the first fits the
  * wishes of the second.  */
@@ -138,7 +139,7 @@ module.exports = {
     const promises = [];
     user_ids.forEach((user_id) => {
       const the_promise = PotentialMatch.deleteMany({
-        $or: [{ User1: user_id  }, { User2: user_id }],
+        $or: [{ User1: user_id }, { User2: user_id }],
       });
       promises.push(the_promise);
     });
@@ -176,6 +177,11 @@ module.exports = {
               rated: false,
               rating: 0,
             });
+            if (abbreviated_logging) {
+              console.log(
+                "Matched " + user_1.username + " with " + user_2.username + "."
+              );
+            }
             matches_created = matches_created + 1;
           }
         }
