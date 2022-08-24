@@ -193,10 +193,12 @@ const resolvers = {
             rating: rating,
             rated: true,
           },
-        }
+        },
+        { new: true }
       )
         .populate("User1")
         .populate("User2");
+        
       return updated_match;
     },
 
