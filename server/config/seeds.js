@@ -22,7 +22,7 @@ db.once("open", async () => {
     hair: "blonde",
     aboutMe:
       "I am sociable, patient, and love to dance. I am looking for someone who wants to make a home.",
-    contactinfo: "rosie@theshire.net",
+    contactInfo: "rosie@theshire.net",
     wishlist_specified: true,
     wishgen_male: true,
     wishgen_female: false,
@@ -48,9 +48,9 @@ db.once("open", async () => {
   });
 
   await User.create({
-    username: 'Julius Caesar',
-    email: 'jcaesar@empire.com',
-    password: 'IdesofMarch',
+    username: "Julius Caesar",
+    email: "jcaesar@empire.com",
+    password: "IdesofMarch",
     matchmaker: false,
     profile_specified: true,
     gender: "male",
@@ -61,7 +61,7 @@ db.once("open", async () => {
     hair: "brown",
     aboutMe:
       "My likes include Italian food, subjugating peoples, and receiving adoring crowds. Love to travel. Looking for someone who wants to be treated like a queen",
-    contactinfo: "jcaesar@empire.com",
+    contactInfo: "jcaesar@empire.com",
     wishlist_specified: true,
     wishgen_male: true,
     wishgen_female: true,
@@ -85,6 +85,7 @@ db.once("open", async () => {
     match_found: false,
     found_match: null,
   });
+
   await User.create({
     username: "Sam Gamgee",
     email: "sgamgee@lotr.com",
@@ -99,7 +100,7 @@ db.once("open", async () => {
     hair: "blonde",
     aboutMe:
       "I am a homebody who loves gardening and home-cooked meals. I do not like traveling. Looking for someone who likes pipes and second breakfast",
-    contactinfo: "sgamgee@lotr.com",
+    contactInfo: "sgamgee@lotr.com",
     wishlist_specified: true,
     wishgen_male: false,
     wishgen_female: true,
@@ -138,7 +139,7 @@ db.once("open", async () => {
     hair: "brown",
     aboutMe:
       "I am a careful planner and not much for spontenaity. I am looking for someone who like peace and quiet but can take bad news with aplomb. Open to sentient AI. ",
-    contactinfo: "hseldon@streeling.edu",
+    contactInfo: "hseldon@streeling.edu",
     wishlist_specified: true,
     wishgen_male: false,
     wishgen_female: true,
@@ -177,7 +178,7 @@ db.once("open", async () => {
     hair: "red",
     aboutMe:
       "I am sociable, patient, and love to dance. I am looking for someone who wants to make a home.",
-    contactinfo: "'cphilopato@ptolemy.gov'",
+    contactInfo: "'cphilopato@ptolemy.gov'",
     wishlist_specified: true,
     wishgen_male: true,
     wishgen_female: false,
@@ -203,18 +204,18 @@ db.once("open", async () => {
   });
 
   await User.create({
-    username: 'Mark Antony',
-    email: 'mantony@secondtriumvirate.gov',
-    password: 'IamdyingEgyptdying.',
+    username: "Mark Antony",
+    email: "mantony@secondtriumvirate.gov",
+    password: "IamdyingEgyptdying.",
     matchmaker: false,
     profile_specified: true,
-    gender: 'male',
+    gender: "male",
     age: 39,
     height: 68,
     weight: 170,
-    eyes: 'brown',
-    hair: 'brown',
-    aboutMe '',
+    eyes: "brown",
+    hair: "brown",
+    aboutMe: "I am a mamber of the College of Augurs",
     contactInfo: "mantony@secondtriumvirate.gov",
     wishlist_specified: true,
     wishgen_male: true,
@@ -236,10 +237,8 @@ db.once("open", async () => {
     wishhair_red: true,
     paid: true,
     match_found: false,
-    found_match:false
+    found_match: null,
   });
-console.log('users seeded');
-
 
   await User.create({
     username: "Yenta",
@@ -255,8 +254,7 @@ console.log('users seeded');
   console.log("users seeded");
 
   const matches_created = await match_recompute([]);
-  console.log(String(matches_created) + " potential matches computed.");
-
+  console.log(String(matches_created) + " potential matches found.");
 
   process.exit(1);
 });
