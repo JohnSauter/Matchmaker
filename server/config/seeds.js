@@ -165,7 +165,7 @@ db.once('open', async () => {
     weight: 90,
     eyes: 'blue',
     hair: 'red',
-    aboutMe: 'I am sociable, patient, and love to dance. I am looking for someone who wants to make a home.',
+    aboutMe: 'I an used to getting my way. I am looking for someone who will treat me like the goddess that I am.',
     contactinfo: "'cphilopato@ptolemy.gov'",
     wishlist_specified: true,
     wishgen_male: true,
