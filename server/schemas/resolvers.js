@@ -3,6 +3,8 @@ const { User, PotentialMatch } = require("../models");
 const { signToken } = require("../utils/auth.js");
 const stripe = require("stripe")("sk_test_4eC39HqLyjWDarjtT1zdp7dc");
 const { match_recompute } = require("../utils/make_matches.js");
+const { match_email, reject_email} = require("../utils/mailer.js");
+
 const mongoose = require("mongoose");
 
 const resolvers = {
@@ -450,9 +452,7 @@ const resolvers = {
       ).populate("found_match");
 
       /* Send e-mail to each user saying that they are matched.  */
-      /* Not yet written.  
-      send_two_emails(updated_user, updated_other_user, "match");
-       */
+      await match_email (updated_user, updated_other_user);
 
       /* These two seekers are no longer eligible for matching.  */
       await match_recompute([user_id, other_user_id]);
@@ -515,9 +515,7 @@ const resolvers = {
       ).populate("found_match");
 
       /* Send email to each user saying he is no longer matched.  */
-      /* Not yet written. 
-      send_two_emails(updated_user, updated_other_user, "reject");
-       */
+      await reject_email (updated_user, updated_other_user);
 
       /* It is probably unnecessary, but make sure these seekers are not
        * matched until they pay again.  */
