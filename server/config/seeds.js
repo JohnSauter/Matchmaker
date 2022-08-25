@@ -10,7 +10,7 @@ db.once("open", async () => {
 
   await User.create({
     username: "Rosie Cotton",
-    email: "rosie@theshire.net",
+    email: "rosie@systemeyescomputerstore.com",
     password: "GreenDragon",
     matchmaker: false,
     profile_specified: true,
@@ -22,7 +22,7 @@ db.once("open", async () => {
     hair: "blonde",
     aboutMe:
       "I am sociable, patient, and love to dance. I am looking for someone who wants to make a home.",
-    contactInfo: "rosie@theshire.net",
+    contactInfo: "rosie@systemeyescomputerstore.com",
     wishlist_specified: true,
     wishgen_male: true,
     wishgen_female: false,
@@ -49,7 +49,7 @@ db.once("open", async () => {
 
   await User.create({
     username: "Julius Caesar",
-    email: "jcaesar@empire.com",
+    email: "jcaesar@systemeyescomputerstore.com",
     password: "IdesofMarch",
     matchmaker: false,
     profile_specified: true,
@@ -61,7 +61,7 @@ db.once("open", async () => {
     hair: "brown",
     aboutMe:
       "My likes include Italian food, subjugating peoples, and receiving adoring crowds. Love to travel. Looking for someone who wants to be treated like a queen",
-    contactInfo: "jcaesar@empire.com",
+    contactInfo: "jcaesar@systemeyescomputerstore.com",
     wishlist_specified: true,
     wishgen_male: true,
     wishgen_female: true,
@@ -88,7 +88,7 @@ db.once("open", async () => {
 
   await User.create({
     username: "Sam Gamgee",
-    email: "sgamgee@lotr.com",
+    email: "sgamgee@systemeyescomputerstore.com",
     password: "Mellon",
     matchmaker: false,
     profile_specified: true,
@@ -100,7 +100,7 @@ db.once("open", async () => {
     hair: "blonde",
     aboutMe:
       "I am a homebody who loves gardening and home-cooked meals. I do not like traveling. Looking for someone who likes pipes and second breakfast",
-    contactInfo: "sgamgee@lotr.com",
+    contactInfo: "sgamgee@systemeyescomputerstore.com",
     wishlist_specified: true,
     wishgen_male: false,
     wishgen_female: true,
@@ -127,7 +127,7 @@ db.once("open", async () => {
 
   await User.create({
     username: "Hari Seldon",
-    email: "hseldon@streeling.edu",
+    email: "hseldon@systemeyescomputerstore.com",
     password: "the Raven",
     matchmaker: false,
     profile_specified: true,
@@ -139,7 +139,7 @@ db.once("open", async () => {
     hair: "brown",
     aboutMe:
       "I am a careful planner and not much for spontenaity. I am looking for someone who like peace and quiet but can take bad news with aplomb. Open to sentient AI. ",
-    contactInfo: "hseldon@streeling.edu",
+    contactInfo: "hseldon@systemeyescomputerstore.com",
     wishlist_specified: true,
     wishgen_male: false,
     wishgen_female: true,
@@ -166,7 +166,7 @@ db.once("open", async () => {
 
   await User.create({
     username: "Cleopatra Philopator",
-    email: "cphilopato@ptolemy.gov",
+    email: "cphilopato@systemeyescomputerstore.com",
     password: "emerald",
     matchmaker: false,
     profile_specified: true,
@@ -178,7 +178,7 @@ db.once("open", async () => {
     eyes: 'blue',
     hair: 'red',
     aboutMe: 'I am used to getting my way. I am looking for someone who will treat me like the goddess that I am.',
-    contactInfo: "'cphilopato@ptolemy.gov'",
+    contactInfo: "'cphilopato@systemeyescomputerstore.com'",
 
     wishlist_specified: true,
     wishgen_male: true,
@@ -217,7 +217,7 @@ db.once("open", async () => {
     eyes: "brown",
     hair: "brown",
     aboutMe: "I am a mamber of the College of Augurs",
-    contactInfo: "mantony@secondtriumvirate.gov",
+    contactInfo: "mantony@systemeyescomputerstore.com",
     wishlist_specified: true,
     wishgen_male: true,
     wishgen_female: true,
@@ -243,7 +243,7 @@ db.once("open", async () => {
 
   await User.create({
     username: "Yenta",
-    email: "Yenta@fiddlerontheroof.com",
+    email: "Yenta@systemeyescomputerstore.com",
     password: "12345678",
     matchmaker: true,
     profile_specified: false,
