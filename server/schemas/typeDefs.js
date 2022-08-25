@@ -105,9 +105,9 @@ const typeDefs = gql`
   }
 
   type Mutation {
-    rateAMatch(PotentialMatchId: ID, rating: Int): PotentialMatch
+    rateAMatch(PotentialMatchId: ID!, rating: Int!): PotentialMatch
 
-    chooseAMatch(PotentialMatchId: ID): FullUser
+    chooseAMatch(PotentialMatchId: ID!): FullUser
 
     rejectMatch: FullUser
 
@@ -119,33 +119,33 @@ const typeDefs = gql`
     ): Auth
 
     updateProfile(
-      gender: String
-      age: Int
-      height: Int
-      weight: Int
-      eyes: String
-      hair: String
-      aboutMe: String
-      contactInfo: String
+      gender: String!
+      age: Int!
+      height: Int!
+      weight: Int!
+      eyes: String!
+      hair: String!
+      aboutMe: String!
+      contactInfo: String!
     ): FullUser
 
     updateWishList(
-      wishgen: String
-      minage: Int
-      maxage: Int
-      minheight: Int
-      maxheight: Int
-      minweight: Int
-      maxweight: Int
-      wisheye_brown: Boolean
-      wisheye_blue: Boolean
-      whisheye_gray: Boolean
-      wisheye_green: Boolean
-      wisheye_hazel: Boolean
-      wishhair_black: Boolean
-      wishhair_brown: Boolean
-      wishhair_blond: Boolean
-      wishhair_red: Boolean
+      wishgen: String!
+      minage: Int!
+      maxage: Int!
+      minheight: Int!
+      maxheight: Int!
+      minweight: Int!
+      maxweight: Int!
+      wisheye_brown: Boolean!
+      wisheye_blue: Boolean!
+      whisheye_gray: Boolean!
+      wisheye_green: Boolean!
+      wisheye_hazel: Boolean!
+      wishhair_black: Boolean!
+      wishhair_brown: Boolean!
+      wishhair_blond: Boolean!
+      wishhair_red: Boolean!
     ): FullUser
 
     pay(card_number: String!): FullUser
