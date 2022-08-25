@@ -1,37 +1,57 @@
-const jwt = require('jsonwebtoken');
+const jwt = require("jsonwebtoken");
+const { v4: uuidv4 } = require("uuid");
 
-const secret = 'mysecretsshhhhh';
-const expiration = '2h';
+let jwt_secret = process.env.JWT_SECRET;
+if (!jwt_secret) {
+  /* We do not have an environment variable with a secret
+   * so make one up.  Doing this means that restarting
+   * the server causes previous logins to become invalid.
+   */
+  jwt_secret = uuidv4();
+  console.log("jwt secret is: " + String(jwt_secret));
+}
+
+/* Tokens are only valid for two hours.  After than
+ * users must log in again.  */
+const expiration = "2h";
 
 module.exports = {
   authMiddleware: function ({ req }) {
-    // allows token to be sent via req.body, req.query, or headers
+    // Allows token to be sent via req.body, req.query, or headers.
     let token = req.body.token || req.query.token || req.headers.authorization;
 
-    // ["Bearer", "<tokenvalue>"]
+    // Authorization is formatted as "Bearer <tokenvalue>"."
     if (req.headers.authorization) {
-      token = token.split(' ').pop().trim();
+      token = token.split(" ").pop().trim();
     }
 
     if (!token) {
+      /* We have no token, so pass along the request unchanged.
+       */
       return req;
     }
 
+    /* Include the data from the token in the request under "user".
+     */
     try {
-      const { data } = jwt.verify(token, secret, { maxAge: expiration });
+      const { data } = jwt.verify(token, jwt_secret, { maxAge: expiration });
       req.user = data;
     } catch (err) {
-      console.log('Invalid token');
+      /* If jwt.verify fails to verify the token it throws an error message.
+       */
+      console.log("Invalid token:");
       if (err.message) {
-        console.log (err.message);
+        console.log(err.message);
       }
     }
 
+    /* Pass along the (possibly updated) request.  */
     return req;
   },
-  signToken: function ({ firstName, email, _id }) {
-    const payload = { firstName, email, _id };
 
-    return jwt.sign({ data: payload }, secret, { expiresIn: expiration });
+  /* Create a signed token containing the user id.  */
+  signToken: function ({ _id }) {
+    const payload = { _id };
+    return jwt.sign({ data: payload }, jwt_secret, { expiresIn: expiration });
   },
 };

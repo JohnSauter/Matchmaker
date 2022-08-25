@@ -10,7 +10,7 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "AGPL3.0-or-later",
   "dependencies": {
     "apollo-server-express": "^3.6.1",
     "bcrypt": "^5.0.1",
@@ -18,9 +18,10 @@
     "graphql": "^16.3.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.1.8",
-    "stripe": "^8.67.0"
+    "stripe": "^8.67.0",
+    "dotenv": "^16.0.1"
   },
-  "devDependencies": {
-    "nodemon": "^2.0.2"
-  }
+"devDependencies": {
+  "nodemon": "^2.0.2"
+}
 }
