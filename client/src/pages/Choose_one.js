@@ -1,5 +1,5 @@
-/* Chosen.js */
-/* Present the chosen match with its contact information.  */
+/* Choose_one.js */
+/* Present a single potential match with all its details.  */
 
 //import React, { useEffect, useState } from "react";
 //import { Link, useParams } from "react-router-dom";
@@ -12,12 +12,12 @@ import { } from "../utils/mutations";
 //import { idbPromise } from "../utils/helpers";
 //import spinner from "../assets/spinner.gif";
 
-export function Chosen() {
+export function ChooseOne() {
   //const [state, dispatch] = useStoreContext();
 
   return (
     <div>
-      <p>Chosen</p>
+      <p>Choose_one</p>
     </div>
   );
 }

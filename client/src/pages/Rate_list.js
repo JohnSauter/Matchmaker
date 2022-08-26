@@ -1,4 +1,6 @@
-/* Rate.js */
+/* Rate_list.js */
+/* Present the list of unrated potential matches
+ * so a matchmaker can select one for closer examination.  */
 
 //import React, { useEffect, useState } from "react";
 //import { Link, useParams } from "react-router-dom";
@@ -11,12 +13,12 @@ import { } from "../utils/mutations";
 //import { idbPromise } from "../utils/helpers";
 //import spinner from "../assets/spinner.gif";
 
-export function Rate() {
+export function RateList() {
   //const [state, dispatch] = useStoreContext();
 
   return (
     <div>
-      <p>Rate</p>
+      <p>Rate_list</p>
     </div>
   );
 }

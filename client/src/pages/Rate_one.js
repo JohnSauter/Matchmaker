@@ -1,5 +1,6 @@
-/* Chosen.js */
-/* Present the chosen match with its contact information.  */
+/* Rate_one.js */
+/* Present a single potential match with all its details
+ * so a matchmaker can decide how to rate it.  */
 
 //import React, { useEffect, useState } from "react";
 //import { Link, useParams } from "react-router-dom";
@@ -12,12 +13,12 @@ import { } from "../utils/mutations";
 //import { idbPromise } from "../utils/helpers";
 //import spinner from "../assets/spinner.gif";
 
-export function Chosen() {
+export function RateOne() {
   //const [state, dispatch] = useStoreContext();
 
   return (
     <div>
-      <p>Chosen</p>
+      <p>Rate_one</p>
     </div>
   );
 }

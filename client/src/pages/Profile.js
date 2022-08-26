@@ -1,4 +1,5 @@
-/* Profile */
+/* Profile.js */
+/* Present the seeker's profile and let him modify it.  */
 
 //import React, { useEffect, useState } from "react";
 //import { Link, useParams } from "react-router-dom";
