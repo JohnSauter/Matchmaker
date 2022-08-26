@@ -8,15 +8,34 @@ import {
 } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
 
-//import Home from './pages/Home';
-//import Detail from './pages/Detail';
-import NoMatch from "./pages/NoMatch";
-import Login from "./pages/Login";
-import Signup from "./pages/Signup";
 import Nav from "./components/Nav";
 import { AppProvider } from "./utils/GlobalState";
-//import Success from './pages/Success';
-//import OrderHistory from './pages/OrderHistory';
+
+/*
+
+import {
+  Login,
+  Signup,
+  Profile,
+  Wishlist,
+  Pay,
+  Rate,
+  Choose,
+  Chosen,
+  NoMatch,
+} from "./pages";
+
+*/
+
+const {Login} = require("./pages/Login.js");
+const {Signup} = require("./pages/Signup.js");
+const {Profile} = require("./pages/Profile.js");
+const {Wishlist} = require("./pages/Wishlist.js");
+const {Pay} = require("./pages/Pay.js");
+const {Rate} = require("./pages/Rate.js");
+const {Choose} = require("./pages/Choose.js");
+const {Chosen} = require("./pages/Chosen.js");
+const {NoMatch} = require("./pages/NoMatch.js");
 
 const httpLink = createHttpLink({
   uri: "/graphql",
@@ -48,7 +67,14 @@ function App() {
               <Route path="/" element={<Login />} />
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<Signup />} />
+              <Route path="/profile" element={<Profile />} />
+              <Route path="/wishlist" element={<Wishlist />} />
+              <Route path="/pay" element={<Pay />} />
+              <Route path="/rate" element={<Rate />} />
+              <Route path="/choose" element={<Choose />} />
+              <Route path="/chosen" element={<Chosen />} />
               <Route path="*" element={<NoMatch />} />
+
             </Routes>
           </AppProvider>
         </div>
@@ -58,3 +84,16 @@ function App() {
 }
 
 export default App;
+
+/*
+<Route path="/login" element={<Login />} />
+              <Route path="/signup" element={<Signup />} />
+              <Route path="/profile" element={<Profile />} />
+              <Route path="/wishlist" element={<Wishlist />} />
+              <Route path="/pay" element={<Pay />} />
+              <Route path="/rate" element={<Rate />} />
+              <Route path="/choose" element={<Choose />} />
+              <Route path="/chosen" element={<Chosen />} />
+              <Route path="*" element={<NoMatch />} />
+
+              */
