@@ -1,7 +1,9 @@
+/* queries.js */
+
 import { gql } from "@apollo/client";
 
 export const QUERY_USER = gql`
-  {
+  query user {
     user {
       _id
       username
@@ -76,7 +78,7 @@ export const QUERY_USER = gql`
 `;
 
 export const QUERY_ALL_MY_POTENTIAL_MATCHES = gql`
-  {
+  query all_my_potential_matches {
     PotentialMatch {
       _id
       user1 {
@@ -153,7 +155,7 @@ export const QUERY_ALL_MY_POTENTIAL_MATCHES = gql`
 `;
 
 export const QUERY_UNRATED_MATCHES = gql`
-  {
+  query unrated_matches {
     PotentialMatch {
       _id
       user1 {
@@ -230,7 +232,7 @@ export const QUERY_UNRATED_MATCHES = gql`
 
 /* The contact information for my match, or the empty string.  */
 export const QUERY_MY_MATCH = gql`
-  {
+  query mt_match {
     my_match {
       contact_info
     }
