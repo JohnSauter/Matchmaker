@@ -11,6 +11,7 @@ import { setContext } from "@apollo/client/link/context";
 import Nav from "./components/Nav";
 import { AppProvider } from "./utils/GlobalState";
 
+const {Front} = require("./pages/Front.js");
 const { Login } = require("./pages/Login.js");
 const { Signup } = require("./pages/Signup.js");
 const { Profile } = require("./pages/Profile.js");
@@ -51,7 +52,7 @@ function App() {
           <AppProvider>
             <Nav />
             <Routes>
-              <Route path="/" element={<Login />} />
+              <Route path="/" element={<Front />} />
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<Signup />} />
               <Route path="/profile" element={<Profile />} />
