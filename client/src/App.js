@@ -73,16 +73,3 @@ function App() {
 }
 
 export default App;
-
-/*
-<Route path="/login" element={<Login />} />
-              <Route path="/signup" element={<Signup />} />
-              <Route path="/profile" element={<Profile />} />
-              <Route path="/wishlist" element={<Wishlist />} />
-              <Route path="/pay" element={<Pay />} />
-              <Route path="/rate" element={<Rate />} />
-              <Route path="/choose" element={<Choose />} />
-              <Route path="/chosen" element={<Chosen />} />
-              <Route path="*" element={<NoMatch />} />
-
-              */
