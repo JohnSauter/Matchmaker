@@ -59,7 +59,7 @@ function App() {
               <Route path="/wishlist" element={<Wishlist />} />
               <Route path="/pay" element={<Pay />} />
               <Route path="/rate_list" element={<RateList />} />
-              <Route path="/rate_one" element={<RateOne />} />
+              <Route path="/rate_one/:PotentialMatchId" element={<RateOne />} />
               <Route path="/choose_list" element={<ChooseList />} />
               <Route path="/choose_one" element={<ChooseOne />} />
               <Route path="/chosen" element={<Chosen />} />
