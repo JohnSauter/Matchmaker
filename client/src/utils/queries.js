@@ -1,70 +1,238 @@
-import { gql } from '@apollo/client';
-
-export const QUERY_PRODUCTS = gql`
-  query getProducts($category: ID) {
-    products(category: $category) {
-      _id
-      name
-      description
-      price
-      quantity
-      image
-      category {
-        _id
-      }
-    }
-  }
-`;
-
-export const QUERY_CHECKOUT = gql`
-  query getCheckout($products: [ID]!) {
-    checkout(products: $products) {
-      session
-    }
-  }
-`;
-
-export const QUERY_ALL_PRODUCTS = gql`
-  {
-    products {
-      _id
-      name
-      description
-      price
-      quantity
-      category {
-        name
-      }
-    }
-  }
-`;
-
-export const QUERY_CATEGORIES = gql`
-  {
-    categories {
-      _id
-      name
-    }
-  }
-`;
+import { gql } from "@apollo/client";
 
 export const QUERY_USER = gql`
   {
     user {
-      firstName
-      lastName
-      orders {
+      _id
+      username
+      email
+      matchmaker
+      profile_specified
+      gender
+      age
+      height
+      weight
+      eyes
+      hair
+      aboutMe
+      contactInfo
+      wishlist_specified
+      wishgen_male
+      wishgen_female
+      minage
+      maxage
+      minheight
+      maxheight
+      minweight
+      maxweight
+      wisheye_brown
+      wisheye_blue
+      whisheye_gray
+      wisheye_green
+      wisheye_hazel
+      wishhair_black
+      wishhair_brown
+      wishhair_blond
+      wishhair_red
+      paid
+      match_found
+      found_match {
         _id
-        purchaseDate
-        products {
-          _id
-          name
-          description
-          price
-          quantity
-          image
-        }
+        username
+        email
+        matchmaker
+        profile_specified
+        gender
+        age
+        height
+        weight
+        eyes
+        hair
+        aboutMe
+        contactInfo
+        wishlist_specified
+        wishgen_male
+        wishgen_female
+        minage
+        maxage
+        minheight
+        maxheight
+        minweight
+        maxweight
+        wisheye_brown
+        wisheye_blue
+        whisheye_gray
+        wisheye_green
+        wisheye_hazel
+        wishhair_black
+        wishhair_brown
+        wishhair_blond
+        wishhair_red
+        paid
+        match_found
       }
+    }
+  }
+`;
+
+export const QUERY_ALL_MY_POTENTIAL_MATCHES = gql`
+  {
+    PotentialMatch {
+      _id
+      user1 {
+        _id
+        username
+        email
+        matchmaker
+        profile_specified
+        gender
+        age
+        height
+        weight
+        eyes
+        hair
+        aboutMe
+        wishlist_specified
+        wishgen_male
+        wishgen_female
+        minage
+        maxage
+        minheight
+        maxheight
+        minweight
+        maxweight
+        wisheye_brown
+        wisheye_blue
+        whisheye_gray
+        wisheye_green
+        wisheye_hazel
+        wishhair_black
+        wishhair_brown
+        wishhair_blond
+        wishhair_red
+        paid
+        match_found
+      }
+      user2 {
+        _id
+        username
+        email
+        matchmaker
+        profile_specified
+        gender
+        age
+        height
+        weight
+        eyes
+        hair
+        aboutMe
+        wishlist_specified
+        wishgen_male
+        wishgen_female
+        minage
+        maxage
+        minheight
+        maxheight
+        minweight
+        maxweight
+        wisheye_brown
+        wisheye_blue
+        whisheye_gray
+        wisheye_green
+        wisheye_hazel
+        wishhair_black
+        wishhair_brown
+        wishhair_blond
+        wishhair_red
+        paid
+        match_found
+      }
+      rating
+    }
+  }
+`;
+
+export const QUERY_UNRATED_MATCHES = gql`
+  {
+    PotentialMatch {
+      _id
+      user1 {
+        _id
+        username
+        email
+        matchmaker
+        profile_specified
+        gender
+        age
+        height
+        weight
+        eyes
+        hair
+        aboutMe
+        wishlist_specified
+        wishgen_male
+        wishgen_female
+        minage
+        maxage
+        minheight
+        maxheight
+        minweight
+        maxweight
+        wisheye_brown
+        wisheye_blue
+        whisheye_gray
+        wisheye_green
+        wisheye_hazel
+        wishhair_black
+        wishhair_brown
+        wishhair_blond
+        wishhair_red
+        paid
+        match_found
+      }
+      user2 {
+        _id
+        username
+        email
+        matchmaker
+        profile_specified
+        gender
+        age
+        height
+        weight
+        eyes
+        hair
+        aboutMe
+        wishlist_specified
+        wishgen_male
+        wishgen_female
+        minage
+        maxage
+        minheight
+        maxheight
+        minweight
+        maxweight
+        wisheye_brown
+        wisheye_blue
+        whisheye_gray
+        wisheye_green
+        wisheye_hazel
+        wishhair_black
+        wishhair_brown
+        wishhair_blond
+        wishhair_red
+        paid
+        match_found
+      }
+    }
+  }
+`;
+
+/* The contact information for my match, or the empty string.  */
+export const QUERY_MY_MATCH = gql`
+  {
+    my_match {
+      contact_info
     }
   }
 `;
