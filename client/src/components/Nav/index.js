@@ -4,9 +4,12 @@ import { Link } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 import { QUERY_USER } from "../../utils/queries.js";
 
-import cupid from "../../assets/cupid_shooting_arrow.png";
+import cupid_1 from "../../assets/cupid_shooting_arrow.png";
+import cupid_2 from "../../assets/kisspng-cupid-silhouette-drawing-1000.png";
 
 function Nav() {
+  /* This query will return null if there is no user logged in,
+   * or the user information if there is.  */
   const { loading, error, data } = useQuery(QUERY_USER);
 
   function showNavigation() {
@@ -21,6 +24,8 @@ function Nav() {
       return <p>No data</p>;
     }
 
+    /* It is possible to still have a good token but for there
+     * to be no user logged in.  */
     if (Auth.loggedIn() && data.user) {
       const user = data.user;
 
@@ -95,7 +100,7 @@ function Nav() {
       <h1>
         <Link to="/">
           <img
-            src={cupid}
+            src={cupid_2}
             aria-label="go home"
             alt="Cupid with arrow"
             width="100"
