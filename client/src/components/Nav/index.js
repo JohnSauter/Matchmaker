@@ -2,6 +2,8 @@ import React from "react";
 import Auth from "../../utils/auth";
 import { Link } from "react-router-dom";
 
+import cupid from '../../assets/cupid_shooting_arrow.png';
+
 function Nav() {
 
   function showNavigation() {
@@ -40,7 +42,8 @@ function Nav() {
     <header className="flex-row px-1">
       <h1>
         <Link to="/">
-          <span role="img" aria-label="go home">🛍️</span>
+          <img src={cupid} aria-label="go home" alt="Cupid with arrow" width="100" />
+          
           Matchmaker
         </Link>
       </h1>

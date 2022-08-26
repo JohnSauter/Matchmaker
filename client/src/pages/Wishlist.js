@@ -1,4 +1,5 @@
 /* Wishlist.js */
+/* Present the seeker's wish list so he can update it.  */
 
 //import React, { useEffect, useState } from "react";
 //import { Link, useParams } from "react-router-dom";

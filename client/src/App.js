@@ -11,31 +11,18 @@ import { setContext } from "@apollo/client/link/context";
 import Nav from "./components/Nav";
 import { AppProvider } from "./utils/GlobalState";
 
-/*
+const { Login } = require("./pages/Login.js");
+const { Signup } = require("./pages/Signup.js");
+const { Profile } = require("./pages/Profile.js");
+const { Wishlist } = require("./pages/Wishlist.js");
+const { Pay } = require("./pages/Pay.js");
+const { RateList } = require("./pages/Rate_list.js");
+const { RateOne } = require("./pages/Rate_one.js");
+const { ChooseList } = require("./pages/Choose_list.js");
+const { ChooseOne } = require("./pages/Choose_one.js");
+const { Chosen } = require("./pages/Chosen.js");
+const { NoMatch } = require("./pages/NoMatch.js");
 
-import {
-  Login,
-  Signup,
-  Profile,
-  Wishlist,
-  Pay,
-  Rate,
-  Choose,
-  Chosen,
-  NoMatch,
-} from "./pages";
-
-*/
-
-const {Login} = require("./pages/Login.js");
-const {Signup} = require("./pages/Signup.js");
-const {Profile} = require("./pages/Profile.js");
-const {Wishlist} = require("./pages/Wishlist.js");
-const {Pay} = require("./pages/Pay.js");
-const {Rate} = require("./pages/Rate.js");
-const {Choose} = require("./pages/Choose.js");
-const {Chosen} = require("./pages/Chosen.js");
-const {NoMatch} = require("./pages/NoMatch.js");
 
 const httpLink = createHttpLink({
   uri: "/graphql",
@@ -70,8 +57,10 @@ function App() {
               <Route path="/profile" element={<Profile />} />
               <Route path="/wishlist" element={<Wishlist />} />
               <Route path="/pay" element={<Pay />} />
-              <Route path="/rate" element={<Rate />} />
-              <Route path="/choose" element={<Choose />} />
+              <Route path="/rate_list" element={<RateList />} />
+              <Route path="/rate_one" element={<RateOne />} />
+              <Route path="/choose_list" element={<ChooseList />} />
+              <Route path="/choose_one" element={<ChooseOne />} />
               <Route path="/chosen" element={<Chosen />} />
               <Route path="*" element={<NoMatch />} />
 

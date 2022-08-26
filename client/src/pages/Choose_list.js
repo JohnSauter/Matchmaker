@@ -1,4 +1,5 @@
-/* Choose.js */
+/* Choose_list.js */
+/* Choose a potential match from a list for closer examination.  */
 
 //import React, { useEffect, useState } from "react";
 //import { Link, useParams } from "react-router-dom";
@@ -11,12 +12,12 @@ import { } from "../utils/mutations";
 //import { idbPromise } from "../utils/helpers";
 //import spinner from "../assets/spinner.gif";
 
-export function Choose() {
+export function ChooseList() {
   //const [state, dispatch] = useStoreContext();
 
   return (
     <div>
-      <p>Choose</p>
+      <p>Choose_list</p>
     </div>
   );
 }
