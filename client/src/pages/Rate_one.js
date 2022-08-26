@@ -3,22 +3,37 @@
  * so a matchmaker can decide how to rate it.  */
 
 //import React, { useEffect, useState } from "react";
-//import { Link, useParams } from "react-router-dom";
-//import { useQuery } from "@apollo/client";
+import { useParams } from "react-router-dom";
+import { useQuery } from "@apollo/client";
+import { QUERY_UNRATED_MATCHES } from "../utils/queries.js";
 
-//import { useStoreContext } from "../utils/GlobalState";
-import { } from "../utils/actions";
-import { } from "../utils/queries";
-import { } from "../utils/mutations";
+//import { useAppContext } from "../utils/GlobalState";
+
 //import { idbPromise } from "../utils/helpers";
 //import spinner from "../assets/spinner.gif";
 
 export function RateOne() {
-  //const [state, dispatch] = useStoreContext();
+  const params = useParams();
+  const { loading, error, data } = useQuery(QUERY_UNRATED_MATCHES);
+  //const [state, dispatch] = useAppContext();
+  if (loading) {
+    return <p>Loading...</p>;
+  }
+  if (error) {
+    return <p>Error</p>;
+  }
+
+  const potential_matches = data.unRatedMatches;
+  const match_id = params.PotentialMatchId;
+   /* Find the specified match.  */
+
+  const potential_match = potential_matches.filter(
+    (element) => element._id === match_id
+  )[0];
 
   return (
     <div>
-      <p>Rate_one</p>
+      <p>Rate_one: {potential_match.User1.username}</p>
     </div>
   );
 }
