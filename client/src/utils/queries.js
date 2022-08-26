@@ -156,9 +156,9 @@ export const QUERY_ALL_MY_POTENTIAL_MATCHES = gql`
 
 export const QUERY_UNRATED_MATCHES = gql`
   query unrated_matches {
-    PotentialMatch {
+    unRatedMatches {
       _id
-      user1 {
+      User1 {
         _id
         username
         email
@@ -174,6 +174,7 @@ export const QUERY_UNRATED_MATCHES = gql`
         wishlist_specified
         wishgen_male
         wishgen_female
+        wishgen_nonbinary
         minage
         maxage
         minheight
@@ -192,7 +193,7 @@ export const QUERY_UNRATED_MATCHES = gql`
         paid
         match_found
       }
-      user2 {
+      User2 {
         _id
         username
         email
@@ -208,6 +209,7 @@ export const QUERY_UNRATED_MATCHES = gql`
         wishlist_specified
         wishgen_male
         wishgen_female
+        wishgen_nonbinary
         minage
         maxage
         minheight
