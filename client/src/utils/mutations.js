@@ -58,7 +58,7 @@ export const UPDATE_PROFILE = gql`
       aboutMe: $aboutMe
       contactInfo: $contactInfo
     ) {
-        _id
+      _id
     }
   }
 `;
@@ -99,9 +99,7 @@ export const UPDATE_WISHLIST = gql`
       wishhair_blond: $wishhair_blond
       wishhair_red: $wishhair_red
     ) {
-      user {
-        _id
-      }
+      _id
     }
   }
 `;
