@@ -2,19 +2,16 @@
 /* Present the seeker's profile and let him modify it.  */
 
 import React, { useEffect, useState } from "react";
-//import { Link, useParams } from "react-router-dom";
-import { useQuery } from "@apollo/client";
+import { useQuery, useMutation } from "@apollo/client";
 import { QUERY_USER } from "../utils/queries";
-//import { useAppContext } from "../utils/GlobalState";
+import { } from "../utils/queries";
 import { } from "../utils/actions";
 import { } from "../utils/queries";
-import { UPDATE_PROFILE} from "../utils/mutations";
-//import { idbPromise } from "../utils/helpers";
-//import spinner from "../assets/spinner.gif";
+import { UPDATE_PROFILE } from "../utils/mutations";
+
 
 export function Profile() {
     const [updateProfile] = useMutation(UPDATE_PROFILE);
-    //const [state, dispatch] = useAppContext();
     const { loading, data } = useQuery(QUERY_USER);
     const [profileForm, setProfileForm] = useState({
         gender: "",
@@ -29,11 +26,8 @@ export function Profile() {
     useEffect(() => {
         if (!loading) {
             setProfileForm(data.user)
-        }  
-    });
-
-    //     handleInputChange = handleInputChange.bind(this);
-    // }
+        }
+    }, [loading, data.user]);
 
     const handleInputChange = (event) => {
         const target = event.target;
@@ -49,7 +43,7 @@ export function Profile() {
     const handleSubmit = (event) => {
         event.preventDefault();
         alert("submit");
-        
+
     }
 
 
