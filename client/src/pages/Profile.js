@@ -11,7 +11,10 @@ import { UPDATE_PROFILE } from "../utils/mutations";
 
 
 export function Profile() {
-    const [updateProfile] = useMutation(UPDATE_PROFILE);
+    const [updateProfile,] = useMutation(UPDATE_PROFILE, {// Refetches two queries after mutation completes
+        refetchQueries: [
+            { query: QUERY_USER }]
+    });
     const { loading, data } = useQuery(QUERY_USER);
     const [profileForm, setProfileForm] = useState({
         gender: "",
@@ -40,10 +43,21 @@ export function Profile() {
         });
     }
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
         alert("submit");
-
+        await updateProfile({
+            variables: {
+                gender: profileForm.gender,
+                age: profileForm.age,
+                height: profileForm.height,
+                weight: profileForm.weight,
+                eyes: profileForm.eyes,
+                hair: profileForm.hair,
+                aboutMe: profileForm.aboutMe,
+                contactInfo: profileForm.contactInfo
+            }
+        })
     }
 
 
