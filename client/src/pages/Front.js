@@ -21,6 +21,7 @@ const { Profile } = require("./Profile.js");
 const { Wishlist } = require("./Wishlist.js");
 const { Pay } = require("./Pay.js");
 const { ChooseList } = require("./Choose_list.js");
+const { Chosen } = require("./Chosen.js")
 
 export function Front() {
   const { loading, error, data } = useQuery(QUERY_USER);
@@ -47,5 +48,8 @@ export function Front() {
   if (!user.paid) {
     return <Pay />;
   }
+  if (!user.match_found) {
   return <ChooseList />;
+  }
+  return <Chosen />;
 }

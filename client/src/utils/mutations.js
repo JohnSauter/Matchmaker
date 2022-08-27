@@ -127,11 +127,9 @@ export const RATE_A_MATCH = gql`
 
 /* Choose a match.  */
 export const CHOOSE_A_MATCH = gql`
-  mutation choose_a_match($PotentialMatchId: String!) {
-    choose_a_match(PotentialMatchId: $PotentialMatchId) {
-      user {
-        _id
-      }
+  mutation choose_a_match($PotentialMatchId: ID!) {
+    chooseAMatch(PotentialMatchId: $PotentialMatchId) {
+      _id
     }
   }
 `;
@@ -139,10 +137,8 @@ export const CHOOSE_A_MATCH = gql`
 /* Reject the match.  */
 export const REJECT_MATCH = gql`
   mutation reject_match {
-    reject_match {
-      user {
-        _id
-      }
+    rejectMatch {
+      _id
     }
   }
 `;

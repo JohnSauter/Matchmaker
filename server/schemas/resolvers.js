@@ -509,8 +509,9 @@ const resolvers = {
         { _id: other_user_id },
         {
           $set: {
-            found_match: user_id,
-            match_found: true,
+            found_match: null,
+            match_found: false,
+            paid: false,
           },
         },
         { new: true }

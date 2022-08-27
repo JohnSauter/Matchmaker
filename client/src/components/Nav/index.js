@@ -39,27 +39,36 @@ function Nav() {
               </li>
             ) : (
               <>
-                <li className="mx-1">
-                  <Link to="/profile">Profile</Link>
-                </li>
-                <li className="mx-1">
-                  <Link to="/wishlist">Wish List</Link>
-                </li>
-                {!user.paid ? (
+                {" "}
+                {user.match_found ? (
                   <li className="mx-1">
-                    <Link to="/pay">Pay</Link>
+                    <Link to="/chosen">Chosen</Link>
                   </li>
                 ) : (
-                  <div></div>
-                )}
-                {user.profile_specified &&
-                user.wishlist_specified &&
-                user.paid ? (
-                  <li className="mx-1">
-                    <Link to="/choose_list">Choose</Link>
-                  </li>
-                ) : (
-                  <div></div>
+                  <>
+                    <li className="mx-1">
+                      <Link to="/profile">Profile</Link>
+                    </li>
+                    <li className="mx-1">
+                      <Link to="/wishlist">Wish List</Link>
+                    </li>
+                    {!user.paid ? (
+                      <li className="mx-1">
+                        <Link to="/pay">Pay</Link>
+                      </li>
+                    ) : (
+                      <div></div>
+                    )}
+                    {user.profile_specified &&
+                    user.wishlist_specified &&
+                    user.paid ? (
+                      <li className="mx-1">
+                        <Link to="/choose_list">Choose</Link>
+                      </li>
+                    ) : (
+                      <div></div>
+                    )}
+                  </>
                 )}
               </>
             )}
