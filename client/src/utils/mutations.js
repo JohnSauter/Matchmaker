@@ -58,9 +58,7 @@ export const UPDATE_PROFILE = gql`
       aboutMe: $aboutMe
       contactInfo: $contactInfo
     ) {
-      user {
         _id
-      }
     }
   }
 `;
