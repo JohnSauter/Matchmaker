@@ -1,117 +1,127 @@
 /* Profile.js */
 /* Present the seeker's profile and let him modify it.  */
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 //import { Link, useParams } from "react-router-dom";
-//import { useQuery } from "@apollo/client";
-
+import { useQuery } from "@apollo/client";
+import { QUERY_USER } from "../utils/queries";
 //import { useAppContext } from "../utils/GlobalState";
 import { } from "../utils/actions";
 import { } from "../utils/queries";
-import { } from "../utils/mutations";
+import { UPDATE_PROFILE} from "../utils/mutations";
 //import { idbPromise } from "../utils/helpers";
 //import spinner from "../assets/spinner.gif";
 
 export function Profile() {
-  //const [state, dispatch] = useAppContext();
-  
-  const [profileForm, setProfileForm] = useState({
-    gender: "male",
-    age: 100,
-    height: 65,
-    weight: 100,
-    eyes: "brown",
-    hair: "brown",
-    aboutMe: "",
-    contactInfo: "",
-  });
-
-
-  //     handleInputChange = handleInputChange.bind(this);
-  // }
-
-  const handleInputChange = (event) => {
-    const target = event.target;
-    const value = target.value;
-    const name = target.name;
-
-    setProfileForm({
-      ...profileForm,
-      [name]: value,
+    const [updateProfile] = useMutation(UPDATE_PROFILE);
+    //const [state, dispatch] = useAppContext();
+    const { loading, data } = useQuery(QUERY_USER);
+    const [profileForm, setProfileForm] = useState({
+        gender: "",
+        age: 100,
+        height: 65,
+        weight: 100,
+        eyes: "brown",
+        hair: "brown",
+        aboutMe: "",
+        contactInfo: "",
     });
-  }
+    useEffect(() => {
+        if (!loading) {
+            setProfileForm(data.user)
+        }  
+    });
 
-  const handleSubmit = (event) => { 
-    alert("submit");
-  }
+    //     handleInputChange = handleInputChange.bind(this);
+    // }
+
+    const handleInputChange = (event) => {
+        const target = event.target;
+        const value = target.value;
+        const name = target.name;
+
+        setProfileForm({
+            ...profileForm,
+            [name]: value,
+        });
+    }
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        alert("submit");
+        
+    }
 
 
-  return (
-    <form onSubmit={handleSubmit}>
-      <h1>Tell us a little about yourself</h1>
-      <label>
-        What is your gender?:
-        <select value={profileForm.gender} onChange={handleInputChange}>
-          <option value="male">Male</option>
-          <option value="female">Female</option>
-          <option value="nonbinary">Nonbinary</option>
-        </select>
-      </label>
-      <label>
-        What is your age?
-        <input
-          name="ages"
-          type="number"
-          value={profileForm.age}
-          onChange={handleInputChange}
-        />
-      </label>
-      <label>
-        What is your height?
-        <input
-          name="height"
-          type="number"
-          value={profileForm.height}
-          onChange={handleInputChange}
-        />
-      </label>
-      <label>
-        What is your weight?
-        <input
-          name="weight"
-          type="number"
-          value={profileForm.weight}
-          onChange={handleInputChange}
-        />
-      </label>
-      <label>
-        What color are your eyes?
-        <select value={profileForm.value} onChange={handleInputChange}>
-          <option value="brown">Brown</option>
-          <option value="blue">blue</option>
-          <option value="green">green</option>
-          <option value="gray">gray</option>
-        </select>
-      </label>
-      <label>
-        What would you like your match to know about you?
-        <input
-          type="text"
-          value={profileForm.aboutMe}
-          onChange={handleInputChange}
-        />
-      </label>
-      <label>
-        Enter your name:How would you like your match to contact you?
-        <input
-          type="text"
-          value={profileForm.contactInfo}
-          onChange={handleInputChange}
-        />
-      </label>
-      <button type="submit">Submit</button>
-    </form>
-  );
+    return (
+        <> {loading ? <div>Loading...</div> : <form onSubmit={handleSubmit}>
+            <h1>Tell us a little about yourself</h1>
+            <label>
+                What is your gender?:
+                <select name="gender" value={profileForm.gender} onChange={handleInputChange}>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="nonbinary">Nonbinary</option>
+                </select>
+            </label>
+            <label>
+                What is your age?
+                <input
+                    name="age"
+                    type="number"
+                    value={profileForm.age}
+                    onChange={handleInputChange}
+                />
+            </label>
+            <label>
+                What is your height?
+                <input
+                    name="height"
+                    type="number"
+                    value={profileForm.height}
+                    onChange={handleInputChange}
+                />
+            </label>
+            <label>
+                What is your weight?
+                <input
+                    name="weight"
+                    type="number"
+                    value={profileForm.weight}
+                    onChange={handleInputChange}
+                />
+            </label>
+            <label>
+                What color are your eyes?
+                <select name="eyes" value={profileForm.eyes} onChange={handleInputChange}>
+                    <option value="brown">Brown</option>
+                    <option value="blue">blue</option>
+                    <option value="green">green</option>
+                    <option value="gray">gray</option>
+                </select>
+            </label>
+            <label>
+                What would you like your match to know about you?
+                <input
+                    name="aboutMe"
+                    type="text"
+                    value={profileForm.aboutMe}
+                    onChange={handleInputChange}
+                />
+            </label>
+            <label>
+                Enter your name:How would you like your match to contact you?
+                <input
+                    name="contactInfo"
+                    type="text"
+                    value={profileForm.contactInfo}
+                    onChange={handleInputChange}
+                />
+            </label>
+            <button type="submit">Submit</button>
+        </form>}</>
+
+    );
 
 
 }
