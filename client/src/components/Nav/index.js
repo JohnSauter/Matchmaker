@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 import { QUERY_USER } from "../../utils/queries.js";
 
-import cupid_1 from "../../assets/cupid_shooting_arrow.png";
+//import cupid_1 from "../../assets/cupid_shooting_arrow.png";
 import cupid_2 from "../../assets/kisspng-cupid-silhouette-drawing-1000.png";
 
 function Nav() {
