@@ -9,7 +9,9 @@ const mongoose = require("mongoose");
 
 const resolvers = {
   Query: {
-    /* Get information about the current user.  */
+    /* Get information about the current user.  
+     * to simplify the navigator, return null if
+     * there is not a login.  */
     user: async (parent, args, context) => {
       if (context.user) {
         const user = await User.findById(context.user._id).populate(
@@ -17,7 +19,7 @@ const resolvers = {
         );
         return user;
       }
-      throw new AuthenticationError("Must be logged in.");
+      return null;
     },
 
     /* Get all of the potential matches for the logged-in user.  */
