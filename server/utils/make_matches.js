@@ -183,6 +183,12 @@ module.exports = {
               );
             }
             matches_created = matches_created + 1;
+          } else {
+            if (abbreviated_logging) {
+              console.log(
+                "Already have a match for " + user_1.username + " with " + user_2.username + "."
+              )
+            }
           }
         }
       }

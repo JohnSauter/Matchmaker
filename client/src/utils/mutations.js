@@ -117,11 +117,9 @@ export const PAY = gql`
 
 /* Rate a potential match.  */
 export const RATE_A_MATCH = gql`
-  mutation rate_a_match($PotentialMatchId: String!, $rating: Int!) {
-    rate_a_match(PotentialMatchId: $PotentialMatchId, rating: $rating) {
-      potentialmatch {
-        _id
-      }
+  mutation rateAMatch($PotentialMatchId: ID!, $rating: Int!) {
+    rateAMatch(PotentialMatchId: $PotentialMatchId, rating: $rating) {
+      _id
     }
   }
 `;
