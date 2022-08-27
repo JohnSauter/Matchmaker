@@ -79,9 +79,9 @@ export const QUERY_USER = gql`
 
 export const QUERY_ALL_MY_POTENTIAL_MATCHES = gql`
   query all_my_potential_matches {
-    PotentialMatch {
+    allMyPotentialMatches {
       _id
-      user1 {
+      User1 {
         _id
         username
         email
@@ -115,7 +115,7 @@ export const QUERY_ALL_MY_POTENTIAL_MATCHES = gql`
         paid
         match_found
       }
-      user2 {
+      User2 {
         _id
         username
         email
