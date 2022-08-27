@@ -11,7 +11,6 @@ import { UPDATE_PROFILE } from "../utils/mutations";
 
 export function Profile() {
   const [updateProfile] = useMutation(UPDATE_PROFILE, {
-    // Refetches two queries after mutation completes
     refetchQueries: [{ query: QUERY_USER }],
   });
   const { loading, data } = useQuery(QUERY_USER);

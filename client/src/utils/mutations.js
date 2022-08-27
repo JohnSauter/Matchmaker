@@ -108,9 +108,7 @@ export const UPDATE_WISHLIST = gql`
 export const PAY = gql`
   mutation pay($card_number: String!) {
     pay(card_number: $card_number) {
-      user {
-        _id
-      }
+      _id
     }
   }
 `;
