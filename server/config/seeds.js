@@ -216,7 +216,7 @@ db.once("open", async () => {
     weight: 170,
     eyes: "brown",
     hair: "brown",
-    aboutMe: "I am a mamber of the College of Augurs",
+    aboutMe: "I am a member of the College of Augurs",
     contactInfo: "mantony@systemeyescomputerstore.com",
     wishlist_specified: true,
     wishgen_male: true,

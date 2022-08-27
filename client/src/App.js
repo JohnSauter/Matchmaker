@@ -11,7 +11,7 @@ import { setContext } from "@apollo/client/link/context";
 import Nav from "./components/Nav";
 import { AppProvider } from "./utils/GlobalState";
 
-const {Front} = require("./pages/Front.js");
+const { Front } = require("./pages/Front.js");
 const { Login } = require("./pages/Login.js");
 const { Signup } = require("./pages/Signup.js");
 const { Profile } = require("./pages/Profile.js");
@@ -23,7 +23,6 @@ const { ChooseList } = require("./pages/Choose_list.js");
 const { ChooseOne } = require("./pages/Choose_one.js");
 const { Chosen } = require("./pages/Chosen.js");
 const { NoMatch } = require("./pages/NoMatch.js");
-
 
 const httpLink = createHttpLink({
   uri: "/graphql",
@@ -61,10 +60,12 @@ function App() {
               <Route path="/rate_list" element={<RateList />} />
               <Route path="/rate_one/:PotentialMatchId" element={<RateOne />} />
               <Route path="/choose_list" element={<ChooseList />} />
-              <Route path="/choose_one" element={<ChooseOne />} />
+              <Route
+                path="/choose_one/:PotentialMatchId"
+                element={<ChooseOne />}
+              />
               <Route path="/chosen" element={<Chosen />} />
               <Route path="*" element={<NoMatch />} />
-
             </Routes>
           </AppProvider>
         </div>

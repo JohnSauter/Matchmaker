@@ -22,6 +22,11 @@ export function RateList() {
   }
   const potential_matches = data.unRatedMatches;
 
+  /* If there are no matches, say so.  */
+  if (potential_matches.length === 0) {
+    return <p>No unrated matches.</p>
+  }
+
   /* List the matches.  */
   return (
     <ul>
