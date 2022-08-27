@@ -12,7 +12,8 @@ import { CHOOSE_A_MATCH } from "../utils/mutations";
 
 export function ChooseOne() {
   const params = useParams();
-  const { loading, error, data } = useQuery(QUERY_ALL_MY_POTENTIAL_MATCHES);
+  const match_query = useQuery(QUERY_ALL_MY_POTENTIAL_MATCHES);
+  const user_query = useQuery(QUERY_USER);
   const [choose_a_match] = useMutation(CHOOSE_A_MATCH, {
     refetchQueries: [
       { query: QUERY_ALL_MY_POTENTIAL_MATCHES },
@@ -25,10 +26,11 @@ export function ChooseOne() {
 
   const navigate = useNavigate();
 
-  if (loading) {
+  /* Wait for both queries to complete.  */
+  if (match_query.loading || user_query.loading) {
     return <p>Loading...</p>;
   }
-  if (error) {
+  if (match_query.error || user_query.error) {
     return <p>Error</p>;
   }
 
@@ -36,13 +38,27 @@ export function ChooseOne() {
     navigate("/");
   };
 
-  const potential_matches = data.allMyPotentialMatches;
+  const potential_matches = match_query.data.allMyPotentialMatches;
   const match_id = params.PotentialMatchId;
 
   /* Find the specified match.  */
   const potential_match = potential_matches.filter(
     (element) => element._id === match_id
   )[0];
+
+  /* Figure out which matched user isn't us.  */
+  let other_user = null;
+  const user1 = potential_match.User1;
+  const user1_id = user1._id;
+  const user2 = potential_match.User2;
+  const user2_id = user2._id;
+  const user_id = user_query.data.user._id;
+  if (user_id === user1_id) {
+    other_user = user2;
+  }
+  if (user_id === user2_id) {
+    other_user = user1;
+  }
 
   /* Present the information about one of the seekers.  */
   function DisplayOneUser(props) {
@@ -96,20 +112,21 @@ export function ChooseOne() {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    const chooseResponse = await choose_a_match({
-      variables: {
-        PotentialMatchId: match_id,
-      },
-    });
-    console.log(chooseResponse);
+    if (chooseForm.chosen) {
+      const chooseResponse = await choose_a_match({
+        variables: {
+          PotentialMatchId: match_id,
+        },
+      });
+      console.log(chooseResponse);
+    }
     goHome();
   };
 
   return (
     <div>
       <p>Choose_one</p>
-      <DisplayOneUser user={potential_match.User1} />
-      <DisplayOneUser user={potential_match.User2} />
+      <DisplayOneUser user={other_user} />
 
       <div className="container my-1">
         <form onSubmit={handleSubmit}>
