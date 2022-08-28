@@ -1,16 +1,37 @@
-import { React } from "react";
+/* index.js within Nav */
+
+import { React, useEffect } from "react";
 import Auth from "../../utils/auth.js";
 import { Link } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 import { QUERY_USER } from "../../utils/queries.js";
+import { useAppContext } from "../../utils/GlobalState.js";
+import { UPDATE_USER } from "../../utils/actions.js";
 
 //import cupid_1 from "../../assets/cupid_shooting_arrow.png";
 import cupid_2 from "../../assets/kisspng-cupid-silhouette-drawing-1000.png";
 
 function Nav() {
-  /* This query will return null if there is no user logged in,
+  const [state, dispatch] = useAppContext();
+
+  /* The following query will return null for the user
+   * if there is no user logged in,
    * or the user information if there is.  */
   const { loading, error, data } = useQuery(QUERY_USER);
+
+  /* Make sure global storage has a current copy
+   * of the user.  The update_user action sets the
+   * user_valid flag, so we don't get into an infinite
+   * loop trying to keep this component refreshed.
+   */
+  useEffect(() => {
+    if (!loading && !state.user_valid) {
+      dispatch({
+        type: UPDATE_USER,
+        user: data.user,
+      });
+    }
+  }, [loading, data?.user, state.user_valid, dispatch]);
 
   function showNavigation() {
     if (loading) {
