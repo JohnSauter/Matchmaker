@@ -12,39 +12,39 @@ export function Wishlist() {
     refetchQueries: [{ query: QUERY_USER }],
   });
   const { loading, data } = useQuery(QUERY_USER);
-  const [wishlistForm, setWishListForm] = useState({
-    wishgen_male: false,
-    wishgen_female: false,
-    wishgen_nonbinary: false,
+  const [wishlistForm, setWishlistForm] = useState({
+    wishgen_male: true,
+    wishgen_female: true,
+    wishgen_nonbinary: true,
     minage: 18,
     maxage: 100,
     minheight: 0,
     maxheight: 100,
     minweight: 0,
     maxweight: 1000,
-    wisheye_brown: false,
-    wisheye_blue: false,
-    wisheye_gray: false,
-    wisheye_green: false,
-    wisheye_hazel: false,
-    wishhair_black: false,
-    wishhair_brown: false,
-    wishhair_blond: false,
-    wishhair_red: false,
+    wisheye_brown: true,
+    wisheye_blue: true,
+    wisheye_gray: true,
+    wisheye_green: true,
+    wisheye_hazel: true,
+    wishhair_black: true,
+    wishhair_brown: true,
+    wishhair_blond: true,
+    wishhair_red: true,
   });
 
   useEffect(() => {
     if (!loading) {
-      setWishListForm(data.user);
+      setWishlistForm(data.user);
     }
   }, [loading, data?.user]);
 
   const handleInputChange = (event) => {
     const target = event.target;
-    const value = target.value;
+    const value = target.type === 'checkbox' ? target.checked : target.value;
     const name = target.name;
 
-    setWishListForm({
+    setWishlistForm({
       ...wishlistForm,
       [name]: value,
     });
@@ -71,6 +71,7 @@ export function Wishlist() {
         wishhair_brown: wishlistForm.wishhair_brown,
         wishhair_blond: wishlistForm.wishhair_blond,
         wishhair_red: wishlistForm.wishhair_red,
+        wishlist_specified:true
       },
     });
     console.log(updateResponse);
@@ -83,6 +84,36 @@ export function Wishlist() {
       ) : (
         <form onSubmit={handleSubmit}>
           <h1>Tell us about what you are seeking in your match.</h1>
+
+          <p>Please uncheck any genders that are not acceptable.</p>
+          <label>
+            Male
+            <input
+              name="wishgen_male"
+              type="checkbox"
+              checked={wishlistForm.wishgen_male}
+              onChange={handleInputChange}
+            />
+          </label>
+          <label>
+            Female
+            <input
+              name="wishgen_female"
+              type="checkbox"
+              checked={wishlistForm.wishgen_female}
+              onChange={handleInputChange}
+            />
+          </label>
+          <label>
+            Nonbinary
+            <input
+              name="wishgen_nonbinary"
+              type="checkbox"
+              checked={wishlistForm.wishgen_nonbinary}
+              onChange={handleInputChange}
+            />
+          </label>
+
           <label>
             What is the minimum age you would prefer in you match? You may choose an age from 18-100.
             <input
@@ -134,6 +165,90 @@ export function Wishlist() {
               name="maxweight"
               type="number"
               value={wishlistForm.maxweight}
+              onChange={handleInputChange}
+            />
+          </label>
+          <p>Please uncheck any eye color that is not acceptable.</p>
+          <label>
+            Brown
+            <input
+              name="wisheye_brown"
+              type="checkbox"
+              checked={wishlistForm.wisheye_brown}
+              onChange={handleInputChange}
+            />
+          </label>
+          <label>
+            Blue
+            <input
+              name="wisheye_blue"
+              type="checkbox"
+              checked={wishlistForm.wisheye_blue}
+              onChange={handleInputChange}
+            />
+          </label>
+          <label>
+            Gray
+            <input
+              name="wisheye_gray"
+              type="checkbox"
+              checked={wishlistForm.wisheye_gray}
+              onChange={handleInputChange}
+            />
+          </label>
+          <label>
+            Green
+            <input
+              name="wisheye_green"
+              type="checkbox"
+              checked={wishlistForm.wisheye_green}
+              onChange={handleInputChange}
+            />
+          </label>
+          <label>
+            Hazel
+            <input
+              name="wisheye_hazel"
+              type="checkbox"
+              checked={wishlistForm.wisheye_hazel}
+              onChange={handleInputChange}
+            />
+          </label>
+          <p>Please uncheck any hair color that is not acceptable.</p>
+          <label>
+            Black
+            <input
+              name="wishhair_black"
+              type="checkbox"
+              checked={wishlistForm.wishhair_black}
+              onChange={handleInputChange}
+            />
+          </label>
+          <label>
+            Brown
+            <input
+              name="wishhair_brown"
+              type="checkbox"
+              checked={true}
+              value={wishlistForm.wishhair_brown}
+              onChange={handleInputChange}
+            />
+          </label>
+          <label>
+            Blond
+            <input
+              name="wishhair_blond"
+              type="checkbox"
+              checked={wishlistForm.wishhair_blond}
+              onChange={handleInputChange}
+            />
+          </label>
+          <label>
+            Red
+            <input
+              name="wishhair_red"
+              type="checkbox"
+              checked={wishlistForm.wishhair_red}
               onChange={handleInputChange}
             />
           </label>
