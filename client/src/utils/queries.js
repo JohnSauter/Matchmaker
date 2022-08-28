@@ -21,6 +21,7 @@ export const QUERY_USER = gql`
       wishlist_specified
       wishgen_male
       wishgen_female
+      wishgen_nonbinary
       minage
       maxage
       minheight
@@ -29,7 +30,7 @@ export const QUERY_USER = gql`
       maxweight
       wisheye_brown
       wisheye_blue
-      whisheye_gray
+      wisheye_gray
       wisheye_green
       wisheye_hazel
       wishhair_black
@@ -55,6 +56,7 @@ export const QUERY_USER = gql`
         wishlist_specified
         wishgen_male
         wishgen_female
+        wishgen_nonbinary
         minage
         maxage
         minheight
@@ -63,7 +65,7 @@ export const QUERY_USER = gql`
         maxweight
         wisheye_brown
         wisheye_blue
-        whisheye_gray
+        wisheye_gray
         wisheye_green
         wisheye_hazel
         wishhair_black
@@ -97,6 +99,7 @@ export const QUERY_ALL_MY_POTENTIAL_MATCHES = gql`
         wishlist_specified
         wishgen_male
         wishgen_female
+        wishgen_nonbinary
         minage
         maxage
         minheight
@@ -105,7 +108,7 @@ export const QUERY_ALL_MY_POTENTIAL_MATCHES = gql`
         maxweight
         wisheye_brown
         wisheye_blue
-        whisheye_gray
+        wisheye_gray
         wisheye_green
         wisheye_hazel
         wishhair_black
@@ -131,6 +134,7 @@ export const QUERY_ALL_MY_POTENTIAL_MATCHES = gql`
         wishlist_specified
         wishgen_male
         wishgen_female
+        wishgen_nonbinary
         minage
         maxage
         minheight
@@ -139,7 +143,7 @@ export const QUERY_ALL_MY_POTENTIAL_MATCHES = gql`
         maxweight
         wisheye_brown
         wisheye_blue
-        whisheye_gray
+        wisheye_gray
         wisheye_green
         wisheye_hazel
         wishhair_black
@@ -183,7 +187,7 @@ export const QUERY_UNRATED_MATCHES = gql`
         maxweight
         wisheye_brown
         wisheye_blue
-        whisheye_gray
+        wisheye_gray
         wisheye_green
         wisheye_hazel
         wishhair_black
@@ -218,7 +222,7 @@ export const QUERY_UNRATED_MATCHES = gql`
         maxweight
         wisheye_brown
         wisheye_blue
-        whisheye_gray
+        wisheye_gray
         wisheye_green
         wisheye_hazel
         wishhair_black

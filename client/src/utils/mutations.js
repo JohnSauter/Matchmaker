@@ -65,7 +65,10 @@ export const UPDATE_PROFILE = gql`
 
 /* Update a seeker's wish list.  */
 export const UPDATE_WISHLIST = gql`
-  mutation updateWishlist(
+  mutation updateWishList(
+    $wishgen_male: Boolean!
+    $wishgen_female: Boolean!
+    $wishgen_nonbinary: Boolean!
     $minage: Int!
     $maxage: Int!
     $minheight: Int!
@@ -74,7 +77,7 @@ export const UPDATE_WISHLIST = gql`
     $maxweight: Int!
     $wisheye_brown: Boolean!
     $wisheye_blue: Boolean!
-    $whisheye_gray: Boolean!
+    $wisheye_gray: Boolean!
     $wisheye_green: Boolean!
     $wisheye_hazel: Boolean!
     $wishhair_black: Boolean!
@@ -82,7 +85,10 @@ export const UPDATE_WISHLIST = gql`
     $wishhair_blond: Boolean!
     $wishhair_red: Boolean!
   ) {
-    updateWishlist(
+    updateWishList(
+      wishgen_male: $wishgen_male
+      wishgen_female: $wishgen_female
+      wishgen_nonbinary: $wishgen_nonbinary
       minage: $minage
       maxage: $maxage
       minheight: $minheight
@@ -91,7 +97,7 @@ export const UPDATE_WISHLIST = gql`
       maxweight: $maxweight
       wisheye_brown: $wisheye_brown
       wisheye_blue: $wisheye_blue
-      wisheye_gray: $whisheye_gray
+      wisheye_gray: $wisheye_gray
       wisheye_green: $wisheye_green
       wisheye_hazel: $wisheye_hazel
       wishhair_black: $wishhair_black

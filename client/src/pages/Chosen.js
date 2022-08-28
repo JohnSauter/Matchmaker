@@ -32,9 +32,6 @@ export function Chosen() {
     navigate("/");
   };
 
-  if (loading) {
-    return <p>Loading...</p>;
-  }
   const user = data.user.found_match;
   if (!user) {
     return <p>No user.</p>;

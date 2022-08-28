@@ -33,7 +33,7 @@ const typeDefs = gql`
     maxweight: Int
     wisheye_brown: Boolean
     wisheye_blue: Boolean
-    whisheye_gray: Boolean
+    wisheye_gray: Boolean
     wisheye_green: Boolean
     wisheye_hazel: Boolean
     wishhair_black: Boolean
@@ -66,6 +66,7 @@ const typeDefs = gql`
     wishlist_specified: Boolean!
     wishgen_male: Boolean
     wishgen_female: Boolean
+    wishgen_nonbinary: Boolean
     minage: Int
     maxage: Int
     minheight: Int
@@ -74,7 +75,7 @@ const typeDefs = gql`
     maxweight: Int
     wisheye_brown: Boolean
     wisheye_blue: Boolean
-    whisheye_gray: Boolean
+    wisheye_gray: Boolean
     wisheye_green: Boolean
     wisheye_hazel: Boolean
     wishhair_black: Boolean
@@ -130,7 +131,9 @@ const typeDefs = gql`
     ): FullUser
 
     updateWishList(
-      wishgen: String!
+      wishgen_male: Boolean!
+      wishgen_female: Boolean!
+      wishgen_nonbinary: Boolean!
       minage: Int!
       maxage: Int!
       minheight: Int!
@@ -139,7 +142,7 @@ const typeDefs = gql`
       maxweight: Int!
       wisheye_brown: Boolean!
       wisheye_blue: Boolean!
-      whisheye_gray: Boolean!
+      wisheye_gray: Boolean!
       wisheye_green: Boolean!
       wisheye_hazel: Boolean!
       wishhair_black: Boolean!
