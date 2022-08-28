@@ -8,7 +8,7 @@ import { } from "../utils/actions";
 
 
 export function Wishlist() {
-  const [updateWishlist] = useMutation(UPDATE_WISHLIST, {
+  const [updateWishList] = useMutation(UPDATE_WISHLIST, {
     refetchQueries: [{ query: QUERY_USER }],
   });
   const { loading, data } = useQuery(QUERY_USER);
@@ -51,7 +51,7 @@ export function Wishlist() {
   };
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const updateResponse = await updateProfile({
+    const updateResponse = await updateWishList({
       variables: {
         wishgen_male: wishlistForm.wishgen_male,
         wishgen_female: wishlistForm.wishgen_female,
@@ -77,8 +77,69 @@ export function Wishlist() {
   };
 
   return (
-    <div>
-      <p>Wishlist</p>
-    </div >
+    <>
+      {loading ? (
+        <div>Loading...</div>
+      ) : (
+        <form onSubmit={handleSubmit}>
+          <h1>Tell us about what you are seeking in your match.</h1>
+          <label>
+            What is the minimum age you would prefer in you match? You may choose an age from 18-100.
+            <input
+              name="minage"
+              type="number"
+              value={wishlistForm.minage}
+              onChange={handleInputChange}
+            />
+          </label>
+          <label>
+            What is the maximum age you would prefer in you match? You may choose an age from 18-100.
+            <input
+              name="maxage"
+              type="number"
+              value={wishlistForm.maxage}
+              onChange={handleInputChange}
+            />
+          </label>
+          <label>
+            What is the minimum height you would prefer in you match? You may choose a height of 0-100 inches.
+            <input
+              name="minheight"
+              type="number"
+              value={wishlistForm.minheight}
+              onChange={handleInputChange}
+            />
+          </label>
+          <label>
+            What is the maximum height you would prefer in you match? You may choose a height of 0-100 inches.
+            <input
+              name="maxheight"
+              type="number"
+              value={wishlistForm.maxheight}
+              onChange={handleInputChange}
+            />
+          </label>
+          <label>
+            What is the minimum weight you would prefer in you match? You may choose a weight of 0-1000 pounds.
+            <input
+              name="minweight"
+              type="number"
+              value={wishlistForm.minweight}
+              onChange={handleInputChange}
+            />
+          </label>
+          <label>
+            What is the maximum weight you would prefer in you match? You may choose a weight of 0-100 inches.
+            <input
+              name="maxweight"
+              type="number"
+              value={wishlistForm.maxweight}
+              onChange={handleInputChange}
+            />
+          </label>
+          <button type="submit">Submit</button>
+        </form>
+      )}
+    </>
   );
 }
