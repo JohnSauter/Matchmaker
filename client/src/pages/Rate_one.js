@@ -43,16 +43,16 @@ export function RateOne() {
   function DisplayOneUser(props) {
     const user = props.user;
     return (
-      <>
-        <p>{user.username}</p>
-        <p>gender: {user.gender}</p>
-        <p>age: {user.age}</p>
-        <p>height: {user.height}</p>
-        <p>weight: {user.weight}</p>
-        <p>eyes: {user.eyes}</p>
-        <p>hair: {user.hair}</p>
-        <p>About: {user.aboutMe}</p>
-      </>
+      <ul>
+        <li>Name: {user.username}</li>
+        <li>gender: {user.gender}</li>
+        <li>age: {user.age}</li>
+        <li>height: {user.height}</li>
+        <li>weight: {user.weight}</li>
+        <li>eyes: {user.eyes}</li>
+        <li>hair: {user.hair}</li>
+        <li>About: {user.aboutMe}</li>
+      </ul>
     );
   }
 
@@ -81,12 +81,14 @@ export function RateOne() {
   };
   return (
     <div>
-      <p>Rate_one</p>
+      <h2>Rate this potential match.</h2>
+      <h3>Person 1:</h3>
       <DisplayOneUser user={potential_match.User1} />
+      <h3>Person 2:</h3>
       <DisplayOneUser user={potential_match.User2} />
       <form onSubmit={handleSubmit}>
         <label>
-          Rate this match:
+          How would you rate this match from 0 to 10?:
           <input
             name="rating"
             type="number"

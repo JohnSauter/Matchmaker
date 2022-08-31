@@ -61,82 +61,103 @@ export function Profile() {
   return (
     <>
       {loading ? (
-        <div>Loading...</div>
+        <p>Loading...</p>
       ) : (
-        <form onSubmit={handleSubmit}>
-          <h1>Tell us a little about yourself</h1>
-          <label>
-            What is your gender?:
-            <select
-              name="gender"
-              value={profileForm.gender}
-              onChange={handleInputChange}
-            >
-              <option value="male">Male</option>
-              <option value="female">Female</option>
-              <option value="nonbinary">Nonbinary</option>
-            </select>
-          </label>
-          <label>
-            What is your age?
-            <input
-              name="age"
-              type="number"
-              value={profileForm.age}
-              onChange={handleInputChange}
-            />
-          </label>
-          <label>
-            What is your height?
-            <input
-              name="height"
-              type="number"
-              value={profileForm.height}
-              onChange={handleInputChange}
-            />
-          </label>
-          <label>
-            What is your weight?
-            <input
-              name="weight"
-              type="number"
-              value={profileForm.weight}
-              onChange={handleInputChange}
-            />
-          </label>
-          <label>
-            What color are your eyes?
-            <select
-              name="eyes"
-              value={profileForm.eyes}
-              onChange={handleInputChange}
-            >
-              <option value="brown">Brown</option>
-              <option value="blue">blue</option>
-              <option value="green">green</option>
-              <option value="gray">gray</option>
-            </select>
-          </label>
-          <label>
-            What would you like your match to know about you?
-            <input
-              name="aboutMe"
-              type="text"
-              value={profileForm.aboutMe}
-              onChange={handleInputChange}
-            />
-          </label>
-          <label>
-            How would you like your match to contact you?
-            <input
-              name="contactInfo"
-              type="text"
-              value={profileForm.contactInfo}
-              onChange={handleInputChange}
-            />
-          </label>
-          <button type="submit">Submit</button>
-        </form>
+        <div className="container my-1">
+          <form className="choice_form" onSubmit={handleSubmit}>
+            <h3>Tell us a little about yourself.</h3>
+            <div className="flex-row flex-form-item my-1">
+              <label>
+                What is your gender? </label>
+                <select
+                  name="gender"
+                  value={profileForm.gender}
+                  onChange={handleInputChange}
+                  autofocus
+                >
+                  <option value="male">Male</option>
+                  <option value="female">Female</option>
+                  <option value="nonbinary">Nonbinary</option>
+                </select>
+            </div>
+
+            <div className="flex-row flex-form-item my-1">
+            <label>
+              What is your age?</label>
+              <input
+                name="age"
+                type="number"
+                value={profileForm.age}
+                onChange={handleInputChange}
+              />
+            </div>
+
+            <div className="flex-row flex-form-item my-1">
+            <label>
+              What is your height? </label>
+              <input
+                name="height"
+                type="number"
+                value={profileForm.height}
+                onChange={handleInputChange}
+              />
+            </div>
+
+            <div className="flex-row flex-form-item my-1">
+            <label>
+              What is your weight? </label>
+              <input
+                name="weight"
+                type="number"
+                value={profileForm.weight}
+                onChange={handleInputChange}
+              />
+            </div>
+
+            <div className="flex-row flex-form-item my-1">
+            <label>
+              What color are your eyes?</label>
+              <select
+                name="eyes"
+                value={profileForm.eyes}
+                onChange={handleInputChange}
+              >
+                <option value="brown">Brown</option>
+                <option value="blue">blue</option>
+                <option value="green">green</option>
+                <option value="gray">gray</option>
+              </select>
+            </div>
+
+            <div className="flex-row flex-form-item my-1">
+            <label>
+              What would you like your match to know about you?</label>
+              <textarea
+                name="aboutMe"
+                type="text"
+                rows="7"
+                cols="50"
+                value={profileForm.aboutMe}
+                onChange={handleInputChange}
+              />
+            </div>
+
+            <div className="flex-row flex-form-item my-1">
+            <label>
+              How would you like your match to contact you?</label>
+              <textarea
+                name="contactInfo"
+                type="text"
+                rows="7"
+                cols="50"
+                value={profileForm.contactInfo}
+                onChange={handleInputChange}
+              />
+            </div>
+
+            <button type="submit">Submit</button>
+          </form>
+        </div>
       )}
     </>
   );

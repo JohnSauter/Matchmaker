@@ -124,6 +124,10 @@ form {
   width: 40%;
 }
 
+.choice_form {
+  width: 100%
+}
+
 input {
   font-size: 1rem;
   padding: 0.25rem;
@@ -156,6 +160,10 @@ input:focus {
 
 .flex-end {
   justify-content: flex-end;
+}
+
+.flex-form-items {
+  justify-content: space-evenly;
 }
 
 .mx-1 {

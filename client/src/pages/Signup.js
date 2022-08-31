@@ -103,17 +103,15 @@ export function Signup(props) {
         </div>
 
         <div className="flex-row space-between my-2">
-          <label htmlFor="matchmaker">
-            Matchmaker?
-            <select
-              name="matchmaker"
-              id="matchmaker"
-              onChange={handleBooleanChange}
-            >
-              <option value={false}>no</option>
-              <option value={true}>yes</option>
-            </select>
-          </label>
+          <label htmlFor="matchmaker">Matchmaker?</label>
+          <select
+            name="matchmaker"
+            id="matchmaker"
+            onChange={handleBooleanChange}
+          >
+            <option value={false}>no</option>
+            <option value={true}>yes</option>
+          </select>
         </div>
 
         <div className="flex-row flex-end">
@@ -123,4 +121,3 @@ export function Signup(props) {
     </div>
   );
 }
-
