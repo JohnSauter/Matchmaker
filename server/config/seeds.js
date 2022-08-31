@@ -175,9 +175,10 @@ db.once("open", async () => {
     height: 65,
     weight: 90,
 
-    eyes: 'blue',
-    hair: 'red',
-    aboutMe: 'I am used to getting my way. I am looking for someone who will treat me like the goddess that I am.',
+    eyes: "blue",
+    hair: "red",
+    aboutMe:
+      "I am used to getting my way. I am looking for someone who will treat me like the goddess that I am.",
     contactInfo: "'cphilopato@systemeyescomputerstore.com'",
 
     wishlist_specified: true,
@@ -279,7 +280,7 @@ db.once("open", async () => {
     match_found: false,
     found_match: null,
   });
-  
+
   await User.create({
     username: "Worf Martok",
     email: "easternexposuredev@systemeyescomputerstore.com",
@@ -315,6 +316,44 @@ db.once("open", async () => {
     wishhair_blond: true,
     wishhair_red: true,
     paid: true,
+    match_found: false,
+    found_match: null,
+  });
+
+  await User.create({
+    username: "Ebenezer Scrooge",
+    email: "Ebenezer_Scrooge@systemeyescomputerstore.com",
+    password: "humbug",
+    matchmaker: false,
+    profile_specified: true,
+    gender: "male",
+    age: 70,
+    height: 71,
+    weight: 190,
+    eyes: "brown",
+    hair: "brown",
+    aboutMe: "I despise Christmas and all it stands for.",
+    contactInfo: "Ebenezer_Scrooge@systemeyescomputerstore.com",
+    wishlist_specified: true,
+    wishgen_male: false,
+    wishgen_female: false,
+    wishgen_nonbinary: false,
+    minage: 65,
+    maxage: 70,
+    minheight: 68,
+    maxheight: 72,
+    minweight: 150,
+    maxweight: 200,
+    wisheye_brown: false,
+    wisheye_blue: false,
+    wisheye_gray: false,
+    wisheye_green: false,
+    wisheye_hazel: false,
+    wishhair_black: false,
+    wishhair_brown: false,
+    wishhair_blond: false,
+    wishhair_red: false,
+    paid: false,
     match_found: false,
     found_match: null,
   });

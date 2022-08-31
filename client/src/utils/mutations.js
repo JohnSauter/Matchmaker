@@ -113,9 +113,7 @@ export const UPDATE_WISHLIST = gql`
 /* Pay us for suggesting a match.  */
 export const PAY = gql`
   mutation pay {
-    pay {
-      ID
-    }
+    pay 
   }
 `;
 

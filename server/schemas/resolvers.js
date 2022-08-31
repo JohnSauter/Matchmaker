@@ -380,10 +380,10 @@ const resolvers = {
       }
 
       /* Invoke the credit card payment software.  */
-
-      const stripe_session_id = collect_payment(context);
-
-
+      const collect_result = await collect_payment(context);
+      if (collect_result.success != 1) {
+        return collect_result.message;
+      }
 
       /* If the charge was successful, flag the seeker as having paid.
        */
@@ -401,7 +401,7 @@ const resolvers = {
        */
       await match_recompute([user_id]);
 
-      return stripe_session_id;
+      return collect_result.stripe_session_id;
     },
 
     /* The seeker has found a companion.  */

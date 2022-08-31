@@ -56,7 +56,7 @@ function App() {
               <Route path="/signup" element={<Signup />} />
               <Route path="/profile" element={<Profile />} />
               <Route path="/wishlist" element={<Wishlist />} />
-              <Route path="/pay" element={<Pay />} />
+              <Route path="/pay/:condition" element={<Pay />} />
               <Route path="/rate_list" element={<RateList />} />
               <Route path="/rate_one/:PotentialMatchId" element={<RateOne />} />
               <Route path="/choose_list" element={<ChooseList />} />
