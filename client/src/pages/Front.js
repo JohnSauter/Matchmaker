@@ -3,15 +3,12 @@
  * upon login or signup.  */
 
 //import React, { useEffect, useState } from "react";
-//import { Link, useParams } from "react-router-dom";
+//import { useNavigate } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 import { QUERY_USER } from "../utils/queries.js";
 
 //import { useAppContext } from "../utils/GlobalState";
 
-import {} from "../utils/actions";
-import {} from "../utils/queries";
-import {} from "../utils/mutations";
 //import { idbPromise } from "../utils/helpers";
 //import spinner from "../assets/spinner.gif";
 
@@ -26,6 +23,7 @@ const { Chosen } = require("./Chosen.js");
 export function Front() {
   const { loading, error, data } = useQuery(QUERY_USER);
   //const [state, dispatch] = useAppContext();
+  //const navigate = useNavigate();
   if (loading) {
     return <Login />;
   }
