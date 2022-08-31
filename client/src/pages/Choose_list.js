@@ -29,6 +29,10 @@ export function ChooseList() {
 
   /* List the matches.  */
   return (
+    <>
+    <h3>Here are the matches that have been approved
+      by a matchmaker.  Click on one to see details.
+    </h3>
     <ul>
       {potential_matches.map((potential_match) => (
         <li key={potential_match._id}>
@@ -39,5 +43,6 @@ export function ChooseList() {
         </li>
       ))}
     </ul>
+    </>
   );
 }

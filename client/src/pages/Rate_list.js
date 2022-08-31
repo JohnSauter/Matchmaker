@@ -3,6 +3,7 @@
  * so a matchmaker can select one for closer examination.  */
 
 //import React, { useEffect, useState } from "react";
+import Jumbotron from "../components/Jumbotron";
 import { Link } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 import { QUERY_UNRATED_MATCHES } from "../utils/queries.js";
@@ -24,11 +25,16 @@ export function RateList() {
 
   /* If there are no matches, say so.  */
   if (potential_matches.length === 0) {
-    return <p>No unrated matches.</p>
+    return (
+      <Jumbotron>
+        <h1>There are no potential matches to rate.</h1>
+      </Jumbotron>
+    );
   }
 
   /* List the matches.  */
-  return (
+  return (<>
+  <h2>Click on a potential match to see its details.</h2>
     <ul>
       {potential_matches.map((potential_match) => (
         <li key={potential_match._id}>
@@ -39,5 +45,6 @@ export function RateList() {
         </li>
       ))}
     </ul>
+    </>
   );
 }

@@ -64,16 +64,16 @@ export function ChooseOne() {
   function DisplayOneUser(props) {
     const user = props.user;
     return (
-      <>
-        <p>{user.username}</p>
-        <p>gender: {user.gender}</p>
-        <p>age: {user.age}</p>
-        <p>height: {user.height}</p>
-        <p>weight: {user.weight}</p>
-        <p>eyes: {user.eyes}</p>
-        <p>hair: {user.hair}</p>
-        <p>About: {user.aboutMe}</p>
-      </>
+      <ul>
+        <li>Name: {user.username}</li>
+        <li>gender: {user.gender}</li>
+        <li>age: {user.age}</li>
+        <li>height: {user.height}</li>
+        <li>weight: {user.weight}</li>
+        <li>eyes: {user.eyes}</li>
+        <li>hair: {user.hair}</li>
+        <li>About: {user.aboutMe}</li>
+      </ul>
     );
   }
 
@@ -125,19 +125,22 @@ export function ChooseOne() {
 
   return (
     <div>
-      <p>Choose_one</p>
+      <h3>Here is a person you might be matched with.</h3>
       <DisplayOneUser user={other_user} />
+      <ul>
+        <li>Matchmaker rating: {potential_match.rating}</li>
+      </ul>
 
       <div className="container my-1">
         <form onSubmit={handleSubmit}>
           <div className="flex-row space-between my-2">
             <label htmlFor="choose_one">
-              Do you choose this one?
+              Would you like to be matched to this person?</label>
               <select name="chosen" id="chosen" onChange={handleBooleanChange}>
                 <option value={false}>no</option>
                 <option value={true}>yes</option>
               </select>
-            </label>
+            
           </div>
 
           <div className="flex-row flex-end">

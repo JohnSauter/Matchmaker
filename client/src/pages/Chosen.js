@@ -40,17 +40,17 @@ export function Chosen() {
   function DisplayOneUser(props) {
     const user = props.user;
     return (
-      <>
-        <p>{user.username}</p>
-        <p>gender: {user.gender}</p>
-        <p>age: {user.age}</p>
-        <p>height: {user.height}</p>
-        <p>weight: {user.weight}</p>
-        <p>eyes: {user.eyes}</p>
-        <p>hair: {user.hair}</p>
-        <p>About: {user.aboutMe}</p>
-        <p>Contact information: {user.contactInfo}</p>
-      </>
+      <ul>
+        <li>Name: {user.username}</li>
+        <li>gender: {user.gender}</li>
+        <li>age: {user.age}</li>
+        <li>height: {user.height}</li>
+        <li>weight: {user.weight}</li>
+        <li>eyes: {user.eyes}</li>
+        <li>hair: {user.hair}</li>
+        <li>About: {user.aboutMe}</li>
+        <li>Contact information: {user.contactInfo}</li>
+      </ul>
     );
   }
 
@@ -64,6 +64,7 @@ export function Chosen() {
 
   return (
     <div>
+      <h2>Here is the person you have been matched with.</h2>
       <DisplayOneUser user={user} />
 
       <div className="container my-1">

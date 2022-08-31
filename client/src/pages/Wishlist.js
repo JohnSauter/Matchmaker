@@ -4,8 +4,7 @@ import React, { useEffect, useState } from "react";
 import { useQuery, useMutation } from "@apollo/client";
 import { QUERY_USER } from "../utils/queries";
 import { UPDATE_WISHLIST } from "../utils/mutations";
-import { } from "../utils/actions";
-
+import {} from "../utils/actions";
 
 export function Wishlist() {
   const [updateWishList] = useMutation(UPDATE_WISHLIST, {
@@ -41,7 +40,7 @@ export function Wishlist() {
 
   const handleInputChange = (event) => {
     const target = event.target;
-    const value = target.type === 'checkbox' ? target.checked : target.value;
+    const value = target.type === "checkbox" ? target.checked : target.value;
     const name = target.name;
 
     setWishlistForm({
@@ -71,7 +70,7 @@ export function Wishlist() {
         wishhair_brown: wishlistForm.wishhair_brown,
         wishhair_blond: wishlistForm.wishhair_blond,
         wishhair_red: wishlistForm.wishhair_red,
-        wishlist_specified:true
+        wishlist_specified: true,
       },
     });
     console.log(updateResponse);
@@ -82,178 +81,212 @@ export function Wishlist() {
       {loading ? (
         <div>Loading...</div>
       ) : (
-        <form onSubmit={handleSubmit}>
-          <h1>Tell us about what you are seeking in your match.</h1>
+        <>
+          <h2>Tell us about what you are seeking in your match.</h2>
+          <form className="choice_form" onSubmit={handleSubmit}>
+            <div className="flex-row flex-form-item my-1">
+              <fieldset>
+                <legend>
+                  Please uncheck any genders that are not acceptable.
+                </legend>
+                <label>Male
+                <input
+                  name="wishgen_male"
+                  type="checkbox"
+                  checked={wishlistForm.wishgen_male}
+                  onChange={handleInputChange}
+                /></label>
 
-          <p>Please uncheck any genders that are not acceptable.</p>
-          <label>
-            Male
-            <input
-              name="wishgen_male"
-              type="checkbox"
-              checked={wishlistForm.wishgen_male}
-              onChange={handleInputChange}
-            />
-          </label>
-          <label>
-            Female
-            <input
-              name="wishgen_female"
-              type="checkbox"
-              checked={wishlistForm.wishgen_female}
-              onChange={handleInputChange}
-            />
-          </label>
-          <label>
-            Nonbinary
-            <input
-              name="wishgen_nonbinary"
-              type="checkbox"
-              checked={wishlistForm.wishgen_nonbinary}
-              onChange={handleInputChange}
-            />
-          </label>
+                <label>Female
+                <input
+                  name="wishgen_female"
+                  type="checkbox"
+                  checked={wishlistForm.wishgen_female}
+                  onChange={handleInputChange}
+                /></label>
 
-          <label>
-            What is the minimum age you would prefer in you match? You may choose an age from 18-100.
-            <input
-              name="minage"
-              type="number"
-              value={wishlistForm.minage}
-              onChange={handleInputChange}
-            />
-          </label>
-          <label>
-            What is the maximum age you would prefer in you match? You may choose an age from 18-100.
-            <input
-              name="maxage"
-              type="number"
-              value={wishlistForm.maxage}
-              onChange={handleInputChange}
-            />
-          </label>
-          <label>
-            What is the minimum height you would prefer in you match? You may choose a height of 0-100 inches.
-            <input
-              name="minheight"
-              type="number"
-              value={wishlistForm.minheight}
-              onChange={handleInputChange}
-            />
-          </label>
-          <label>
-            What is the maximum height you would prefer in you match? You may choose a height of 0-100 inches.
-            <input
-              name="maxheight"
-              type="number"
-              value={wishlistForm.maxheight}
-              onChange={handleInputChange}
-            />
-          </label>
-          <label>
-            What is the minimum weight you would prefer in you match? You may choose a weight of 0-1000 pounds.
-            <input
-              name="minweight"
-              type="number"
-              value={wishlistForm.minweight}
-              onChange={handleInputChange}
-            />
-          </label>
-          <label>
-            What is the maximum weight you would prefer in you match? You may choose a weight of 0-100 inches.
-            <input
-              name="maxweight"
-              type="number"
-              value={wishlistForm.maxweight}
-              onChange={handleInputChange}
-            />
-          </label>
-          <p>Please uncheck any eye color that is not acceptable.</p>
-          <label>
-            Brown
-            <input
-              name="wisheye_brown"
-              type="checkbox"
-              checked={wishlistForm.wisheye_brown}
-              onChange={handleInputChange}
-            />
-          </label>
-          <label>
-            Blue
-            <input
-              name="wisheye_blue"
-              type="checkbox"
-              checked={wishlistForm.wisheye_blue}
-              onChange={handleInputChange}
-            />
-          </label>
-          <label>
-            Gray
-            <input
-              name="wisheye_gray"
-              type="checkbox"
-              checked={wishlistForm.wisheye_gray}
-              onChange={handleInputChange}
-            />
-          </label>
-          <label>
-            Green
-            <input
-              name="wisheye_green"
-              type="checkbox"
-              checked={wishlistForm.wisheye_green}
-              onChange={handleInputChange}
-            />
-          </label>
-          <label>
-            Hazel
-            <input
-              name="wisheye_hazel"
-              type="checkbox"
-              checked={wishlistForm.wisheye_hazel}
-              onChange={handleInputChange}
-            />
-          </label>
-          <p>Please uncheck any hair color that is not acceptable.</p>
-          <label>
-            Black
-            <input
-              name="wishhair_black"
-              type="checkbox"
-              checked={wishlistForm.wishhair_black}
-              onChange={handleInputChange}
-            />
-          </label>
-          <label>
-            Brown
-            <input
-              name="wishhair_brown"
-              type="checkbox"
-              checked={true}
-              value={wishlistForm.wishhair_brown}
-              onChange={handleInputChange}
-            />
-          </label>
-          <label>
-            Blond
-            <input
-              name="wishhair_blond"
-              type="checkbox"
-              checked={wishlistForm.wishhair_blond}
-              onChange={handleInputChange}
-            />
-          </label>
-          <label>
-            Red
-            <input
-              name="wishhair_red"
-              type="checkbox"
-              checked={wishlistForm.wishhair_red}
-              onChange={handleInputChange}
-            />
-          </label>
-          <button type="submit">Submit</button>
-        </form>
+                <label>Nonbinary
+                <input
+                  name="wishgen_nonbinary"
+                  type="checkbox"
+                  checked={wishlistForm.wishgen_nonbinary}
+                  onChange={handleInputChange}
+                /></label>
+              </fieldset>
+            </div>
+
+            <div className="flex-row flex-form-item my-1">
+              <label>
+                What is the minimum age you would prefer in your match? You may
+                choose an age from 18-100.
+              </label>
+              <input
+                name="minage"
+                type="number"
+                value={wishlistForm.minage}
+                onChange={handleInputChange}
+              />
+            </div>
+            <div className="flex-row flex-form-item my-1">
+              <label>
+                What is the maximum age you would prefer in your match? You may
+                choose an age from 18-100.
+                <input
+                  name="maxage"
+                  type="number"
+                  value={wishlistForm.maxage}
+                  onChange={handleInputChange}
+                />
+              </label>
+            </div>
+
+            <div className="flex-row flex-form-item my-1">
+              <label>
+                What is the minimum height you would prefer in your match? You
+                may choose a height of 0-100 inches.
+                <input
+                  name="minheight"
+                  type="number"
+                  value={wishlistForm.minheight}
+                  onChange={handleInputChange}
+                />
+              </label>
+            </div>
+
+            <div className="flex-row flex-form-item my-1">
+              <label>
+                What is the maximum height you would prefer in your match? You
+                may choose a height of 0-100 inches.
+                <input
+                  name="maxheight"
+                  type="number"
+                  value={wishlistForm.maxheight}
+                  onChange={handleInputChange}
+                />
+              </label>
+            </div>
+
+            <div className="flex-row flex-form-item my-1">
+              <label>
+                What is the minimum weight you would prefer in your match? You
+                may choose a weight of 0-1000 pounds.
+                <input
+                  name="minweight"
+                  type="number"
+                  value={wishlistForm.minweight}
+                  onChange={handleInputChange}
+                />
+              </label>
+            </div>
+            <div className="flex-row flex-form-item my-1">
+              <label>
+                What is the maximum weight you would prefer in your match? You
+                may choose a weight of 0-100 inches.
+                <input
+                  name="maxweight"
+                  type="number"
+                  value={wishlistForm.maxweight}
+                  onChange={handleInputChange}
+                />
+              </label>
+            </div>
+
+            <div className="flex-row flex-form-item my-1">
+              <fieldset>
+                <legend>
+                  Please uncheck any eye color that is not acceptable.
+                </legend>
+                <label>Brown
+                <input
+                  name="wisheye_brown"
+                  type="checkbox"
+                  checked={wishlistForm.wisheye_brown}
+                  onChange={handleInputChange}
+                /></label>
+
+                <label>Blue
+                <input
+                  name="wisheye_blue"
+                  type="checkbox"
+                  checked={wishlistForm.wisheye_blue}
+                  onChange={handleInputChange}
+                /></label>
+
+                <label>Gray
+                <input
+                  name="wisheye_gray"
+                  type="checkbox"
+                  checked={wishlistForm.wisheye_gray}
+                  onChange={handleInputChange}
+                /></label>
+
+                <label>Green
+                <input
+                  name="wisheye_green"
+                  type="checkbox"
+                  checked={wishlistForm.wisheye_green}
+                  onChange={handleInputChange}
+                /></label>
+
+                <label>Hazel
+                <input
+                  name="wisheye_hazel"
+                  type="checkbox"
+                  checked={wishlistForm.wisheye_hazel}
+                  onChange={handleInputChange}
+                /></label>
+              </fieldset>
+            </div>
+
+            <div className="flex-row flex-form-item my-1">
+              <fieldset>
+                <legend>
+                  Please uncheck any hair color that is not acceptable.
+                </legend>
+                <label>
+                  Black
+                  <input
+                    name="wishhair_black"
+                    type="checkbox"
+                    checked={wishlistForm.wishhair_black}
+                    onChange={handleInputChange}
+                  />
+                </label>
+
+                <label>
+                  Brown
+                  <input
+                    name="wishhair_brown"
+                    type="checkbox"
+                    checked={wishlistForm.wishhair_brown}
+                    onChange={handleInputChange}
+                  />
+                </label>
+
+                <label>
+                  Blond
+                  <input
+                    name="wishhair_blond"
+                    type="checkbox"
+                    checked={wishlistForm.wishhair_blond}
+                    onChange={handleInputChange}
+                  />
+                </label>
+
+                <label>
+                  Red
+                  <input
+                    name="wishhair_red"
+                    type="checkbox"
+                    checked={wishlistForm.wishhair_red}
+                    onChange={handleInputChange}
+                  />
+                </label>
+              </fieldset>
+            </div>
+            <button type="submit">Submit</button>
+          </form>
+        </>
       )}
     </>
   );
