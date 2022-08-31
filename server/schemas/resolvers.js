@@ -381,7 +381,7 @@ const resolvers = {
 
       /* Invoke the credit card payment software.  */
 
-      const stripe_session_id = collect_payment();
+      const stripe_session_id = collect_payment(context);
 
 
 
