@@ -89,29 +89,35 @@ export function Wishlist() {
                 <legend>
                   Please uncheck any genders that are not acceptable.
                 </legend>
-                <label>Male
-                <input
-                  name="wishgen_male"
-                  type="checkbox"
-                  checked={wishlistForm.wishgen_male}
-                  onChange={handleInputChange}
-                /></label>
+                <label>
+                  Male
+                  <input
+                    name="wishgen_male"
+                    type="checkbox"
+                    checked={wishlistForm.wishgen_male}
+                    onChange={handleInputChange}
+                  />
+                </label>
 
-                <label>Female
-                <input
-                  name="wishgen_female"
-                  type="checkbox"
-                  checked={wishlistForm.wishgen_female}
-                  onChange={handleInputChange}
-                /></label>
+                <label>
+                  Female
+                  <input
+                    name="wishgen_female"
+                    type="checkbox"
+                    checked={wishlistForm.wishgen_female}
+                    onChange={handleInputChange}
+                  />
+                </label>
 
-                <label>Nonbinary
-                <input
-                  name="wishgen_nonbinary"
-                  type="checkbox"
-                  checked={wishlistForm.wishgen_nonbinary}
-                  onChange={handleInputChange}
-                /></label>
+                <label>
+                  Nonbinary
+                  <input
+                    name="wishgen_nonbinary"
+                    type="checkbox"
+                    checked={wishlistForm.wishgen_nonbinary}
+                    onChange={handleInputChange}
+                  />
+                </label>
               </fieldset>
             </div>
 
@@ -196,45 +202,55 @@ export function Wishlist() {
                 <legend>
                   Please uncheck any eye color that is not acceptable.
                 </legend>
-                <label>Brown
-                <input
-                  name="wisheye_brown"
-                  type="checkbox"
-                  checked={wishlistForm.wisheye_brown}
-                  onChange={handleInputChange}
-                /></label>
+                <label>
+                  Brown
+                  <input
+                    name="wisheye_brown"
+                    type="checkbox"
+                    checked={wishlistForm.wisheye_brown}
+                    onChange={handleInputChange}
+                  />
+                </label>
 
-                <label>Blue
-                <input
-                  name="wisheye_blue"
-                  type="checkbox"
-                  checked={wishlistForm.wisheye_blue}
-                  onChange={handleInputChange}
-                /></label>
+                <label>
+                  Blue
+                  <input
+                    name="wisheye_blue"
+                    type="checkbox"
+                    checked={wishlistForm.wisheye_blue}
+                    onChange={handleInputChange}
+                  />
+                </label>
 
-                <label>Gray
-                <input
-                  name="wisheye_gray"
-                  type="checkbox"
-                  checked={wishlistForm.wisheye_gray}
-                  onChange={handleInputChange}
-                /></label>
+                <label>
+                  Gray
+                  <input
+                    name="wisheye_gray"
+                    type="checkbox"
+                    checked={wishlistForm.wisheye_gray}
+                    onChange={handleInputChange}
+                  />
+                </label>
 
-                <label>Green
-                <input
-                  name="wisheye_green"
-                  type="checkbox"
-                  checked={wishlistForm.wisheye_green}
-                  onChange={handleInputChange}
-                /></label>
+                <label>
+                  Green
+                  <input
+                    name="wisheye_green"
+                    type="checkbox"
+                    checked={wishlistForm.wisheye_green}
+                    onChange={handleInputChange}
+                  />
+                </label>
 
-                <label>Hazel
-                <input
-                  name="wisheye_hazel"
-                  type="checkbox"
-                  checked={wishlistForm.wisheye_hazel}
-                  onChange={handleInputChange}
-                /></label>
+                <label>
+                  Hazel
+                  <input
+                    name="wisheye_hazel"
+                    type="checkbox"
+                    checked={wishlistForm.wisheye_hazel}
+                    onChange={handleInputChange}
+                  />
+                </label>
               </fieldset>
             </div>
 
