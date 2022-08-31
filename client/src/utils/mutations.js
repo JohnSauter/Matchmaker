@@ -112,9 +112,9 @@ export const UPDATE_WISHLIST = gql`
 
 /* Pay us for suggesting a match.  */
 export const PAY = gql`
-  mutation pay($card_number: String!) {
-    pay(card_number: $card_number) {
-      _id
+  mutation pay() {
+    pay() {
+      ID
     }
   }
 `;

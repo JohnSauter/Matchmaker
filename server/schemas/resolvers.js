@@ -4,8 +4,8 @@ const { signToken } = require("../utils/auth.js");
 const stripe = require("stripe")("sk_test_4eC39HqLyjWDarjtT1zdp7dc");
 const { match_recompute } = require("../utils/make_matches.js");
 const { match_email, reject_email } = require("../utils/mailer.js");
-
 const mongoose = require("mongoose");
+const collect_payment = require("../utils/collect_payment.js");
 
 const resolvers = {
   Query: {
@@ -380,9 +380,10 @@ const resolvers = {
       }
 
       /* Invoke the credit card payment software.  */
-      /* Not yet written.
-      collect_payment(user, args);
-       */
+
+      const stripe_session_id = collect_payment();
+
+
 
       /* If the charge was successful, flag the seeker as having paid.
        */
@@ -400,7 +401,7 @@ const resolvers = {
        */
       await match_recompute([user_id]);
 
-      return updated_user;
+      return stripe_session_id;
     },
 
     /* The seeker has found a companion.  */

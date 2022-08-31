@@ -151,7 +151,7 @@ const typeDefs = gql`
       wishhair_red: Boolean!
     ): FullUser
 
-    pay(card_number: String!): FullUser
+    pay(): ID
 
     login(username: String!, password: String!): Auth
   }
