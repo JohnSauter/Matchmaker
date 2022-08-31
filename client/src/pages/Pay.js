@@ -18,15 +18,14 @@ export function Pay() {
     refetchQueries: [{ query: QUERY_USER }],
   });
   const user_result = useQuery(QUERY_USER);
-  /*
-  const [payForm, setPayForm] = useState({
-    card_number: "",
-  });
-  */
 
+  /* If credit card authorization fails, we get back to this page
+   * but with a parameter describing the problem.  */
   const { condition } = useParams();
   console.log(condition);
 
+  /* When we get data back from setting up the credit card payment,
+   * Send the user to a page where he enters his information.  */
   useEffect(() => {
     if (pay_result.data) {
       stripePromise.then((res) => {
@@ -41,26 +40,16 @@ export function Pay() {
 
   const user = user_result.data.user;
 
-  /*
-  const handleInputChange = (event) => {
-    const target = event.target;
-    const value = target.value;
-    const name = target.name;
-
-    setPayForm({
-      ...payForm,
-      [name]: value,
-    });
-  };
-  */
-
+  /* When the user says he is ready to pay, set up the credit
+   * card processing software, called Stripe.  */
   const handleSubmit = async (event) => {
     event.preventDefault();
     const payResponse = await pay();
     console.log(payResponse);
-    //const stripe_session_id = payResponse.pay.ID;
   };
 
+  /* Solicit a payment from the user, and mention if his
+   * previous attempt failed.  */
   return (
     <>
       {user_result.loading ? (
@@ -68,7 +57,7 @@ export function Pay() {
       ) : (
         <form onSubmit={handleSubmit}>
           <h1>Time to pay, {user.username}</h1>
-          {!condition ? (<div></div>) : <p>condition</p>}
+          {!condition ? <div></div> : <p>condition</p>}
           <label>Pay to receive a list of potential matches.</label>
           <button type="submit">Click to pay</button>
         </form>
