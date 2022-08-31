@@ -127,7 +127,7 @@ export function Profile() {
             />
           </label>
           <label>
-            Enter your name:How would you like your match to contact you?
+            How would you like your match to contact you?
             <input
               name="contactInfo"
               type="text"
