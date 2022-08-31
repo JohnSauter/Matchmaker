@@ -3,10 +3,8 @@
 
 import React, { useEffect, useState } from "react";
 import { useQuery, useMutation } from "@apollo/client";
+import { useNavigate } from "react-router-dom";
 import { QUERY_USER } from "../utils/queries";
-import {} from "../utils/queries";
-import {} from "../utils/actions";
-import {} from "../utils/queries";
 import { UPDATE_PROFILE } from "../utils/mutations";
 
 export function Profile() {
@@ -24,11 +22,17 @@ export function Profile() {
     aboutMe: "",
     contactInfo: "",
   });
+  const navigate = useNavigate();
+
   useEffect(() => {
     if (!loading) {
       setProfileForm(data.user);
     }
   }, [loading, data?.user]);
+
+  const goHome = () => {
+    navigate("/");
+  };
 
   const handleInputChange = (event) => {
     const target = event.target;
@@ -46,9 +50,9 @@ export function Profile() {
     const updateResponse = await updateProfile({
       variables: {
         gender: profileForm.gender,
-        age: profileForm.age,
-        height: profileForm.height,
-        weight: profileForm.weight,
+        age: Number(profileForm.age),
+        height: Number(profileForm.height),
+        weight: Number(profileForm.weight),
         eyes: profileForm.eyes,
         hair: profileForm.hair,
         aboutMe: profileForm.aboutMe,
@@ -56,6 +60,7 @@ export function Profile() {
       },
     });
     console.log(updateResponse);
+    goHome();
   };
 
   return (
@@ -67,56 +72,64 @@ export function Profile() {
           <form className="choice_form" onSubmit={handleSubmit}>
             <h3>Tell us a little about yourself.</h3>
             <div className="flex-row flex-form-item my-1">
-              <label>
-                What is your gender? </label>
+              <fieldset>
+              <legend>
+                What is your gender? </legend>
                 <select
                   name="gender"
                   value={profileForm.gender}
                   onChange={handleInputChange}
-                  autofocus
+                  autoFocus
                 >
                   <option value="male">Male</option>
                   <option value="female">Female</option>
                   <option value="nonbinary">Nonbinary</option>
                 </select>
+                </fieldset>
             </div>
 
             <div className="flex-row flex-form-item my-1">
-            <label>
-              What is your age?</label>
+            <fieldset>
+              <legend>What is your age?</legend>
               <input
                 name="age"
-                type="number"
+                type="text"
+                size="3"
                 value={profileForm.age}
                 onChange={handleInputChange}
               />
+              </fieldset>
             </div>
 
             <div className="flex-row flex-form-item my-1">
-            <label>
-              What is your height? </label>
+            <fieldset>
+              <legend>What is your height in inches? </legend>
               <input
                 name="height"
-                type="number"
+                type="text"
+                size="3"
                 value={profileForm.height}
                 onChange={handleInputChange}
               />
+              </fieldset>
             </div>
 
             <div className="flex-row flex-form-item my-1">
-            <label>
-              What is your weight? </label>
+            <fieldset>
+              <legend>What is your weight in pounds? </legend>
               <input
                 name="weight"
-                type="number"
+                type="text"
+                size="3"
                 value={profileForm.weight}
                 onChange={handleInputChange}
               />
+              </fieldset>
             </div>
 
             <div className="flex-row flex-form-item my-1">
-            <label>
-              What color are your eyes?</label>
+            <fieldset>
+              <legend>What color are your eyes?</legend>
               <select
                 name="eyes"
                 value={profileForm.eyes}
@@ -127,32 +140,36 @@ export function Profile() {
                 <option value="green">green</option>
                 <option value="gray">gray</option>
               </select>
+              </fieldset>
             </div>
 
             <div className="flex-row flex-form-item my-1">
-            <label>
-              What would you like your match to know about you?</label>
+            <fieldset>
+              <legend>
+              What would you like your match to know about you?</legend>
               <textarea
                 name="aboutMe"
                 type="text"
                 rows="7"
-                cols="50"
+                cols="45"
                 value={profileForm.aboutMe}
                 onChange={handleInputChange}
               />
+              </fieldset>
             </div>
 
             <div className="flex-row flex-form-item my-1">
-            <label>
-              How would you like your match to contact you?</label>
+            <fieldset>
+              <legend>How would you like your match to contact you?</legend>
               <textarea
                 name="contactInfo"
                 type="text"
                 rows="7"
-                cols="50"
+                cols="45"
                 value={profileForm.contactInfo}
                 onChange={handleInputChange}
               />
+              </fieldset>
             </div>
 
             <button type="submit">Submit</button>

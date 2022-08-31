@@ -21,8 +21,11 @@ export function Pay() {
 
   /* If credit card authorization fails, we get back to this page
    * but with a parameter describing the problem.  */
-  const { condition } = useParams();
-  console.log(condition);
+  let { condition } = useParams();
+  /* Initial means there is no problem.  */
+  if (condition === "initial") {
+    condition = "";
+  }
 
   /* When we get data back from setting up the credit card payment,
    * Send the user to a page where he enters his information.  */
@@ -55,9 +58,9 @@ export function Pay() {
       {user_result.loading ? (
         <div>Loading...</div>
       ) : (
-        <form onSubmit={handleSubmit}>
-          <h1>Time to pay, {user.username}</h1>
-          {!condition ? <div></div> : <p>condition</p>}
+        <form className="choice_form" onSubmit={handleSubmit}>
+          <h2>Time to pay, {user.username}.</h2>
+          {!condition ? <div></div> : <p>{condition}</p>}
           <label>Pay to receive a list of potential matches.</label>
           <button type="submit">Click to pay</button>
         </form>

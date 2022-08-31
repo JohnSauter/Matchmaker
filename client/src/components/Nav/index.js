@@ -75,7 +75,7 @@ function Nav() {
                     </li>
                     {!user.paid ? (
                       <li className="mx-1">
-                        <Link to="/pay">Pay</Link>
+                        <Link to="/pay/initial">Pay</Link>
                       </li>
                     ) : (
                       <div></div>

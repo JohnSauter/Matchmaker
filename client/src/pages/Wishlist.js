@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import { useQuery, useMutation } from "@apollo/client";
 import { QUERY_USER } from "../utils/queries";
 import { UPDATE_WISHLIST } from "../utils/mutations";
-import {} from "../utils/actions";
+import { useNavigate } from "react-router-dom";
 
 export function Wishlist() {
   const [updateWishList] = useMutation(UPDATE_WISHLIST, {
@@ -32,11 +32,17 @@ export function Wishlist() {
     wishhair_red: true,
   });
 
+  const navigate = useNavigate();
+
   useEffect(() => {
     if (!loading) {
       setWishlistForm(data.user);
     }
   }, [loading, data?.user]);
+
+  const goHome = () => {
+    navigate("/");
+  };
 
   const handleInputChange = (event) => {
     const target = event.target;
@@ -55,12 +61,12 @@ export function Wishlist() {
         wishgen_male: wishlistForm.wishgen_male,
         wishgen_female: wishlistForm.wishgen_female,
         wishgen_nonbinary: wishlistForm.wishgen_nonbinary,
-        minage: wishlistForm.minage,
-        maxage: wishlistForm.maxage,
-        minheight: wishlistForm.minheight,
-        maxheight: wishlistForm.maxheight,
-        minweight: wishlistForm.minweight,
-        maxweight: wishlistForm.maxweight,
+        minage: Number(wishlistForm.minage),
+        maxage: Number(wishlistForm.maxage),
+        minheight: Number(wishlistForm.minheight),
+        maxheight: Number(wishlistForm.maxheight),
+        minweight: Number(wishlistForm.minweight),
+        maxweight: Number(wishlistForm.maxweight),
         wisheye_brown: wishlistForm.wisheye_brown,
         wisheye_blue: wishlistForm.wisheye_blue,
         wisheye_gray: wishlistForm.wisheye_gray,
@@ -74,6 +80,7 @@ export function Wishlist() {
       },
     });
     console.log(updateResponse);
+    goHome();
   };
 
   return (
@@ -96,6 +103,7 @@ export function Wishlist() {
                     type="checkbox"
                     checked={wishlistForm.wishgen_male}
                     onChange={handleInputChange}
+                    autoFocus
                   />
                 </label>
 
@@ -122,79 +130,85 @@ export function Wishlist() {
             </div>
 
             <div className="flex-row flex-form-item my-1">
-              <label>
-                What is the minimum age you would prefer in your match? You may
-                choose an age from 18-100.
-              </label>
+              <fieldset>
+                <legend>
+                What is the minimum and maximum age you would prefer in your match? You may
+                choose an age range from 18-100.
+              </legend>
+              <label>Minimum age
               <input
                 name="minage"
-                type="number"
+                type="text"
+                size="3"
                 value={wishlistForm.minage}
                 onChange={handleInputChange}
-              />
-            </div>
-            <div className="flex-row flex-form-item my-1">
-              <label>
-                What is the maximum age you would prefer in your match? You may
-                choose an age from 18-100.
+              /></label>
+            
+            <label> Maximum age
                 <input
                   name="maxage"
-                  type="number"
+                  type="text"
+                  size="3"
                   value={wishlistForm.maxage}
                   onChange={handleInputChange}
                 />
               </label>
+              </fieldset>
             </div>
 
             <div className="flex-row flex-form-item my-1">
-              <label>
-                What is the minimum height you would prefer in your match? You
-                may choose a height of 0-100 inches.
+              <fieldset>
+              <legend>
+                What is the minimum and maximum height you would prefer in your match? You
+                may choose a height range of 0-100 inches.</legend>
+                <label>Minimum height
                 <input
                   name="minheight"
-                  type="number"
+                  type="text"
+                  size="3"
                   value={wishlistForm.minheight}
                   onChange={handleInputChange}
                 />
               </label>
-            </div>
+            
 
-            <div className="flex-row flex-form-item my-1">
-              <label>
-                What is the maximum height you would prefer in your match? You
-                may choose a height of 0-100 inches.
+            <label> Maximum height
                 <input
                   name="maxheight"
-                  type="number"
+                  type="text"
+                  size="3"
                   value={wishlistForm.maxheight}
                   onChange={handleInputChange}
                 />
               </label>
+              </fieldset>
             </div>
 
             <div className="flex-row flex-form-item my-1">
-              <label>
-                What is the minimum weight you would prefer in your match? You
-                may choose a weight of 0-1000 pounds.
+              <fieldset>
+                <legend>What is the minimum and maximum weight you would prefer in your match? You
+                may choose a weight of 0-1000 pounds.</legend>
+                <label> Minimum weight
                 <input
                   name="minweight"
-                  type="number"
+                  type="text"
+                  size="3"
                   value={wishlistForm.minweight}
                   onChange={handleInputChange}
                 />
               </label>
-            </div>
-            <div className="flex-row flex-form-item my-1">
+            
               <label>
-                What is the maximum weight you would prefer in your match? You
-                may choose a weight of 0-100 inches.
+                Maximum weight
                 <input
                   name="maxweight"
-                  type="number"
+                  type="text"
+                  size="3"
                   value={wishlistForm.maxweight}
                   onChange={handleInputChange}
                 />
               </label>
+              </fieldset>
             </div>
 
             <div className="flex-row flex-form-item my-1">
