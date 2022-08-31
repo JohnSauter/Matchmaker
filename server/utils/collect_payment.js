@@ -4,7 +4,8 @@
 const stripe = require('stripe')('sk_test_4eC39HqLyjWDarjtT1zdp7dc');
 
 
-export async function collect_payment(context) {
+module.exports = async function collect_payment(context) {
+  
     const url = new URL(context.headers.referrer).origin;
     try {
         const session = await stripe.checkout.sessions.create({
@@ -27,6 +28,7 @@ export async function collect_payment(context) {
         return{session:"error"}
     }
 
+return null;
 
 };
 
