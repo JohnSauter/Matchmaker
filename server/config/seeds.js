@@ -166,7 +166,7 @@ db.once("open", async () => {
 
   await User.create({
     username: "Cleopatra Philopator",
-    email: "cphilopato@systemeyescomputerstore.com",
+    email: "easternexposuredev@gmail.com",
     password: "emerald",
     matchmaker: false,
     profile_specified: true,
