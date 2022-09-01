@@ -1,0 +1,64 @@
+Script for the demo:
+
+switch to Signup page
+Username: John Sauter
+Email: John_Sauter@systemeyescomputerstore.com 
+Password: 12345678
+Matchmaker?: no.
+Submit
+
+gender: male
+age: 77
+height: 71
+weight: 225
+eyes: blue
+hair: blond
+AboutMe: In my old age I am looking for a comfortable companion.
+contactInfo: E-mail me at John_Sauter@systemeyescomputerstore.com.
+Submit
+
+Uncheck Male and Nonbinary
+minimum age: 25 maximum: 75
+minimum height: 60
+weight: 90 to 300
+Submit
+
+Click to Pay
+
+Email: John_Sauter@systemeyescomputerstore.com
+Card Information: 4242 4242 4242 4242 
+MM / YY: 12/24
+CVC: 555
+Name on card: John Sauter
+Country or region: United States
+Zip: 03063
+Pay
+
+Logout
+Name: Yenta
+password: 12345678
+Submit
+
+Rosie Cotton and Sam Gamgee: 10
+Julius Caesar and Cleopatra: 8
+Cleopatra and Mark Antony: 9
+Cleopatra and Worf: 3
+Hari Seldon and Cleopatra: 1
+Cleopatra and John Sauter: 0
+Logout
+
+Name: Cleopatra Philopator
+password: emerald
+Submit
+
+Worf: no
+Mark Antomy: yes
+
+Logout
+Name: Cleopatra Philopator
+password: emerald
+Submit
+
+Reject
+
+

@@ -73,8 +73,7 @@ export function Profile() {
             <h3>Tell us a little about yourself.</h3>
             <div className="flex-row flex-form-item my-1">
               <fieldset>
-              <legend>
-                What is your gender? </legend>
+                <legend>What is your gender? </legend>
                 <select
                   name="gender"
                   value={profileForm.gender}
@@ -85,90 +84,108 @@ export function Profile() {
                   <option value="female">Female</option>
                   <option value="nonbinary">Nonbinary</option>
                 </select>
-                </fieldset>
-            </div>
-
-            <div className="flex-row flex-form-item my-1">
-            <fieldset>
-              <legend>What is your age?</legend>
-              <input
-                name="age"
-                type="text"
-                size="3"
-                value={profileForm.age}
-                onChange={handleInputChange}
-              />
               </fieldset>
             </div>
 
             <div className="flex-row flex-form-item my-1">
-            <fieldset>
-              <legend>What is your height in inches? </legend>
-              <input
-                name="height"
-                type="text"
-                size="3"
-                value={profileForm.height}
-                onChange={handleInputChange}
-              />
+              <fieldset>
+                <legend>What is your age?</legend>
+                <input
+                  name="age"
+                  type="text"
+                  size="3"
+                  value={profileForm.age}
+                  onChange={handleInputChange}
+                />
               </fieldset>
             </div>
 
             <div className="flex-row flex-form-item my-1">
-            <fieldset>
-              <legend>What is your weight in pounds? </legend>
-              <input
-                name="weight"
-                type="text"
-                size="3"
-                value={profileForm.weight}
-                onChange={handleInputChange}
-              />
+              <fieldset>
+                <legend>What is your height in inches? </legend>
+                <input
+                  name="height"
+                  type="text"
+                  size="3"
+                  value={profileForm.height}
+                  onChange={handleInputChange}
+                />
               </fieldset>
             </div>
 
             <div className="flex-row flex-form-item my-1">
-            <fieldset>
-              <legend>What color are your eyes?</legend>
-              <select
-                name="eyes"
-                value={profileForm.eyes}
-                onChange={handleInputChange}
-              >
-                <option value="brown">Brown</option>
-                <option value="blue">blue</option>
-                <option value="green">green</option>
-                <option value="gray">gray</option>
-              </select>
+              <fieldset>
+                <legend>What is your weight in pounds? </legend>
+                <input
+                  name="weight"
+                  type="text"
+                  size="3"
+                  value={profileForm.weight}
+                  onChange={handleInputChange}
+                />
               </fieldset>
             </div>
 
             <div className="flex-row flex-form-item my-1">
-            <fieldset>
-              <legend>
-              What would you like your match to know about you?</legend>
-              <textarea
-                name="aboutMe"
-                type="text"
-                rows="7"
-                cols="45"
-                value={profileForm.aboutMe}
-                onChange={handleInputChange}
-              />
+              <fieldset>
+                <legend>What color are your eyes?</legend>
+                <select
+                  name="eyes"
+                  value={profileForm.eyes}
+                  onChange={handleInputChange}
+                >
+                  <option value="brown">brown</option>
+                  <option value="blue">blue</option>
+                  <option value="gray">gray</option>
+                  <option value="green">green</option>
+                  <option value="hazel">hazel</option>
+                </select>
               </fieldset>
             </div>
 
             <div className="flex-row flex-form-item my-1">
-            <fieldset>
-              <legend>How would you like your match to contact you?</legend>
-              <textarea
-                name="contactInfo"
-                type="text"
-                rows="7"
-                cols="45"
-                value={profileForm.contactInfo}
-                onChange={handleInputChange}
-              />
+              <fieldset>
+                <legend>What color is your hair?</legend>
+                <select
+                  name="hair"
+                  value={profileForm.hair}
+                  onChange={handleInputChange}
+                >
+                  <option value="black">black</option>
+                  <option value="brown">brown</option>
+                  <option value="blond">blond</option>
+                  <option value="red">red</option>
+                </select>
+              </fieldset>
+            </div>
+
+            <div className="flex-row flex-form-item my-1">
+              <fieldset>
+                <legend>
+                  What would you like your match to know about you?
+                </legend>
+                <textarea
+                  name="aboutMe"
+                  type="text"
+                  rows="7"
+                  cols="45"
+                  value={profileForm.aboutMe}
+                  onChange={handleInputChange}
+                />
+              </fieldset>
+            </div>
+
+            <div className="flex-row flex-form-item my-1">
+              <fieldset>
+                <legend>How would you like your match to contact you?</legend>
+                <textarea
+                  name="contactInfo"
+                  type="text"
+                  rows="7"
+                  cols="45"
+                  value={profileForm.contactInfo}
+                  onChange={handleInputChange}
+                />
               </fieldset>
             </div>
 
