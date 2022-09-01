@@ -244,7 +244,7 @@ db.once("open", async () => {
 
   await User.create({
     username: "Seven of Nine",
-    email: "easternexposuredev@gmail.com",
+    email: "7of9@systemeyescomputerstore.com",
     password: "AnnikaHansen",
     matchmaker: false,
     profile_specified: true,
@@ -283,7 +283,7 @@ db.once("open", async () => {
 
   await User.create({
     username: "Worf Martok",
-    email: "easternexposuredev@systemeyescomputerstore.com",
+    email: "worf@systemeyescomputerstore.com",
     password: "the Raven",
     matchmaker: false,
     profile_specified: true,
